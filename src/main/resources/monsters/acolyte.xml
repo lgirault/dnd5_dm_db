@@ -1,0 +1,68 @@
+<monster>
+    <category>NPC</category>
+    <name>
+        <fr>Acolyte</fr>
+        <eng>Acolyte</eng>
+    </name>
+    <size>Moyen</size>
+    <type anyRace="true" >Humanoïde (race quelconque)</type>
+    <alignment>any</alignment>
+    <ca>10</ca>
+    <hp>9</hp>
+    <hd>2d8</hd>
+    <speed unit="feet">30</speed>
+    <abilities>
+        <str>10</str>
+        <dex>10</dex>
+        <con>10</con>
+        <int>10</int>
+        <wis>14</wis>
+        <cha>11</cha>
+    </abilities>
+    <skillList>
+        <skill name="Medicine" value="+4"/>
+        <skill name="Religion" value="+2"/>
+    </skillList>
+    <passivePerception>10</passivePerception>
+    <sensList>
+        <sens name="Perception passive" value="10"/>
+    </sensList>
+    <languageList anyLanguage="true">
+        <language>common</language>
+        <language>une langue quelconque (habituellement le Commun)</language>
+    </languageList>
+    <cr>0.25</cr>
+    <xp>50</xp>
+    <spellcasting>
+        <casterLevel>1</casterLevel>
+        <ability>wis</ability>
+        <dc>12</dc>
+        <attackBonus>+4</attackBonus>
+        <spells class ="cleric" >
+            <spellList level="0">
+                <spell name="light"/>
+                <spell name="thaumaturgy"/>
+                <spell name="sacred-flame"/>
+            </spellList>
+            <spellList level="1" slots="3">
+                <spell name="bless"/>
+                <spell name="sanctuary"/>
+                <spell name="cure-wounds"/>
+            </spellList>
+        </spells>
+    </spellcasting>
+    <actionList>
+        <action type="cac">
+            <name>
+                <fr>Gourdin</fr>
+                <eng>Club</eng>
+            </name>
+            <bonus>+2</bonus>
+            <reach unit="feet">5</reach>
+            <numTarget>1</numTarget>
+            <hit>2</hit>
+            <hitd>1d4</hitd>
+            <damageType>contondants</damageType>
+        </action>
+    </actionList>
+</monster>

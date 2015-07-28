@@ -1,0 +1,21 @@
+<spell>
+    <name>
+        <fr>Bénédiction</fr>
+        <eng>Bless</eng>
+    </name>
+    <level>1</level>
+    <type>enchantment</type>
+    <ctime unit="action">1</ctime>
+    <range unit="feet">30</range>
+    <components verbose="true" somatic="true" material="true">
+        <fr>un soupçon d'eau bénite</fr>
+        <eng>a sprinkling of holy water</eng>
+    </components>
+    <duration unit="minute" upTo="true" concentration="true">1</duration>
+    <description>
+        <fr>Vous bénissez jusqu'à trois créatures de votre choix, dans la portée du sort. À chaque fois qu'une cible fait un jet d'attaque ou de sauvegarde avant la fin du sort, la cible peut lancer un d4 et ajouter le résultat au jet d'attaque ou de sauvegarde.</fr>
+    </description>
+    <higher-level-description>
+        <fr>Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez cibler une créature supplémentaire pour chaque niveau d'emplacement supérieur à 1.</fr>
+    </higher-level-description>
+</spell>

@@ -1,0 +1,18 @@
+<spell>
+    <name>
+        <fr>Flamme sacrée</fr>
+        <eng>Sacred flame</eng>
+    </name>
+    <level>0</level>
+    <type>evocation</type>
+    <ctime unit="action">1</ctime>
+    <range unit="feet">60</range>
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="instant"/>
+    <description>
+        <fr>Un rayonnement semblable à des flammes descend sur une créature que vous pouvez voir dans la portée du sort. La cible doit réussir un jet de sauvegarde de Dextérité ou subir 1d8 dégâts de type radiant. La cible ne gagne aucun bénéfice d'abri pour ce jet de sauvegarde.</fr>
+    </description>
+    <higher-level-description>
+    <fr>Les dégâts du sort augmentent de 1d8 lorsque vous atteignez le niveau 5 (2d8), le niveau 11 (3d8), et le niveau 17 (4d8).</fr>
+    </higher-level-description>
+</spell>

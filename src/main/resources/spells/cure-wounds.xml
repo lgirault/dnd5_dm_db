@@ -1,0 +1,18 @@
+<spell>
+    <name>
+        <fr>Soins</fr>
+        <eng>Cure Wounds</eng>
+    </name>
+    <level>1</level>
+    <type>evocation</type>
+    <ctime unit="action">1</ctime>
+    <range unit="contact" />
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="instant" />
+    <description>
+        <fr>Une créature que vous touchez récupère un nombre de points de vie égal à 1d8 + votre modificateur de caractéristique pour lancer vos sorts. Ce sort n'a aucun effet sur les morts-vivants ou les créatures artificielles.</fr>
+    </description>
+        <higher-level-description>
+            <fr>Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, la quantité de points de vie récupérés est augmentée de 1d8 pour chaque niveau d'emplacement supérieur à 1.</fr>
+    </higher-level-description>
+</spell>

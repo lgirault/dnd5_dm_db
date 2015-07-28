@@ -1,0 +1,20 @@
+<spell>
+    <name>
+        <fr>Lumière</fr>
+        <eng>Light</eng>
+    </name>
+    <level>0</level>
+    <type>evocation</type>
+    <ctime unit="minute">1</ctime>
+    <range unit="contact" />
+    <components verbose="true" somatic="false" material="true">
+        <fr>une luciole ou de la mousse phosporescente</fr>
+        <eng>a firefly or phosphorescent moss</eng>
+    </components>
+    <duration unit="hour">1</duration>
+    <description>
+        <fr>Vous touchez un objet qui ne dépasse pas 10 pieds(3 mètres) dans aucune dimension. Jusqu'à la fin du sort, l'objet émet une lumière vive dans un rayon de 20 pieds (6 mètres) et une lumière faible sur 20 pieds supplémentaires. La lumière est de la couleur que vous voulez. Couvrir complètement l'objet avec quelque chose d'opaque bloque la lumière. Le sort se termine si vous le lancez de nouveau ou si vous le dissipez par une action.&#xD;Si vous ciblez un objet tenu ou porté par une créature hostile, cette créature doit réussir un jet de sauvegarde de Dextérité pour éviter le sort.</fr>
+        <eng>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.
+            If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</eng>
+    </description>
+</spell>

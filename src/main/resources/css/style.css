@@ -1,0 +1,77 @@
+html 			{font-size:62.5%;}
+body			{padding:0; margin:0; background:white url("../images/fond.jpg") repeat;}
+
+.bloc			{width:50%; padding:2%; margin:0; box-sizing:border-box;
+				 font-family: Georgia, "Times New Roman", serif; font-size:1.2rem;
+				 line-height:145%; text-align:left;
+				 Page-Break-Inside:avoid}
+
+.bloc table		{margin:8px 0 0 0; padding:0; }
+.bloc table th	{font-weight:bold; font-size:1.0rem; vertical-align:bottom; border-bottom:1px solid black}
+.bloc table td	{min-width:25px;   font-size:1.0rem; }
+
+.sansSerif		{line-height:140%;
+				font-family: arial, sans-serif; font-size:1.2rem; }
+.nom			{padding:0; text-transform:uppercase; letter-spacing:1px;
+				 color:#6D0000; font-size:1.7rem; font-weight:bold; }
+.nom:first-letter {font-size:2.4rem;}
+.trad			{float:right; margin:6px 0 6px 0;
+				 font-family: verdana, arial, sans-serif; font-size:1.2rem;
+}
+.trad a:link, .trad a:hover, .trad a:visited {color:#B30303; font-weight:normal;}
+
+.niveau			{padding:2px 0 8px 0;}
+.type			{padding:2px 0 2px 0;}
+.carac			{float:left; margin:0 15px 0 5px; text-align:center}
+.description	{padding:8px 0 8px 0; text-align:justify;}
+.red			{color:#6D0000;}
+.rub			{color:#6D0000; margin:10px 0 5px 0; border-bottom:1px solid #B30303; font-size:1.4rem; text-transform:uppercase; font-weight:bold;}
+.rub:first-letter{font-size:1.6rem;}
+.source   		{padding:8px 0 4px 0; text-align:left; letter-spacing:-1px;
+				 font-family: verdana, arial, sans-serif; font-size:1.0rem;
+}
+
+p				{padding:0; margin:3px 0 3px 0;}
+.center			{text-align:center;}
+.petit    		{font-size:1.1rem;}
+.trespetit 		{font-size:1.0rem;}
+
+/* monstres */
+img.picture		{max-width:95%; border:4px solid #888; text-align:center;}
+div img.sep-monster	{margin:3px 0 3px 0; }
+div .variant	{ background-color:#DBE2C2;
+				  border-top:4px solid #404040; border-bottom:4px solid #404040;
+				  padding:10px; margin:10px 0 0 0;
+				}
+
+/* livre de sorts */
+.colG			{display: inline-block; width:50%; margin:0; vertical-align: top;} 
+.colD			{display: inline-block; width:50%; margin:0; vertical-align: top;} 
+.colG .bloc		{width:100%; padding:4% 2% 0 4%;}
+.colD .bloc 	{width:100%; padding:4% 4% 0 2%;}
+.colG hr 		{margin:15px 2% 0 4%; }
+.colD hr 		{margin:15px 4% 0 2%; }
+.niveauSort		{font-size:1.8rem; font-weight:bold; text-align:center; background-color:white; color:black;
+				 border:3px solid black; padding:5px; margin:1% 15% 0 15%; }
+
+/* poisons */
+img.poison		{float:right; border:0px; margin:0 0 5px 10px}
+
+/* rencontres */
+.erreur			{font-weight:bold; color:red; }
+.gras			{font-weight:bold; }
+.gris			{background-color:#333333; color:#BBBBBB;}
+.blanc			{background-color:#FFFFFF; color:#000000; font-weight:bold;}
+table.rencontre	td	{font-size:1.2rem; }
+table.resultat		{border:1px solid black; border-collapse:separate; border-spacing:0;}
+table.resultat	td	{font-size:1.2rem; width:80px; text-align:center; padding:6px;}
+
+@media print {
+	html 		{font-size:50%;}
+}
+
+@media only screen and (max-device-width:980px) { 
+	html 		{font-size:87.5%;}
+	.bloc		{width:100%; box-sizing:border-box;}
+	.trad		{float:none; padding-left:0px;}
+}
