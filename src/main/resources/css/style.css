@@ -1,10 +1,30 @@
-html 			{font-size:62.5%;}
-body			{padding:0; margin:0; background:white url("../images/fond.jpg") repeat;}
+html 			{height:100%;
+				 font-size:62.5%;}
+body			{height:100%;
+				 padding:0; margin:0;
+				 background:white url("../images/fond.jpg") repeat;}
 
-.bloc			{width:50%; padding:2%; margin:0; box-sizing:border-box;
+.frame			{height : 100%;
+                 margin : 0px;
+                 overflow : scroll;
+				}
+
+#left_frame		{float : left;
+				 width : 8%;
+				 }
+
+#right_frame	{padding: 0px;
+				 }
+
+.menuLink 		{font-size:1.7rem;}
+
+.bloc			{width:24%; padding:1%; margin:0; box-sizing:border-box;
 				 font-family: Georgia, "Times New Roman", serif; font-size:1.2rem;
 				 line-height:145%; text-align:left;
+				 float:left;
 				 Page-Break-Inside:avoid}
+
+#monsters_view {float : left;}
 
 .bloc table		{margin:8px 0 0 0; padding:0; }
 .bloc table th	{font-weight:bold; font-size:1.0rem; vertical-align:bottom; border-bottom:1px solid black}
@@ -12,17 +32,17 @@ body			{padding:0; margin:0; background:white url("../images/fond.jpg") repeat;}
 
 .sansSerif		{line-height:140%;
 				font-family: arial, sans-serif; font-size:1.2rem; }
-.nom			{padding:0; text-transform:uppercase; letter-spacing:1px;
+.name			{padding:0; text-transform:uppercase; letter-spacing:1px;
 				 color:#6D0000; font-size:1.7rem; font-weight:bold; }
-.nom:first-letter {font-size:2.4rem;}
+.name:first-letter {font-size:2.4rem;}
 .trad			{float:right; margin:6px 0 6px 0;
 				 font-family: verdana, arial, sans-serif; font-size:1.2rem;
 }
 .trad a:link, .trad a:hover, .trad a:visited {color:#B30303; font-weight:normal;}
 
-.niveau			{padding:2px 0 8px 0;}
+.level			{padding:2px 0 8px 0;}
 .type			{padding:2px 0 2px 0;}
-.carac			{float:left; margin:0 15px 0 5px; text-align:center}
+.ability		{float:left; margin:0 15px 0 5px; text-align:center}
 .description	{padding:8px 0 8px 0; text-align:justify;}
 .red			{color:#6D0000;}
 .rub			{color:#6D0000; margin:10px 0 5px 0; border-bottom:1px solid #B30303; font-size:1.4rem; text-transform:uppercase; font-weight:bold;}

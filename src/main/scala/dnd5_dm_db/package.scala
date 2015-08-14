@@ -2,6 +2,9 @@ import scala.xml.{NodeSeq, Node}
 
 package object dnd5_dm_db {
 
+  type KeySeq[A] = Seq[(String, A)]
+  type RelativePath = String
+
   def error(msg : String) = sys.error(msg)
 
   def singleOptionAttribute(node : Node, attr : String) : Option[String] =
@@ -9,6 +12,12 @@ package object dnd5_dm_db {
       case Some(Seq(att)) => Some(att.text)
       case Some(Nil) | None => None
       case _ => error(s"one or zero attribute $attr expected in node " + node.toString())
+    }
+
+  def optionBooleanAttribute(node : Node, attr : String) : Boolean =
+    singleOptionAttribute(node, attr) match {
+      case Some(b) => b.toBoolean
+      case None => false
     }
 
   def singleAttribute(node : Node, attr : String) : String =
@@ -27,6 +36,8 @@ package object dnd5_dm_db {
     }
     def singleText : String = toNode.text
 
+    def int : Int = singleText.toInt
+
     def toNodeOption : Option[Node] = {
       ns.theSeq match {
         case Seq(n) => Some(n)
@@ -41,6 +52,10 @@ package object dnd5_dm_db {
 
   implicit def nodeSeqToString( ns : NodeSeq) : String =
     NodeSeqOps(ns).singleText
+
+  implicit def nodeSeqToInt( ns : NodeSeq) : Int =
+    NodeSeqOps(ns).int
+
 
   implicit def nodeSeqToStringOption( ns : NodeSeq) : Option[String] =
     NodeSeqOps(ns).textOption

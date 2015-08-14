@@ -3,7 +3,7 @@ package dnd5_dm_db
 import scala.xml.Node
 
 sealed abstract class DnDTime
-case class Action(i : Int) extends DnDTime
+case class RegularAction(i : Int) extends DnDTime
 case class BonusAction(i : Int) extends DnDTime
 case class Minute(i: Int) extends DnDTime
 case class Hour(i : Int) extends DnDTime
@@ -16,7 +16,7 @@ object DnDTime {
       singleAttribute(node, "unit") match {
         case "minute" => Minute(node.text.toInt)
         case "hour" => Hour(node.text.toInt)
-        case "action" => Action(node.text.toInt)
+        case "action" => RegularAction(node.text.toInt)
         case "bonusAction" => BonusAction(node.text.toInt)
         case "instant" => Instant
         case attr => error(s"unknown time unit $attr")
@@ -44,24 +44,3 @@ object DnDLength {
 }
 
 
-sealed abstract class Components
-case object Verbose extends Components
-case object Somatic extends Components
-case class Material(cpts : String) extends Components
-
-object Components {
-  def fromXml(node : Node)(implicit lang : Lang): List[Components] =
-    List[Option[Components]](
-      singleAttribute(node, "verbose") match {
-      case "true" => Some(Verbose)
-      case _ => None
-      },
-      singleAttribute(node, "somatic") match {
-        case "true" => Some(Somatic)
-        case _ => None
-      },
-      singleAttribute(node, "material") match {
-        case "true" => Some(Material(node \ lang.id))
-        case _ => None
-      }).flatten
-}

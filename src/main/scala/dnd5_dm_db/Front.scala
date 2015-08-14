@@ -4,7 +4,7 @@ import java.io.File
 
 import sbt.{PathFinder, IO}
 
-import scala.xml.XML
+import scala.xml.{Node, XML}
 
 object Front {
 
@@ -17,39 +17,39 @@ object Front {
 
   implicit def stringToFile(path : String) : File = new File(path)
 
-  val magicSchools = Map(
-    "abjuration" -> "abjuration",
-    "conjuration" -> "invocation",
-    "divination" -> "divination",
-    "enchantment" -> "enchantement",
-    "evocation" -> "évocation",
-    "illusion" -> "illusion",
-    "necromancy" -> "nécromancie",
-    "transmutation" -> "transmutation"
-  )
-
-  val skills = Map(
-    "Athletics" -> "Athlétisme",
-    "Acrobatics" -> "Acrobaties",
-    "Sleight of Hand" -> "Escamotage",
-    "Stealth" -> "Discrétion",
-    "Arcana" -> "Arcanes",
-    "History" -> "Hitoire",
-    "Investigation" -> "Investigation",
-    "Nature" -> "Nature",
-    "Religion" -> "Religion",
-    "Animal Handling" -> "Dressage",
-    "Insight" -> "Intuition",
-    "Medicine" -> "Médecine",
-    "Perception" -> "Perception",
-    "Survival" -> "Survie",
-    "Deception" -> "Tromperie",
-    "Intimidation" -> "Intimidation",
-    "Performance" -> "Représentation",
-    "Persuasion" -> "Persuasion"
-  )
-
   implicit val language = Fr
+
+
+
+  def parseSeq[A]
+  ( fileFinder : PathFinder,
+    key : String )
+  (implicit builder : FromXmlToHtml[A], lang : Lang)
+  : KeySeq[(RelativePath, A)] =
+    fileFinder.getPaths map { path =>
+      val f = XML.loadFile(path)
+      try {
+        val name = path.getName.stripSuffix(".xml")
+        (name,
+          (s"$key/${lang.id}/$name.html",
+            builder.fromXml(f)))
+      } catch {
+        case e : Exception =>
+          println(path)
+          throw e
+      }
+    }
+
+
+
+
+  def genPages[A]
+  ( keySeq : KeySeq[(RelativePath, A)])
+  ( implicit builder : FromXmlToHtml[A], lang : Lang) =
+  keySeq.foreach {
+    case (_, (f, s)) =>
+      IO.write(new File(out +  f), builder.toHtml(s))
+  }
 
   def main(args : Array[String]): Unit = {
 
@@ -61,18 +61,15 @@ object Front {
     val monsterFilesFinder : PathFinder = PathFinder(resources ) / monsters ** "*.xml"
 
 
-    val spellSeq = spellFilesFinder.getPaths map { path =>
 
-      val f = XML.loadFile(path)
-      try {
-        (s"$spells/${path.getName.stripSuffix("xml")}html",
-          Spell.fromXml(f))
-      }catch {
-        case e : Exception =>
-          println(path)
-          throw e
-      }
-    }
+    val frSpellSeq = parseSeq(spellFilesFinder, spells)(Spell, Fr)
+
+    val m : Map[String, Spell] = frSpellSeq map {
+      case (k, (p, s)) => (k, s)
+    } toMap
+
+
+    val frMonsterSeq = parseSeq(monsterFilesFinder, monsters)(Monster.fromXmlToHml(m), Fr)
 
     IO.createDirectories(List(spellOutDir, monsterOutDir))
     IO.copyDirectory(resources + "css/", out + "css/")
@@ -82,10 +79,11 @@ object Front {
 
     index.createNewFile()
 
-    spellSeq.foreach {
-      case (k, s) =>
-        IO.write(new File(out + k), Spell.toHtml(s))
-    }
-    IO.write(index, Templates.index(spellSeq))
+    genPages(frSpellSeq)(Spell, Fr)
+
+
+    genPages(frMonsterSeq)(Monster.fromXmlToHml(m), Fr)
+
+    IO.write(index, Templates.index(frSpellSeq, frMonsterSeq))
   }
 }

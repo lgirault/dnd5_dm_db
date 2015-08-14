@@ -1,16 +1,19 @@
 <monster>
-    <category>NPC</category>
-    <name>
-        <fr>Acolyte</fr>
-        <eng>Acolyte</eng>
-    </name>
-    <size>Moyen</size>
-    <type anyRace="true" >Humanoïde (race quelconque)</type>
-    <alignment>any</alignment>
-    <ca>10</ca>
-    <hp>9</hp>
-    <hd>2d8</hd>
-    <speed unit="feet">30</speed>
+    <identity>
+        <category>NPC</category>
+        <name>
+            <fr>Acolyte</fr>
+            <eng>Acolyte</eng>
+        </name>
+        <size>Medium</size>
+        <type>Humanoïde</type>
+        <race>any</race>
+        <alignment>any</alignment>
+        <ac>10</ac>
+        <hp>9</hp>
+        <hd>2d8</hd>
+        <speed unit="feet">30</speed>
+    </identity>
     <abilities>
         <str>10</str>
         <dex>10</dex>
@@ -19,40 +22,39 @@
         <wis>14</wis>
         <cha>11</cha>
     </abilities>
-    <skillList>
-        <skill name="Medicine" value="+4"/>
-        <skill name="Religion" value="+2"/>
-    </skillList>
-    <passivePerception>10</passivePerception>
-    <sensList>
-        <sens name="Perception passive" value="10"/>
-    </sensList>
-    <languageList anyLanguage="true">
-        <language>common</language>
-        <language>une langue quelconque (habituellement le Commun)</language>
-    </languageList>
-    <cr>0.25</cr>
-    <xp>50</xp>
+    <skillMisc>
+        <skillList>
+            <skill name="Medicine" value="+4"/>
+            <skill name="Religion" value="+2"/>
+        </skillList>
+        <sensList>
+            <passivePerception>10</passivePerception>
+        </sensList>
+        <languageList anyLanguage="true" default="common" />
+        <cr>0.25</cr>
+        <xp>50</xp>
+    </skillMisc>
     <spellcasting>
         <casterLevel>1</casterLevel>
         <ability>wis</ability>
         <dc>12</dc>
         <attackBonus>+4</attackBonus>
-        <spells class ="cleric" >
+        <class>Cleric</class>
+        <spells>
             <spellList level="0">
-                <spell name="light"/>
-                <spell name="thaumaturgy"/>
-                <spell name="sacred-flame"/>
+                <spell>light</spell>
+                <spell>thaumaturgy</spell>
+                <spell>sacred-flame</spell>
             </spellList>
             <spellList level="1" slots="3">
-                <spell name="bless"/>
-                <spell name="sanctuary"/>
-                <spell name="cure-wounds"/>
+                <spell>bless</spell>
+                <spell>sanctuary</spell>
+                <spell>cure-wounds</spell>
             </spellList>
         </spells>
     </spellcasting>
     <actionList>
-        <action type="cac">
+        <action type="mwa">
             <name>
                 <fr>Gourdin</fr>
                 <eng>Club</eng>
@@ -62,7 +64,7 @@
             <numTarget>1</numTarget>
             <hit>2</hit>
             <hitd>1d4</hitd>
-            <damageType>contondants</damageType>
+            <damageType>Bludgeoning</damageType>
         </action>
     </actionList>
 </monster>
