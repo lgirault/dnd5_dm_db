@@ -41,15 +41,17 @@ object Templates {
    (implicit lang : Lang ): String =
     html_header("DnD5 - DM DataBase",
       List("""<link href="css/style.css" rel="stylesheet" type="text/css" />""",
-           """<script type="text/javascript" src="js/main.js"></script>"""))+
-      s"""<div>
-          |   <div id="monsters_view"> ${lang.monsters} </div>
-          |   <div id="spells_view"> ${lang.spells} </div>
-          </div>""".stripMargin +
-     """<div id="left_frame" class="frame" >""" +
-        keyNameDivs("spell", spells) +
-        keyNameDivs("monster", monsters) +
-      """</div><div id="right_frame" class="frame" ></div>""" +
+        """<script type="text/javascript" src="js/main.js"></script>"""))+
+     s"""<div id="left_frame" class="frame" >
+         |<div>
+         |   <button id="toggle_button"> ${lang.monsters} / ${lang.spells} </button>
+         |</div>""".stripMargin +
+        keyNameDivs("spells", spells) +
+        keyNameDivs("monsters", monsters) +
+    s"""</div><div class="frame" >
+      |   <div id="monsters_screen"><h1>${lang.monsters}</h1></div>
+      |   <div id="spells_screen"><h1>${lang.spells}</h1></div>
+      </div>""".stripMargin +
       html_footer
 
 }

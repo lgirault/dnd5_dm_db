@@ -35,8 +35,6 @@ function hideInnerBlockSpells(){
        var name = innerBlock.querySelector(".name");
        var desc = innerBlock.querySelector(".toHide");
 
-       console.log(name);
-       console.log(desc);
        desc.style.display = "none";
        name.onclick = function(){
         toggleBlockDisplay(desc);
@@ -46,41 +44,145 @@ function hideInnerBlockSpells(){
 }
 
 
-function displayBlock(text){
-    document.getElementById("right_frame").innerHTML = text;
+
+function appendMonsterBlock(text){
+    document.getElementById("monsters_screen").innerHTML += text;
     hideInnerBlockSpells();
 }
 
-function appendBlock(text){
-    document.getElementById("right_frame").innerHTML += text;
-    hideInnerBlockSpells();
+function appendSpellBlock(text){
+    document.getElementById("spells_screen").innerHTML += text;
 }
+
+
+
+var SCREEN = "screen";
+var MONSTERS = "monsters";
+var SPELLS= "spells";
+
+
+function otherScreen(name){
+    if(name == SPELLS)
+        return MONSTERS;
+    else if( name == MONSTERS)
+        return SPELLS;
+    else
+        return "undefined";
+}
+
+function Context(){
+
+    this.screen = SPELLS;
+
+    this.address = window.location.origin + window.location.pathname;
+
+    this.parseSearchString = function (){
+        var searchString = window.location.search;
+            var query = searchString.substring(1);
+            var keyVals = query.split('&');
+            for(var i = 0; i < keyVals.length; i++){
+                if(keyVals[i].length > 0)
+                   this.parseAndLoadQuery(keyVals[i]);
+            }
+
+    }
+
+    this.monsters = new Array();
+    this.spells = new Array();
+
+    this.parseAndLoadQuery= function (query) {
+        var keyVal = query.split('=');
+        var key = decodeURIComponent(keyVal[0]);
+
+        if(key == SCREEN){
+            this.setScreen(keyVal[1]);
+        }
+        else {
+            this.loadQuery(key, keyVal[1]);
+        }
+        //var relativeAddress = parseDBEntry(keyVal[1]);
+    }
+
+    this.setURL = function (){
+        var str = "?screen="+this.screen;
+        for(var i =0; i< this.monsters.length; i++){
+           str += "&" + MONSTERS + "=" + this.monsters[i];
+        }
+        for(var i =0; i< this.spells.length; i++){
+           str += "&" + SPELLS + "=" + this.spells[i];
+        }
+
+
+        // !!! do not use  window.location.search = XXX; it reload the page !
+
+         history.pushState({}, "", this.address + str);
+
+    }
+
+    this.loadQuery = function(type, query){
+        var answerProcess;
+        var relativeAddress = type + "/" + query + ".html"
+
+       if (type == MONSTERS){
+            this.monsters.push(query);
+            answerProcess = appendMonsterBlock;
+       }
+       else if (type == SPELLS){
+            this.spells.push(query);
+            answerProcess = appendSpellBlock;
+       }
+
+       loadXMLDoc(this.address + relativeAddress, answerProcess);
+
+    }
+
+    this.setScreen = function (name){
+        var other = otherScreen(name);
+        this.screen = name;
+        hide(other + "_screen");
+        hide(other + "_index");
+        show(name + "_screen");
+        show(name + "_index");
+    }
+
+    this.toggleScreen = function() {
+        this.setScreen(otherScreen(this.screen));
+        this.setURL();
+    }
+}
+
+function hide(toHideId) {
+    document.getElementById(toHideId).style.display = "none";
+}
+function show(toShowId){
+    document.getElementById(toShowId).style.display = "block";
+}
+
+
+var context = new Context();
 
 function initMenuLinks(){
     var menuLinks = document.querySelectorAll(".menuLink"); //nodeList
     menuLinks.forEach(function(menuLink){
         menuLink.onclick = function(e) {
-            loadXMLDoc(e.target.href, appendBlock)
+            var url = e.target.href.split('?');
+            context.parseAndLoadQuery(url[1]);
+            context.setURL();
             return false;
         };
     });
 
+    var toggleButton = document.getElementById("toggle_button");
+
+    toggleButton.onclick = function(e) {
+        console.log("click");
+        context.toggleScreen();
+        return false;
+    };
 }
 
 window.onload = function(){
     initMenuLinks();
-    console.log()
-    var address = window.location.origin + window.location.pathname;
-    var query = window.location.search.substring(1);
-    var keyVals = query.split('&');
-    for(var i = 0; i < keyVals.length; i++){
-        var keyVal = keyVals[i].split('=');
-        var key = decodeURIComponent(keyVal[0]);
-        var val = keyVal[1].split('.');
-        var lang = decodeURIComponent(val[0]);
-        var name = decodeURIComponent(val[1]);
-        var fullAddress = address + key + "/" + lang + "/" + name + ".html";
-        loadXMLDoc(fullAddress, displayBlock);
-    }
-
+    context.parseSearchString();
+    setScreen();
 };

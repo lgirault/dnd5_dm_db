@@ -31,7 +31,7 @@ object Front {
       try {
         val name = path.getName.stripSuffix(".xml")
         (name,
-          (s"$key/${lang.id}/$name.html",
+          (s"?$key=${lang.id}/$name",
             builder.fromXml(f)))
       } catch {
         case e : Exception =>
