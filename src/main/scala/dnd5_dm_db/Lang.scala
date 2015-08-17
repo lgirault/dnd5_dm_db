@@ -226,8 +226,24 @@ object Fr extends Lang {
 
   val language : Language => String = {
     case AnyLanguage(default) => "une langue au choix"+
-      default.map(d => s" (généralement le $d)").getOrElse("")
-    case OneLanguage(l) => l
+      default.map(d => s" (généralement le ${language(d)})").getOrElse("")
+    case Common => "Commun"
+    case Dwarvish => "Nain"
+    case Elvish => "Elfe"
+    case Giant => "Géant"
+    case Gnomish => "Gnome"
+    case Goblin => "Gobelin"
+    case Halfling => "Hobbit"
+    case Orc => "Orc"
+
+    case Abyssal => "Abyssal"
+    case Celestial => "Célestial"
+    case Draconic => "Draconique"
+    case DeepSpeech => "Langue des profondeurs"
+    case Infernal => "Infernal"
+    case Primordial => "Primordial"
+    case Sylvan => "Sylvain"
+    case Undercommon => "Commun des profondeurs"
   }
 
   val challengeRanking : String = "Facteur de puissance"

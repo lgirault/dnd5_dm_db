@@ -1,5 +1,7 @@
 package dnd5_dm_db
 
+import scala.xml.Node
+
 
 object Language {
   def fromString(str : String) : Language = str match {
@@ -22,8 +24,23 @@ object Language {
     case "Undercommon" => Undercommon
     case _ => error(s"unknown language $str")
   }
+
+  def fromXml(languageList : Node) : Seq[Language] = {
+    languageList.child
+    val ls = (languageList \ "language") map (n => fromString(n.text))
+    if(optionBooleanAttribute(languageList, "anyLanguage")){
+      AnyLanguage(singleOptionAttribute(languageList, "default") map fromString) +: ls
+    }
+    else ls
+  }
+
+  def toHtml(ls : Seq[Language])(implicit lang : Lang) : String = {
+    val start = s"<div><b>${lang.languages} :</b>"
+    ls  map lang.language mkString (start, ", ", "</div>")
+  }
 }
 sealed abstract class Language
+
 
 case object Common extends Language
 case object Dwarvish extends Language
@@ -42,4 +59,5 @@ case object Infernal extends Language
 case object Primordial extends Language
 case object Sylvan extends Language
 case object Undercommon extends Language
-case class CustomLanguage(name : String) extends Language
+case class AnyLanguage(default : Option[Language]) extends Language
+//case class CustomLanguage(name : String) extends Language

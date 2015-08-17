@@ -22,18 +22,18 @@
         <cha>8</cha>
     </abilities>
     <skillMisc>
-        <skillList>
+        <skills>
             <skill name="Medicine" value="+4"/>
             <skill name="Religion" value="+2"/>
-        </skillList>
-        <sensList>
+        </skills>
+        <senses>
             <passivePerception>10</passivePerception>
             <darkvision unit="feet">60</darkvision>
-        </sensList>
-        <languageList>
-            <language>common</language>
-            <language>draconic</language>
-        </languageList>
+        </senses>
+        <languages>
+            <language>Common</language>
+            <language>Draconic</language>
+        </languages>
         <cr>0.125</cr>
         <xp>25</xp>
     </skillMisc>

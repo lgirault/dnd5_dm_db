@@ -4,24 +4,7 @@ import scala.xml.Node
 
 
 
-sealed abstract class Language
-case class AnyLanguage(default : Option[String]) extends Language
-case class OneLanguage(name : String) extends Language
 
-object Language {
-  def fromXml(languageList : Node) : Seq[Language] = {
-    val ls = (languageList \ "language") map (n => OneLanguage(n.text))
-    if(optionBooleanAttribute(languageList, "anyLanguage")){
-      AnyLanguage(singleOptionAttribute(languageList, "default")) +: ls
-    }
-    else ls
-  }
-
-  def toHtml(ls : Seq[Language])(implicit lang : Lang) : String = {
-    val start = s"<div><b>${lang.languages} :</b>"
-    ls  map lang.language mkString (start, ", ", "</div>")
-  }
-}
 
 case class Trait(name : String, description : String)
 object Trait {
@@ -98,9 +81,9 @@ object Monster{
       (identity \ "hp", Die.fromString(identity \ "hd")),
       DnDLength fromXml (identity \ "speed").toNode,
       abilities,
-      (skillMisc \ "skillList" \ "skill").theSeq map Skill.fromXml,
-      Sens fromXml (skillMisc \ "sensList").toNode,
-      Language fromXml (skillMisc\"languageList").toNode, // language
+      (skillMisc \ "skills" \ "skill").theSeq map Skill.fromXml,
+      Sens fromXml (skillMisc \ "senses").toNode,
+      Language fromXml (skillMisc\"languages").toNode, // language
       (skillMisc \ "cr").text.toFloat,
       skillMisc \ "xp",
       traits map Trait.fromXml,

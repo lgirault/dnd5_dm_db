@@ -23,14 +23,14 @@
         <cha>11</cha>
     </abilities>
     <skillMisc>
-        <skillList>
+        <skills>
             <skill name="Medicine" value="+4"/>
             <skill name="Religion" value="+2"/>
-        </skillList>
-        <sensList>
+        </skills>
+        <senses>
             <passivePerception>10</passivePerception>
-        </sensList>
-        <languageList anyLanguage="true" default="common" />
+        </senses>
+        <languages anyLanguage="true" default="Common" />
         <cr>0.25</cr>
         <xp>50</xp>
     </skillMisc>
