@@ -8,7 +8,7 @@ import scala.xml.{Node, XML}
 
 object Front {
 
-  val root = "/home/lorilan/projects/dnd5-dm-db/"
+  val root = "/home/lorilan/projects/dnd5_dm_db/"
   val resources = root + "src/main/resources/"
   val out = root + "out/"
 
