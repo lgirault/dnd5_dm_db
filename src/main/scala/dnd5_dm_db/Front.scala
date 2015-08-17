@@ -22,17 +22,14 @@ object Front {
 
 
   def parseSeq[A]
-  ( fileFinder : PathFinder,
-    key : String )
+  ( fileFinder : PathFinder)
   (implicit builder : FromXmlToHtml[A], lang : Lang)
-  : KeySeq[(RelativePath, A)] =
+  : Seq[(Name, LangId, A)] =
     fileFinder.getPaths map { path =>
       val f = XML.loadFile(path)
       try {
         val name = path.getName.stripSuffix(".xml")
-        (name,
-          (s"?$key=${lang.id}/$name",
-            builder.fromXml(f)))
+        (name, lang.id, builder.fromXml(f))
       } catch {
         case e : Exception =>
           println(path)
@@ -44,11 +41,11 @@ object Front {
 
 
   def genPages[A]
-  ( keySeq : KeySeq[(RelativePath, A)])
+  ( keySeq : Seq[(Name, LangId, A)], typ : String)
   ( implicit builder : FromXmlToHtml[A], lang : Lang) =
   keySeq.foreach {
-    case (_, (f, s)) =>
-      IO.write(new File(out +  f), builder.toHtml(s))
+    case (n, l, s) =>
+      IO.write(new File(s"$out/$typ/$l/$n.html"), builder.toHtml(s))
   }
 
   def main(args : Array[String]): Unit = {
@@ -62,14 +59,14 @@ object Front {
 
 
 
-    val frSpellSeq = parseSeq(spellFilesFinder, spells)(Spell, Fr)
+    val frSpellSeq = parseSeq(spellFilesFinder)(Spell, Fr)
 
     val m : Map[String, Spell] = frSpellSeq map {
-      case (k, (p, s)) => (k, s)
+      case (k, p, s) => (k, s)
     } toMap
 
 
-    val frMonsterSeq = parseSeq(monsterFilesFinder, monsters)(Monster.fromXmlToHml(m), Fr)
+    val frMonsterSeq = parseSeq(monsterFilesFinder)(Monster.fromXmlToHml(m), Fr)
 
     IO.createDirectories(List(spellOutDir, monsterOutDir))
     IO.copyDirectory(resources + "css/", out + "css/")
@@ -79,10 +76,10 @@ object Front {
 
     index.createNewFile()
 
-    genPages(frSpellSeq)(Spell, Fr)
+    genPages(frSpellSeq, spells)(Spell, Fr)
 
 
-    genPages(frMonsterSeq)(Monster.fromXmlToHml(m), Fr)
+    genPages(frMonsterSeq, monsters)(Monster.fromXmlToHml(m), Fr)
 
     IO.write(index, Templates.index(frSpellSeq, frMonsterSeq))
   }

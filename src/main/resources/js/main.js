@@ -2,6 +2,17 @@
 NodeList.prototype.forEach = Array.prototype.forEach
 HTMLCollection.prototype.forEach = Array.prototype.forEach
 
+Array.prototype.contains = function (elt){
+    return this.indexOf(elt)!=-1;
+}
+
+var UNDEFINED = "undefined";
+var SCREEN = "screen";
+var MONSTERS = "monsters";
+var SPELLS= "spells";
+var MONSTERS_SCREEN = "monsters_screen";
+var SPELLS_SCREEN = "spells_screen";
+
 function loadXMLDoc(fileName, onReady)
 {
     var xmlhttp;
@@ -38,27 +49,43 @@ function hideInnerBlockSpells(){
        desc.style.display = "none";
        name.onclick = function(){
         toggleBlockDisplay(desc);
+        normalizeBlockHeight(MONSTERS_SCREEN);
         return false;
        }
     });
 }
 
 
+function normalizeBlockHeight(id){
+    var height = 0;
+    var blocks = document.querySelectorAll("#"+id+" .bloc"); //nodeList
+
+    blocks.forEach(function(b){
+           var h = b.clientHeight;
+           if(h > height){
+             height = h;
+           }
+    });
+
+    blocks.forEach(function(b){
+        b.clientHeight = height;
+    });
+}
 
 function appendMonsterBlock(text){
-    document.getElementById("monsters_screen").innerHTML += text;
+    document.getElementById(MONSTERS_SCREEN).innerHTML += text;
     hideInnerBlockSpells();
+    normalizeBlockHeight(MONSTERS_SCREEN);
 }
 
 function appendSpellBlock(text){
-    document.getElementById("spells_screen").innerHTML += text;
+    document.getElementById(SPELLS_SCREEN).innerHTML += text;
+    normalizeBlockHeight(SPELLS_SCREEN);
 }
 
 
 
-var SCREEN = "screen";
-var MONSTERS = "monsters";
-var SPELLS= "spells";
+
 
 
 function otherScreen(name){
@@ -67,12 +94,17 @@ function otherScreen(name){
     else if( name == MONSTERS)
         return SPELLS;
     else
-        return "undefined";
+        return UNDEFINED;
+}
+
+function LangEntry(lang, name){
+    this.lang = lang;
+    this.name = name;
 }
 
 function Context(){
 
-    this.screen = SPELLS;
+    this.screen = UNDEFINED;
 
     this.address = window.location.origin + window.location.pathname;
 
@@ -122,17 +154,26 @@ function Context(){
     this.loadQuery = function(type, query){
         var answerProcess;
         var relativeAddress = type + "/" + query + ".html"
+        var load = false;
 
        if (type == MONSTERS){
-            this.monsters.push(query);
-            answerProcess = appendMonsterBlock;
+            if(!this.monsters.contains(query)){
+                this.monsters.push(query);
+                answerProcess = appendMonsterBlock;
+                load = true;
+            }
        }
        else if (type == SPELLS){
-            this.spells.push(query);
-            answerProcess = appendSpellBlock;
+            if(!this.spells.contains(query)){
+                this.spells.push(query);
+                answerProcess = appendSpellBlock;
+                load = true;
+            }
        }
 
-       loadXMLDoc(this.address + relativeAddress, answerProcess);
+       if(load){
+            loadXMLDoc(this.address + relativeAddress, answerProcess);
+       }
 
     }
 
@@ -184,5 +225,6 @@ function initMenuLinks(){
 window.onload = function(){
     initMenuLinks();
     context.parseSearchString();
-    setScreen();
+    if(context.screen == UNDEFINED)
+        context.setScreen(MONSTERS);
 };

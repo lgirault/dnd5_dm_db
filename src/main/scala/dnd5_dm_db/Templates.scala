@@ -26,18 +26,18 @@ object Templates {
   }
 
 
-  def keyNameDivs[A](c : String, kseq : KeySeq[(RelativePath, A)])
+  def keyNameDivs[A](c : String, kseq : Seq[(Name, LangId, A)], typ : String)
                 (implicit convert : A => Named) : String =
     s"""<div id="${c}_index" >""" +
-      kseq.map{case ((_, (p, n))) =>
-        s"""<div><a class="menuLink" href="$p">${n.name}</a></div>"""
+      kseq.map{case (n, l, elt) =>
+        s"""<div><a class="menuLink" href="?$typ=$l/$n">${elt.name}</a></div>"""
       }.mkString("\n") +
     "</div>"
 
 
   def index
-   ( spells : KeySeq[(RelativePath, Spell)],
-     monsters : KeySeq[(RelativePath,Monster)] )
+   ( spells : Seq[(Name, LangId, Spell)],
+     monsters : Seq[(Name, LangId, Monster)] )
    (implicit lang : Lang ): String =
     html_header("DnD5 - DM DataBase",
       List("""<link href="css/style.css" rel="stylesheet" type="text/css" />""",
@@ -46,8 +46,8 @@ object Templates {
          |<div>
          |   <button id="toggle_button"> ${lang.monsters} / ${lang.spells} </button>
          |</div>""".stripMargin +
-        keyNameDivs("spells", spells) +
-        keyNameDivs("monsters", monsters) +
+        keyNameDivs("spells", spells, "spells") +
+        keyNameDivs("monsters", monsters, "monsters") +
     s"""</div><div class="frame" >
       |   <div id="monsters_screen"><h1>${lang.monsters}</h1></div>
       |   <div id="spells_screen"><h1>${lang.spells}</h1></div>

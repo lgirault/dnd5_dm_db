@@ -2,8 +2,9 @@ import scala.xml.{NodeSeq, Node}
 
 package object dnd5_dm_db {
 
-  type KeySeq[A] = Seq[(String, A)]
-  type RelativePath = String
+  type Name = String
+  type LangId = String
+
 
   def error(msg : String) = sys.error(msg)
 
