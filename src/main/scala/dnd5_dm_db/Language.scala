@@ -8,14 +8,14 @@ object Language {
     case "Common" => Common
     case "Dwarvish" => Dwarvish
     case "Elvish" => Elvish
-    case "Giant" => Giant
+    case "Giant" => GiantLang
     case "Gnomish" => Gnomish
     case "Goblin" => Goblin
     case "Halfling" => Halfling
     case "Orc" => Orc
 
     case "Abyssal" => Abyssal
-    case "Celestial" => Celestial
+    case "Celestial" => CelestialLang
     case "Draconic" => Draconic
     case "DeepSpeech" => DeepSpeech
     case "Infernal" => Infernal
@@ -34,10 +34,6 @@ object Language {
     else ls
   }
 
-  def toHtml(ls : Seq[Language])(implicit lang : Lang) : String = {
-    val start = s"<div><b>${lang.languages} :</b>"
-    ls  map lang.language mkString (start, ", ", "</div>")
-  }
 }
 sealed abstract class Language
 
@@ -45,14 +41,14 @@ sealed abstract class Language
 case object Common extends Language
 case object Dwarvish extends Language
 case object Elvish extends Language
-case object Giant extends Language
+case object GiantLang extends Language
 case object Gnomish extends Language
 case object Goblin extends Language
 case object Halfling extends Language
 case object Orc extends Language
 
 case object Abyssal extends Language
-case object Celestial extends Language
+case object CelestialLang extends Language
 case object Draconic extends Language
 case object DeepSpeech extends Language
 case object Infernal extends Language

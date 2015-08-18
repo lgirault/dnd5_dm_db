@@ -1,18 +1,19 @@
 <monster>
     <identity>
-        <category>NPC</category>
         <name>
             <fr>Acolyte</fr>
             <eng>Acolyte</eng>
         </name>
         <size>Medium</size>
-        <type>Humanoïde</type>
-        <race>any</race>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
         <alignment>any</alignment>
         <ac>10</ac>
-        <hp>9</hp>
-        <hd>2d8</hd>
-        <speed unit="feet">30</speed>
+        <hp>
+            <average>9</average>
+            <die>2d8</die>
+        </hp>
+        <speeds><speed unit="feet">30</speed></speeds>
     </identity>
     <abilities>
         <str>10</str>
@@ -54,7 +55,7 @@
         </spells>
     </spellcasting>
     <actionList>
-        <action type="mwa">
+        <action type="attack">
             <name>
                 <fr>Gourdin</fr>
                 <eng>Club</eng>
@@ -62,9 +63,16 @@
             <bonus>+2</bonus>
             <reach unit="feet">5</reach>
             <numTarget>1</numTarget>
-            <hit>2</hit>
-            <hitd>1d4</hitd>
-            <damageType>Bludgeoning</damageType>
+            <damage>
+                <average>2</average>
+                <die>1d4+2</die>
+                <type>Bludgeoning</type>
+            </damage>
         </action>
     </actionList>
+    <description>
+        <fr>Les acolytes sont des membres débutants du clergé généralement rattachés à un prêtre. Ils réalisent diverses fonctions dans un temple et des capacités de lanceurs de sorts mineurs leur sont accordés par leur divinités.</fr>
+        <eng>Acolytes are junior members of clergy, usually answerable to a priest. They perform a variety of functions in a temple and are granted minor spellcasting power by their deities.</eng>
+    </description>
+    <source>MM</source>
 </monster>

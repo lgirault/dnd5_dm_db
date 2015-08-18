@@ -54,7 +54,7 @@ object Spell extends FromXmlToHtml[Spell]{
       |     <div><b>${lang.range}</b> : ${lang.length(s.range)}</div>
       |     <div><b>${lang.components}</b> : ${s.components map lang.component mkString ", "}</div>
       |     <div><b>${lang.duration}</b> : ${lang.time(s.duration)} </div>
-      |     <div class="description">${s.description}</div>
+      |     <div class="description">${s.description.replaceAllLiterally("[","<").replaceAllLiterally("]",">")}</div>
       |     ${optionHL(s.highLevelDescription)}
       |    <div><em>${lang.source} : ${s.source.getOrElse(lang.unknown)}</em></div>
       |    </div>

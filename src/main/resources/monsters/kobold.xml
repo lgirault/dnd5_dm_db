@@ -1,17 +1,18 @@
 <monster>
     <identity>
-        <category>Monster</category>
         <name>
             <fr>Kobold</fr>
             <eng>Kobold</eng>
         </name>
         <size>Small</size>
-        <type>Humanoïde</type>
+        <type>Humanoid</type>
         <alignment>le</alignment>
         <ac>12</ac>
-        <hp>5</hp>
-        <hd>2d6-2</hd>
-        <speed unit="feet">30</speed>
+        <hp>
+            <average>5</average>
+            <die>2d6-2</die>
+        </hp>
+        <speeds><speed unit="feet">30</speed></speeds>
     </identity>
     <abilities>
         <str>7</str>
@@ -37,7 +38,7 @@
         <cr>0.125</cr>
         <xp>25</xp>
     </skillMisc>
-    <traitList>
+    <traits>
         <trait>
             <fr><name>Sensibilité au soleil</name>
                 <description>À la lumière du soleil, un kobold a un désavantage aux jets d'attaque et aux jets de Sagesse (Perception) basés sur la vue.</description>
@@ -46,17 +47,14 @@
                 <description>While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</description>
             </eng>
         </trait>
-        <trait>
-            <fr><name>Tactique de meute</name>
-                <description>Un kobold a l'avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir.</description>
-            </fr>
-            <eng><name>Pack Tactics</name>
-                <description>The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 feet of the creature and the ally isn't incapacitated.</description>
-            </eng>
-        </trait>
-    </traitList>
+        <sharedTrait>
+            <id>pack-tactics</id>
+            <fr>Le kobold</fr>
+            <eng>The kobold</eng>
+        </sharedTrait>
+    </traits>
     <actionList>
-        <action type="mwa">
+        <action type="attack">
             <name>
                 <fr>Dague</fr>
                 <eng>Dagger</eng>
@@ -68,14 +66,16 @@
             <hitd>1d4+2</hitd>
             <damageType>Piercing</damageType>
         </action>
-        <action type="rwa">
+        <action type="attack">
             <name>
                 <fr>Lance-pierre</fr>
                 <eng>Sling</eng>
             </name>
             <bonus>+4</bonus>
-            <range unit="feet">30</range>
-            <rangeMax unit="feet">120</rangeMax>
+            <range>
+                <regular unit="feet">30</regular>
+                <max unit="feet">120</max>
+            </range>
             <numTarget>1</numTarget>
             <hit>4</hit>
             <hitd>1d4+2</hitd>

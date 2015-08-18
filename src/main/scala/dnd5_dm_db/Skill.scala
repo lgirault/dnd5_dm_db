@@ -50,17 +50,4 @@ object Skill {
     (fromString(singleAttribute(node, "name")),
       singleAttribute(node, "value").toInt)
 
-  def toHtml(skills : Seq[(Skill, Int)])(implicit lang : Lang) : String = {
-  val start =
-    s"""<div>
-     |    <b>${lang.skills}:</b>
-     |    <ul><li>"""
-    val end = "</li></ul></div>"
-
-    skills map {
-      case (s, v) => lang.skill(s) + " " + Die.bonus_str(v)
-    } mkString(start, "</li><li>", end)
-  }
-
-
 }

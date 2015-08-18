@@ -49,8 +49,8 @@ object Templates {
         keyNameDivs("spells", spells, "spells") +
         keyNameDivs("monsters", monsters, "monsters") +
     s"""</div><div class="frame" >
-      |   <div id="monsters_screen"><h1>${lang.monsters}</h1></div>
-      |   <div id="spells_screen"><h1>${lang.spells}</h1></div>
+      |   <div id="monsters_screen"><h1>${lang.monsters}<button class="clear">${lang.clear}</button></h1></div>
+      |   <div id="spells_screen"><h1>${lang.spells}<button class="clear">${lang.clear}</button></h1></div>
       </div>""".stripMargin +
       html_footer
 

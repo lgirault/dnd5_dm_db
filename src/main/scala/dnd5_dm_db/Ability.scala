@@ -48,6 +48,9 @@ object Ability {
   def modifier(value : Int) : Int =
     Math.floor((value - 10).toDouble / 2).toInt
 
+  def savingThrowFromXml(node : Node) : (Ability, Int) =
+      (fromString(singleAttribute(node, "name")),
+        singleAttribute(node, "value").toInt)
 
 
   def fromString(str : String) : Ability = str match {

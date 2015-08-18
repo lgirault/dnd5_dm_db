@@ -18,16 +18,13 @@ object Sens{
 
     val senses : Seq[Option[Sens]] = Seq(
       (node \ "passivePerception").textOption map (v => PassivePerception(v.toInt)),
-      optionSens("blindSight", BlindSight.apply),
-      optionSens("darkVision", DarkVision.apply),
+      optionSens("blindsight", BlindSight.apply),
+      optionSens("darkvision", DarkVision.apply),
       optionSens("tremorsense", Tremorsense.apply),
-      optionSens("trueSight", TrueSight.apply)
+      optionSens("truesight", TrueSight.apply)
     )
 
     senses.flatten
   }
-
-  def toHtml(ss : Seq[Sens])(implicit lang : Lang) : String =
-    ss map lang.sens mkString ("<div><b>Sens:</b>", ", ", "</div>")
 
 }

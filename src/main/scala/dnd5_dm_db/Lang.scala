@@ -27,7 +27,8 @@ abstract class Lang {
 
   val size : Size => String
 
-  val monsterType : (Size, MonsterType) => String
+  val monsterType : MonsterType => String
+  val monsterTypeAndSize : (Size, MonsterType) => String
 
   val alignment : Alignment => String
 
@@ -41,9 +42,14 @@ abstract class Lang {
   val hp : String
   val speed : String
 
+  val speedLength : Speed => String
+  
   val ability_short : Ability => String
   val ability_long : Ability => String
 
+  val savingThrows : String
+
+  val senses : String
   val sens : Sens => String
 
   val languages : String
@@ -69,7 +75,9 @@ abstract class Lang {
 
   val atWill : String
   val slots : Option[Int] => String
-  def spellLvl : Int => String
+  val spellLvl : Int => String
+
+  val clear : String
 }
 
 object Fr extends Lang {
@@ -140,15 +148,27 @@ object Fr extends Lang {
   }
 
 
-  val monsterType : (Size, MonsterType) => String = {
-    case (s , mt) =>
-      (mt match {
-        case AnyRace(t) => t + " (race quelconque)"
-        case OneRace(t, r) => s"$t ($r)"
-        case NoRace(t)=> t
-      }) + s" de taille ${size(s)}"
+  val monsterType : MonsterType => String = {
+    case Aberration => "Aberration"
+    case Beast => "Bête"
+    case CelestialType => "Célese"
+    case Construct => "Construction"
+    case Dragon => "Dragon"
+    case Elemental => "Elémentaire"
+    case Fey => "Fée"
+    case Fiend => "Démon"
+    case GiantType => "Géant"
+    case Humanoid => "Humanoïde"
+    case Monstrosity => "Monstruosité"
+    case Ooze => "Gelée"
+    case Plant => "Plante"
+    case Undead => "Mort-Vivant"
+    case AnyRace(t) => monsterType(t) + " (race quelconque)"
+    case TaggedType(t, r) => s"${monsterType(t)} ($r)"
   }
-
+  val monsterTypeAndSize : (Size, MonsterType) => String = {
+    case (s, mt) => monsterType(mt)+ s" de taille ${size(s)}"
+  }
   val moral : Moral => String = {
     case Good => "bon"
     case Neuter => "neutre"
@@ -160,9 +180,21 @@ object Fr extends Lang {
     case Chaotic => "chaotique"
   }
 
+  def moralOrOrderToString : Either[Order, Moral] => String = {
+    case Left(o) => order(o)
+    case Right(m) => moral(m)
+  }
+  def alignmentRestrictionToStr : AlignmentRestriction => String ={
+    case Restrict(om) => moralOrOrderToString(om)
+    case RestrictNot(Left(a)) => alignment(a)
+    case RestrictNot(Right(om)) => moralOrOrderToString(om)
+  }
+
   val alignment : Alignment => String = {
     case Unaligned => "non aligné"
-    case AnyAlignment => "alignement quelconque"
+    case AnyAlignment(None) => "alignement quelconque"
+    case AnyAlignment(Some(res : Restrict)) => s"alignement ${alignmentRestrictionToStr(res)} quelconque"
+    case AnyAlignment(Some(res : RestrictNot)) => s"alignement quelconque non ${alignmentRestrictionToStr(res)}"
     case Aligned(Neuter, Neuter) => "neutre"
     case Aligned(o, m) => order(o) +" " + moral(m)
   }
@@ -204,6 +236,18 @@ object Fr extends Lang {
   val hp : String = "PV"
   val speed : String = "Vitesse"
 
+  val speedLength : Speed => String = {
+    s =>
+      val kind = s match {
+      case Regular(_) => ""
+      case Burrow(_) => "creuser : "
+      case Climb(_) => "escalade : "
+      case Fly(_) => "vol : "
+      case Swim(_) => "nage : "
+    }
+    kind + length(s.speed)
+  }
+
   val ability_short : Ability => String = {
     case Strength => "FOR"
     case Dexterity => "DEX"
@@ -222,6 +266,7 @@ object Fr extends Lang {
     case Charisma => "le Charisme"
   }
 
+  val savingThrows : String = "Jets de sauvegarde"
   val languages : String = "Langues"
 
   val language : Language => String = {
@@ -230,14 +275,14 @@ object Fr extends Lang {
     case Common => "Commun"
     case Dwarvish => "Nain"
     case Elvish => "Elfe"
-    case Giant => "Géant"
+    case GiantLang => "Géant"
     case Gnomish => "Gnome"
     case Goblin => "Gobelin"
     case Halfling => "Hobbit"
     case Orc => "Orc"
 
     case Abyssal => "Abyssal"
-    case Celestial => "Célestial"
+    case CelestialLang => "Célestial"
     case Draconic => "Draconique"
     case DeepSpeech => "Langue des profondeurs"
     case Infernal => "Infernal"
@@ -250,11 +295,20 @@ object Fr extends Lang {
   val xp : String = "PX"
 
   val actionName : Action => String = {
-    case _ : MeleeWeaponAttack => "Attaque d'arme de corps à corps"
-    case _ : RangeWeaponAttack => "Attaque d'arme à distance"
+    case aa : AttackAction =>
+      aa.kind match {
+        case _ : Melee => "Attaque d'arme de corps à corps"
+        case _ : Ranged => "Attaque d'arme à distance"
+        case _ : MeleeOrRange => "Attaque d'arme de corps à corps ou à distance"
+      }
+
+    case _ : MultiAttack => "Attaque multiple"
+    case sa : SpecialAction => sa.name
   }
   val toHit : String = "au toucher"
   val target : Int => String = "cible" + plural(_)
+
+  val senses : String = "Sens"
 
   val sens : Sens => String = {
     case PassivePerception(v) => s"Percepion passive $v"
@@ -316,4 +370,5 @@ object Fr extends Lang {
     case None => atWill
     case Some(x) => s"$x emplacement${plural(x)}"
   }
+  val clear : String = "Tout effacer"
 }

@@ -1,10 +1,10 @@
 package dnd5_dm_db
 
+import scala.xml.Node
+
 case class Die(number : Int, faces: Int, bonus : Int){
   override def toString : String = {
     import Die.bonus_str
-
-
     s"${number}d$faces${bonus_str(bonus)}"
   }
 }
@@ -30,4 +30,8 @@ object Die {
       Die(n.toInt, f.toInt,  b)
     case _ => error(s"unknown die pattern : $str")
   }
+
+  def fromXml(node : Node) : (Int, Die) =
+    (node \ "average", fromString(node \"die"))
+
 }

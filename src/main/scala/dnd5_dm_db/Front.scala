@@ -14,6 +14,7 @@ object Front {
 
   val monsters = "monsters"
   val spells = "spells"
+  val traits = "traits"
 
   implicit def stringToFile(path : String) : File = new File(path)
 
@@ -24,10 +25,10 @@ object Front {
   def parseSeq[A]
   ( fileFinder : PathFinder)
   (implicit builder : FromXmlToHtml[A], lang : Lang)
-  : Seq[(Name, LangId, A)] =
+  : NLSeq[A] =
     fileFinder.getPaths map { path =>
-      val f = XML.loadFile(path)
       try {
+        val f = XML.loadFile(path)
         val name = path.getName.stripSuffix(".xml")
         (name, lang.id, builder.fromXml(f))
       } catch {
@@ -37,8 +38,8 @@ object Front {
       }
     }
 
-
-
+  def nlSeqToMap[A](nls : NLSeq[A]) : Map[String, A] =
+    nls map { case (k, p, s) => (k, s) } toMap
 
   def genPages[A]
   ( keySeq : Seq[(Name, LangId, A)], typ : String)
@@ -56,17 +57,18 @@ object Front {
 
     val spellFilesFinder : PathFinder = PathFinder(resources ) / spells ** "*.xml"
     val monsterFilesFinder : PathFinder = PathFinder(resources ) / monsters ** "*.xml"
+    val traitsFileFinder : PathFinder = PathFinder(resources ) / traits ** "*.xml"
 
-
+    val frTraitSeq = parseSeq(traitsFileFinder)(Trait, Fr)
 
     val frSpellSeq = parseSeq(spellFilesFinder)(Spell, Fr)
 
-    val m : Map[String, Spell] = frSpellSeq map {
-      case (k, p, s) => (k, s)
-    } toMap
+    val m : Map[String, Spell] = nlSeqToMap(frSpellSeq)
+    val traitsMap : Map[String, Trait] = nlSeqToMap(frTraitSeq)
 
 
-    val frMonsterSeq = parseSeq(monsterFilesFinder)(Monster.fromXmlToHml(m), Fr)
+    val frMonsterSeq =
+      parseSeq(monsterFilesFinder)(Monster.fromXmlToHml(m, traitsMap), Fr)
 
     IO.createDirectories(List(spellOutDir, monsterOutDir))
     IO.copyDirectory(resources + "css/", out + "css/")
@@ -79,7 +81,7 @@ object Front {
     genPages(frSpellSeq, spells)(Spell, Fr)
 
 
-    genPages(frMonsterSeq, monsters)(Monster.fromXmlToHml(m), Fr)
+    genPages(frMonsterSeq, monsters)(Monster.fromXmlToHml(m, traitsMap), Fr)
 
     IO.write(index, Templates.index(frSpellSeq, frMonsterSeq))
   }
