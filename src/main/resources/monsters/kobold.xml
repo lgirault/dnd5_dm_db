@@ -6,6 +6,7 @@
         </name>
         <size>Small</size>
         <type>Humanoid</type>
+        <typeTags><race>kobold</race></typeTags>
         <alignment>le</alignment>
         <ac><value>12</value></ac>
         <hp>
@@ -23,12 +24,8 @@
         <cha>8</cha>
     </abilities>
     <skillMisc>
-        <skills>
-            <skill name="Medicine" value="+4"/>
-            <skill name="Religion" value="+2"/>
-        </skills>
         <senses>
-            <passivePerception>10</passivePerception>
+            <passivePerception>8</passivePerception>
             <darkvision unit="feet">60</darkvision>
         </senses>
         <languages>

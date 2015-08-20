@@ -2,14 +2,13 @@ package dnd5_dm_db.lang
 
 import dnd5_dm_db._
 
-abstract class Lang {
+abstract class Lang
+  extends SpellText {
   val id : String
 
   val monsters : String
 
   val level : String
-
-  val castingTime : String
 
   val range : String
 
@@ -17,15 +16,9 @@ abstract class Lang {
 
   val rangeLength : ((DnDLength, DnDLength)) => String
 
-  val components : String
-
-  val component : Components => String
-
-  val duration : String
 
   val time : DnDTime => String
 
-  val higherLevels : String
 
   val size : Size => String
 
@@ -39,7 +32,6 @@ abstract class Lang {
   val skills : String
   val skill : Skill => String
 
-  val magicSchool : MagicSchool => String
 
   val hp : String
   val speed : String

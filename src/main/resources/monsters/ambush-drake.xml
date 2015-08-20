@@ -1,0 +1,83 @@
+<monster>
+    <identity>
+        <name>
+            <fr>Drake Embusqué</fr>
+            <eng>Ambush Drake</eng>
+        </name>
+        <size>Medium</size>
+        <type>Dragon</type>
+        <alignment>none</alignment>
+        <ac>
+            <value>13</value>
+            <desc>
+                <fr>armure naturelle</fr>
+                <eng>natural armor</eng>
+            </desc>
+        </ac>
+        <hp>
+            <average>22</average>
+            <die>4d6+8</die>
+        </hp>
+        <speeds><speed unit="feet">30</speed></speeds>
+    </identity>
+    <abilities>
+        <str>13</str>
+        <dex>15</dex>
+        <con>14</con>
+        <int>4</int>
+        <wis>11</wis>
+        <cha>6</cha>
+    </abilities>
+    <skillMisc>
+        <skills>
+            <skill name ="Perception" value ="+4"/>
+            <skill name ="Stealth" value ="+4"/>
+        </skills>
+        <resistances>
+            <resist>Poison</resist>
+        </resistances>
+        <senses>
+            <passivePerception>14</passivePerception>
+            <darkvision unit="feet">60</darkvision>
+        </senses>
+        <languages>
+            <language doNotSpeak="true">Draconic</language>
+        </languages>
+        <cr>1/2</cr>
+        <xp>100</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <fr>
+                <name>Attaque surprise</name>
+                <description>Si le drake surprend une créature et touche pendant le premier round du combat, la cible prend 7 (2d6) dégâts supplémentaire.</description>
+            </fr>
+            <eng>
+                <name>Surprise Attack</name>
+                <description>If the drake surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.</description>
+            </eng>
+        </trait>
+        <shared>
+            <fr>Le drake</fr>
+            <eng>The drake</eng>
+            <id>pack-tactics</id>
+        </shared>
+    </traits>
+    <actions>
+        <action type="attack">
+            <name>
+                <fr>Morsure</fr>
+                <eng>Bite</eng>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet">5</reach>
+            <numTarget>1</numTarget>
+            <hit type="damage">
+                <average>4</average>
+                <die>1d6+1</die>
+                <type>Piercing</type>
+            </hit>
+        </action>
+    </actions>
+    <source page="88">HOTDQ</source>
+</monster>

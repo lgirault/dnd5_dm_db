@@ -13,8 +13,10 @@
     </components>
     <duration unit="minute">1</duration>
     <description>
-        <fr>Vous protégez une créature dans la portée du sort contre les attaques. Jusqu'à ce que le sort se termine, toute créature qui cible la créature protégée avec une attaque ou un sort offensif doit d'abord effectuer un jet de sauvegarde de Sagesse. En cas d'échec, la créature doit choisir une nouvelle cible ou perdre son attaque ou son sort. Ce sort ne protège pas la créature protégée contre les sorts à zone d'effet, tel que l'explosion d'une boule de feu.<br/>Si la créature protégée fait une attaque ou lance un sort qui affecte une créature ennemie, ce sort se termine.</fr>
-        <eng>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a fireball.
-            If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</eng>
+        <fr>[p]Vous protégez une créature dans la portée du sort contre les attaques. Jusqu'à ce que le sort se termine, toute créature qui cible la créature protégée avec une attaque ou un sort offensif doit d'abord effectuer un jet de sauvegarde de Sagesse. En cas d'échec, la créature doit choisir une nouvelle cible ou perdre son attaque ou son sort. Ce sort ne protège pas la créature protégée contre les sorts à zone d'effet, tel que l'explosion d'une boule de feu.[/p]
+            [p]Si la créature protégée fait une attaque ou lance un sort qui affecte une créature ennemie, ce sort se termine.[/p]</fr>
+        <eng>[p]You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn't protect the warded creature from area effects, such as the explosion of a fireball.[/p]
+            [p]If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.[/p]</eng>
     </description>
+    <source page="272">PHB</source>
 </spell>

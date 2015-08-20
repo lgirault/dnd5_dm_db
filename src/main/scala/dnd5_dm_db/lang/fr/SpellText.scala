@@ -3,7 +3,7 @@ package dnd5_dm_db.lang.fr
 import dnd5_dm_db._
 
 
-trait SpellText {
+trait SpellText extends lang.SpellText {
 
   val castingTime: String = "Temps d'incantation"
 
@@ -19,6 +19,12 @@ trait SpellText {
     case Material(txt) => s"M ($txt)"
   }
 
+  val sAreaOfEffect : Option[AreaOfEffect] => String = {
+    case Some(Line(l)) => s" (ligne de ${unitsText.length(l)})"
+    case Some(Sphere(r)) => s" (sur un rayon de ${unitsText.length(r)})"
+    case None => ""
+  }
+
   val magicSchool : MagicSchool => String = {
     case Abjuration => "abjuration"
     case Conjuration => "invocation"
@@ -30,14 +36,4 @@ trait SpellText {
     case Transmutation => "transmutation"
   }
 
-  val atWill : String = "à volonté"
-
-  val spellLvl : Int => String = {
-    case 0 => "Sorts mineurs"
-    case x => s"Niveau $x"
-  }
-  val slots : Option[Int] => String = {
-    case None => atWill
-    case Some(x) => s"$x emplacement${plural(x)}"
-  }
 }

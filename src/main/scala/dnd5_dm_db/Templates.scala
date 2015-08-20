@@ -31,7 +31,7 @@ object Templates {
   def keyNameDivs[A](c : String, kseq : Seq[(Name, LangId, A)], typ : String)
                 (implicit convert : A => Named) : String =
     s"""<div id="${c}_index" >""" +
-      kseq.map{case (n, l, elt) =>
+      kseq.sortBy(_._3.name).map{case (n, l, elt) =>
         s"""<div><a class="menuLink" href="?$typ=$l/$n">${elt.name}</a></div>"""
       }.mkString("\n") +
     "</div>"

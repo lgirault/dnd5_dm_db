@@ -14,8 +14,13 @@
     <duration unit="minute" upTo="true" concentration="true">1</duration>
     <description>
         <fr>Vous bénissez jusqu'à trois créatures de votre choix, dans la portée du sort. À chaque fois qu'une cible fait un jet d'attaque ou de sauvegarde avant la fin du sort, la cible peut lancer un d4 et ajouter le résultat au jet d'attaque ou de sauvegarde.</fr>
+        <eng>
+            You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll
+            a d4 and add the number rolled to the attack roll or saving throw.</eng>
     </description>
     <higher-level-description>
         <fr>Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez cibler une créature supplémentaire pour chaque niveau d'emplacement supérieur à 1.</fr>
+        <eng>When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</eng>
     </higher-level-description>
+    <source page="219">PHB</source>
 </spell>

@@ -10,6 +10,7 @@ case class Spell
   school : MagicSchool,
   castingTime : DnDTime,
   range : DnDLength,
+  sAreaOfEffect: Option[AreaOfEffect],
   components : List[Components],
   duration : DnDTime,
   concentration : Boolean,
@@ -25,6 +26,7 @@ object Spell extends FromXmlToHtml[Spell]{
       MagicSchool.fromString(spell \ "type"),
       DnDTime fromXml (spell \ "ctime").toNode,
       DnDLength fromXml (spell \ "range").toNode,
+      (spell \ "areaOfEffect").toNodeOption map AreaOfEffect.fromXml,
       Components.fromXml((spell \ "components").toNode, lang),
       DnDTime fromXml (spell \ "duration").toNode,
       optionBooleanAttribute((spell \ "duration").toNode, "concentration"),
@@ -53,7 +55,7 @@ object Spell extends FromXmlToHtml[Spell]{
       |       <em>${lang.level} ${s.level} ${lang.magicSchool(s.school)}</em>
       |     </div>
       |     <div><b>${lang.castingTime} : </b> ${lang.time(s.castingTime)}</div>
-      |     <div><b>${lang.range}</b> : ${lang.length(s.range)}</div>
+      |     <div><b>${lang.range}</b> : ${lang.length(s.range)}${lang.sAreaOfEffect(s.sAreaOfEffect)}</div>
       |     <div><b>${lang.components}</b> : ${s.components map lang.component mkString ", "}</div>
       |     <div><b>${lang.duration}</b> : ${lang.time(s.duration)} </div>
       |     <div class="description">${formatToHtml(s.description)}</div>

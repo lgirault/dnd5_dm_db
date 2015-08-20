@@ -1,14 +1,15 @@
 package dnd5_dm_db.lang
 
 import dnd5_dm_db._
-import dnd5_dm_db.lang.fr._
 
 
-object Fr extends Lang
-  with AlignmentText
-  with UnitsText
-  with SpellText
-  with MonsterText {
+object Fr
+  extends Lang
+  with fr.AlignmentText
+  with fr.UnitsText
+  with fr.SpellText
+  with fr.MonsterText
+  with fr.SkillAndLanguageText{
 
   val id: String = "fr"
 
@@ -21,27 +22,7 @@ object Fr extends Lang
 
   val armorClass : String = "Classe d'armure"
 
-  val skills : String = "Compétences"
-  val skill : Skill => String = {
-    case Athletics => "Athlétisme"
-    case Acrobatics => "Acrobaties"
-    case SleightOfHand => "Escamotage"
-    case Stealth => "Discrétion"
-    case Arcana => "Arcanes"
-    case History => "Hitoire"
-    case Investigation => "Investigation"
-    case Nature => "Nature"
-    case Religion => "Religion"
-    case AnimalHandling => "Dressage"
-    case Insight => "Intuition"
-    case Medicine => "Médecine"
-    case Perception => "Perception"
-    case Survival => "Survie"
-    case Deception => "Tromperie"
-    case Intimidation => "Intimidation"
-    case Performance => "Représentation"
-    case Persuasion => "Persuasion"
-  }
+
 
   val hp : String = "PV"
   val speed : String = "Vitesse"
@@ -77,30 +58,6 @@ object Fr extends Lang
   }
 
   val savingThrows : String = "Jets de sauvegarde"
-  val languages : String = "Langues"
-
-  val language : Language => String = {
-    case AnyLanguage(default) => "une langue au choix"+
-      default.map(d => s" (généralement le ${language(d)})").getOrElse("")
-    case Common => "Commun"
-    case Dwarvish => "Nain"
-    case Elvish => "Elfe"
-    case GiantLang => "Géant"
-    case Gnomish => "Gnome"
-    case Goblin => "Gobelin"
-    case Halfling => "Hobbit"
-    case Orc => "Orc"
-
-    case Abyssal => "Abyssal"
-    case CelestialLang => "Célestial"
-    case Draconic => "Draconique"
-    case DeepSpeech => "Langue des profondeurs"
-    case Infernal => "Infernal"
-    case Primordial => "Primordial"
-    case Sylvan => "Sylvain"
-    case Undercommon => "Commun des profondeurs"
-    case Troglodyte => "Troglodyte"
-  }
 
   val challengeRanking : String = "Facteur de puissance"
   val xp : String = "PX"
@@ -109,7 +66,7 @@ object Fr extends Lang
     case aa : AttackAction =>
       aa.kind match {
         case _ : Melee => "Attaque d'arme de corps à corps"
-        case _ : Ranged => "Attaque d'arme à distance"
+        case _ : Ranged | _ : RangedSpecial => "Attaque d'arme à distance"
         case _ : MeleeOrRange => "Attaque d'arme de corps à corps ou à distance"
       }
 
@@ -117,7 +74,7 @@ object Fr extends Lang
     case sa : SpecialAction => sa.name
   }
   val toHit : String = "au toucher"
-  val target : Int => String = "cible" + plural(_)
+  val target : Int => String = "cible" + fr.plural(_)
 
   val senses : String = "Sens"
 
@@ -140,7 +97,7 @@ object Fr extends Lang
     case Piercing => "perforants"
     case Poison => "empoisonnés"
     case Psychic => "psychiques"
-    case Radiant => "radiants(rayonnants ?)"
+    case Radiant => "rayonnants"
     case Slashing => "tranchants"
     case Thunder => "de tonnerre"
   }
@@ -165,6 +122,17 @@ object Fr extends Lang
 
   val source : String = "Source"
   val unknown : String = "inconnue"
+
+  val atWill : String = "à volonté"
+
+  val spellLvl : Int => String = {
+    case 0 => "Sorts mineurs"
+    case x => s"Niveau $x"
+  }
+  val slots : Option[Int] => String = {
+    case None => atWill
+    case Some(x) => s"$x emplacement${fr.plural(x)}"
+  }
 
   val spells : String = "Sorts"
   val spellCastingText : (String, SpellCasting) => String = {

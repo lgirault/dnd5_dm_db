@@ -1,0 +1,21 @@
+<spell>
+    <name>
+        <fr>Mot de Soin de Masse</fr>
+        <eng>Mass Healing Word</eng>
+    </name>
+    <level>3</level>
+    <type>evocation</type>
+    <ctime unit="bonusAction">1</ctime>
+    <range unit="feet">60</range>
+    <components verbose="true" somatic="false" material="false"/>
+    <duration unit="instant" />
+    <description>
+        <eng>As you call out words of restoration, up to six creatures of your choice that you can see within range regain hit points equal to 1d4 + your spell casting ability modifier. This spell has no effect on undead or constructs.</eng>
+        <fr>Lorsque vous prononcez les mots de soins, jusqu'à six créatures de votre choix visibles et à portée récupèrent un nombre de points de vie égal à 1d4 + votre modificateur de caractéristique pour lancer vos sorts. Ce sort n'a aucun effet sur les morts-vivants ou les créatures artificielles.</fr>
+    </description>
+    <higher-level-description>
+        <eng>When you cast this spell using a spell slot of 4th level or higher, the healing increases by 1d4 for each slot level above 3rd.</eng>
+        <fr>Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 4 ou plus, la quantité de points de vie récupérés est augmentée de 1d4 pour chaque niveau d'emplacement supérieur à 3.</fr>
+    </higher-level-description>
+    <source page="258">PHB</source>
+</spell>
