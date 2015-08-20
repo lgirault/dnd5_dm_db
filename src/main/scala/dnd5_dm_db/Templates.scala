@@ -1,5 +1,7 @@
 package dnd5_dm_db
 
+import dnd5_dm_db.lang.Lang
+
 trait Named {
   val name : String
 }

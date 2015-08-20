@@ -49,7 +49,7 @@ body			{height:100%;
 .rub:first-letter{font-size:1.6rem;}
 .source   		{padding:8px 0 4px 0; text-align:left; letter-spacing:-1px;
 				 font-family: verdana, arial, sans-serif; font-size:1.0rem;
-}
+                }
 
 p				{padding:0; margin:3px 0 3px 0;}
 .center			{text-align:center;}

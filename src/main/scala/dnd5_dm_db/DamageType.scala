@@ -16,20 +16,20 @@ case object Slashing extends DamageType
 case object Thunder extends DamageType
 
 object DamageType {
-  def fromString(str : String) : DamageType = str match {
-    case "Acid" => Acid
-    case "Bludgeoning" => Bludgeoning
-    case "Cold" => Cold
-    case "Fire" => Fire
-    case "Force" => Force
-    case "Lightning" => Lightning
-    case "Necrotic" => Necrotic
-    case "Piercing" => Piercing
-    case "Poison" => Poison
-    case "Psychic" => Psychic
-    case "Radiant" => Radiant
-    case "Slashing" => Slashing
-    case "Thunder" => Thunder
+  def fromString(str : String) : DamageType = str.toLowerCase match {
+    case "acid" => Acid
+    case "bludgeoning" => Bludgeoning
+    case "cold" => Cold
+    case "fire" => Fire
+    case "force" => Force
+    case "lightning" => Lightning
+    case "necrotic" => Necrotic
+    case "piercing" => Piercing
+    case "poison" => Poison
+    case "psychic" => Psychic
+    case "radiant" => Radiant
+    case "slashing" => Slashing
+    case "thunder" => Thunder
     case _ => error(s"unknown damage type : $str")
   }
 

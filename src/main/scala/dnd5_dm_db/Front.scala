@@ -2,6 +2,7 @@ package dnd5_dm_db
 
 import java.io.File
 
+import dnd5_dm_db.lang.{Fr, Lang}
 import sbt.{PathFinder, IO}
 
 import scala.xml.{Node, XML}

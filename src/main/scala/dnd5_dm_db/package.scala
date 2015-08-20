@@ -62,4 +62,7 @@ package object dnd5_dm_db {
   implicit def nodeSeqToStringOption( ns : NodeSeq) : Option[String] =
     NodeSeqOps(ns).textOption
 
+  def formatToHtml(str : String) : String =
+    str.replaceAllLiterally("[","<").replaceAllLiterally("]",">")
+
 }

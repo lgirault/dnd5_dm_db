@@ -1,66 +1,23 @@
 package dnd5_dm_db
 
+import dnd5_dm_db.lang.Lang
+
 import scala.xml.Node
 
 
 
-sealed abstract class Speed {
-  val speed: DnDLength
+case class Source(src : String, page : Option[Int]){
+  override def toString =
+    src + (page map (p => s" ( p.$p )") getOrElse "")
 }
-object Speed {
-
-
-  def fromXml(speeds : Node) : Seq[Speed] = {
-
-    def extract(name : String, builder : DnDLength => Speed) : Option[Speed] =
-      (speeds \ name ).toNodeOption  map { n =>
-        builder( DnDLength fromXml n )}
-
-
-    Seq(extract("speed", Regular.apply),
-      extract("burrow", Regular.apply),
-      extract("climb", Regular.apply),
-      extract("fly", Regular.apply),
-      extract("swim", Regular.apply)).flatten
-    }
-
-
-}
-
-case class Regular(speed: DnDLength) extends Speed
-case class Burrow(speed: DnDLength) extends Speed
-case class Climb(speed: DnDLength) extends Speed
-case class Fly(speed: DnDLength) extends Speed
-case class Swim(speed: DnDLength) extends Speed
-
-
-
-
-case class Trait(name : String, description : String)
-object Trait extends FromXmlToHtml[Trait]{
-
-  def sharedTraitFromXml
-  (traits : Map[String, Trait])
-  (node : Node)
-  (implicit lang : Lang) : Trait = {
-    val t = traits(node \ "id")
-    val monster = (node \ lang.id).text
-
-    t.copy(description = t.description
-      .replaceAllLiterally("[Monster]", monster)
-      .replaceAllLiterally("[monster]", monster.toLowerCase))
+object Source {
+  def fromXml(node : Node): Source = {
+    Source(node.text, singleOptionAttribute(node, "page") map (_.toInt))
   }
-
-  def fromXml(node : Node)(implicit lang : Lang) : Trait =
-    Trait (node \ lang.id \ "name",
-      node \ lang.id \ "description" )
-  def toHtml(t : Trait)(implicit lang: Lang): String =
-    s"<div><b>${t.name}:</b> ${t.description}</div>"
-
-
+  def toHtml(ssource : Option[Source]) ( implicit lang : Lang) : String = {
+    s"""<div class="source">${lang.source} : ${ssource.getOrElse(lang.unknown)}</div>"""
+  }
 }
-
-
 
 case class Monster
 ( name : String,
@@ -74,16 +31,19 @@ case class Monster
   abilities: Abilities,
   savingThrows : Seq[(Ability, Int)],
   skills : Seq[(Skill, Int)],
+  damageImmunities : Seq[DamageType],
+  conditionImmunities : Seq[Condition],
   resistances : Seq[DamageType],
   sensList : Seq[Sens],
   languages : Seq[Language],
-  challengeRanking : Float,
+  challengeRanking : ChallengeRanking,
   xp : Int,
   traits : Seq[Trait],
   spellCasting: Option[SpellCasting],
   actions : Seq[Action],
+  reactions : Seq[Action],
   description : Option[String],
-  source : Option[String])
+  source : Option[Source])
 
 object Monster{
 
@@ -101,47 +61,70 @@ object Monster{
               traitsMap : Map[String, Trait])(implicit lang : Lang) : Monster = {
     val identity = (monster \ "identity").toNode
     val abilities = Abilities fromXml (monster \ "abilities").toNode
-    val skillMisc = monster \ "skillMisc"
+    val skillMisc = (monster \ "skillMisc").toNode
+
+    val damageImmunities = skillMisc \ "damageImmunities" \ "immune"  map {
+      n => DamageType.fromString(n.text)
+    }
+    val conditionImmunities = skillMisc \ "conditionImmunities" \ "immune"  map {
+        n => Condition.fromString(n.text)
+      }
+    val damageResistances =  skillMisc \ "resistances" \ "resist" map {
+      n => DamageType.fromString(n.text)
+    }
 
     val traits = {
       val ts =  monster \ "traits" \ "trait" map Trait.fromXml
-      val sts = monster \ "traits" \ "sharedTrait" map
-        Trait.sharedTraitFromXml(traitsMap)
+
+      val sShared = (monster \ "traits" \ "shared").toNodeOption
+
+      val sts = sShared map {
+        shared =>
+          val name = shared \ lang.id
+          shared \ "id" map (n => traitsMap(n.text).withMonsterName(name) )
+      } getOrElse Seq()
 
       ts ++: sts
     }
 
     val spellCasting = (monster \ "spellcasting").toNodeOption
-    val actionList = monster \ "actionList"
+    val actions = monster \ "actions" \ "action" map Action.fromXml
+    val reactions = monster \ "reactions" \ "action" map Action.fromXml
+
+
+    val ac = (identity \ "ac").toNode
 
     Monster(
       identity \ "name" \ lang.id,
       Size.fromString(identity \ "size"),
       MonsterType.fromNode(identity),
       Alignment fromXml (identity\"alignment").toNode,
-      identity \ "ac",
-      identity \ "acDesc" \ lang.id,
+      ac \ "value",
+      ac \ "desc" \ lang.id,
       Die fromXml (identity \ "hp").toNode,
       Speed fromXml (identity \ "speeds").toNode,
       abilities,
       (skillMisc \ "savingThrows" \ "save") map Ability.savingThrowFromXml,
       (skillMisc \ "skills" \ "skill") map Skill.fromXml,
-      (skillMisc \ "resistances" \ "resist").theSeq map {n =>DamageType.fromString(n.text)},
+      damageImmunities,
+      conditionImmunities,
+      damageResistances,
       Sens fromXml (skillMisc \ "senses").toNode,
-      Language fromXml (skillMisc\"languages").toNode, // language
-      (skillMisc \ "cr").text.toFloat,
+      (skillMisc\"languages").toNodeOption map Language.fromXml getOrElse Seq(), // language
+      ChallengeRanking.fromString(skillMisc \ "cr"),
       skillMisc \ "xp",
       traits,
       spellCasting map SpellCasting.fromXml,
-      actionList \ "action" map Action.fromXml,
+      actions,
+      reactions,
       monster \ "description" \ lang.id,
-      monster \ "source" )
+      (monster \ "source" ).toNodeOption map Source.fromXml )
   }
 
 
   def titledSeq[A](title:String, s : Seq[A])(f : A => String) : String = {
     if(s.isEmpty) ""
-    else s map f mkString(s"<div><b>$title</b>: ", ", ","</div>")
+    else s map f mkString(s"<div><b>$title :</b> ", ", ","</div>")
   }
   def toHtml
   ( m : Monster,
@@ -149,7 +132,6 @@ object Monster{
   ( implicit lang : Lang) : String = {
     val sepMonster =
       """<img src="images/sep-monster.gif" alt="" class="sep-monster" width="95%" height="4" />"""
-
 
     val (avgHp, hpDie) = m.hitPoint
 
@@ -160,10 +142,27 @@ object Monster{
     val skillStr = titledSeq(lang.skills, m.skills) {
       case (s, v) => lang.skill(s) + " " + Die.bonus_str(v)
     }
-    val sensStr = titledSeq(lang.senses, m.sensList)(lang.sens)
-    val langStr = titledSeq(lang.languages, m.languages)(lang.language)
 
-    val armorDesc = m.armorDesc map {s => s"($s)"} getOrElse("")
+    val dmgImmunStr = titledSeq(lang.damageImmunities, m.damageImmunities)(lang.damageType)
+    val condImmunStr = titledSeq(lang.conditionImmunities, m.conditionImmunities)(lang.conditions)
+    val resistancesStr = titledSeq(lang.resistance, m.resistances)(lang.damageType)
+    val sensStr = titledSeq(lang.senses, m.sensList)(lang.sens)
+    val langStr =
+      if(m.languages.nonEmpty)
+           titledSeq(lang.languages, m.languages)(lang.language)
+      else s"<div><b>${lang.languages}</b>: --</div>"
+
+    val armorDesc = m.armorDesc map {s => s"($s)"} getOrElse ""
+
+    def subSection[A](title : String, elts : Seq[A])(formatter : A => String) : String =
+      if(elts.nonEmpty)
+        s"""<div class="rub">$title</div>
+           |${elts map formatter mkString ""}
+         """.stripMargin
+    else ""
+
+    val actionsStr = subSection("ACTIONS", m.actions)(Action.toHtml)
+    val reActionsStr = subSection("REACTIONS", m.reactions)(Action.toHtml)
 
     s"""<div class="bloc">
       |   <div class="name">${m.name}</div>
@@ -180,6 +179,9 @@ object Monster{
       |    $sepMonster
       |    $saveStr
       |    $skillStr
+      |    $dmgImmunStr
+      |    $condImmunStr
+      |    $resistancesStr
       |    $sensStr
       |    $langStr
       |    <div>${m.challengeRanking} (${m.xp} ${lang.xp})</div>
@@ -187,9 +189,9 @@ object Monster{
       |    $sepMonster
       |    ${m.traits map Trait.toHtml mkString ""}
       |    ${m.spellCasting.map{SpellCasting.toHtml(spells, m.name, _)}.getOrElse("")}
-      |    <div class="rub">ACTIONS</div>
-      |    ${m.actions map Action.toHtml mkString ""}
-      |    <div><em>${lang.source} : ${m.source.getOrElse(lang.unknown)}</em></div>
+      |    $actionsStr
+      |    $reActionsStr
+      |    ${Source.toHtml(m.source)}
       |</div> <!-- /block -->""".stripMargin
   }
 

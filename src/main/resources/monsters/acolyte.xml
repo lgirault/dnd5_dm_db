@@ -8,7 +8,7 @@
         <type>Humanoid</type>
         <typeTags><race>any</race></typeTags>
         <alignment>any</alignment>
-        <ac>10</ac>
+        <ac><value>10</value></ac>
         <hp>
             <average>9</average>
             <die>2d8</die>
@@ -32,7 +32,7 @@
             <passivePerception>10</passivePerception>
         </senses>
         <languages anyLanguage="true" default="Common" />
-        <cr>0.25</cr>
+        <cr>1/4</cr>
         <xp>50</xp>
     </skillMisc>
     <spellcasting>
@@ -54,7 +54,7 @@
             </spellList>
         </spells>
     </spellcasting>
-    <actionList>
+    <actions>
         <action type="attack">
             <name>
                 <fr>Gourdin</fr>
@@ -63,16 +63,16 @@
             <bonus>+2</bonus>
             <reach unit="feet">5</reach>
             <numTarget>1</numTarget>
-            <damage>
+            <hit type="damage">
                 <average>2</average>
                 <die>1d4+2</die>
                 <type>Bludgeoning</type>
-            </damage>
+            </hit>
         </action>
-    </actionList>
+    </actions>
     <description>
         <fr>Les acolytes sont des membres débutants du clergé généralement rattachés à un prêtre. Ils réalisent diverses fonctions dans un temple et des capacités de lanceurs de sorts mineurs leur sont accordés par leur divinités.</fr>
         <eng>Acolytes are junior members of clergy, usually answerable to a priest. They perform a variety of functions in a temple and are granted minor spellcasting power by their deities.</eng>
     </description>
-    <source>MM</source>
+    <source page="342">MM</source>
 </monster>

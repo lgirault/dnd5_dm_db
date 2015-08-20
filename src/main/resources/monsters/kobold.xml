@@ -7,7 +7,7 @@
         <size>Small</size>
         <type>Humanoid</type>
         <alignment>le</alignment>
-        <ac>12</ac>
+        <ac><value>12</value></ac>
         <hp>
             <average>5</average>
             <die>2d6-2</die>
@@ -35,25 +35,18 @@
             <language>Common</language>
             <language>Draconic</language>
         </languages>
-        <cr>0.125</cr>
+        <cr>1/8</cr>
         <xp>25</xp>
     </skillMisc>
     <traits>
-        <trait>
-            <fr><name>Sensibilité au soleil</name>
-                <description>À la lumière du soleil, un kobold a un désavantage aux jets d'attaque et aux jets de Sagesse (Perception) basés sur la vue.</description>
-            </fr>
-            <eng><name>Sunlight Sensitivity</name>
-                <description>While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</description>
-            </eng>
-        </trait>
-        <sharedTrait>
-            <id>pack-tactics</id>
+        <shared>
             <fr>Le kobold</fr>
             <eng>The kobold</eng>
-        </sharedTrait>
+            <id>pack-tactics</id>
+            <id>sunlight-sensitivity</id>
+        </shared>
     </traits>
-    <actionList>
+    <actions>
         <action type="attack">
             <name>
                 <fr>Dague</fr>
@@ -62,9 +55,11 @@
             <bonus>+4</bonus>
             <reach unit="feet">5</reach>
             <numTarget>1</numTarget>
-            <hit>4</hit>
-            <hitd>1d4+2</hitd>
-            <damageType>Piercing</damageType>
+            <hit type="damage">
+                <average>4</average>
+                <die>1d4+2</die>
+                <type>Piercing</type>
+            </hit>
         </action>
         <action type="attack">
             <name>
@@ -77,9 +72,12 @@
                 <max unit="feet">120</max>
             </range>
             <numTarget>1</numTarget>
-            <hit>4</hit>
-            <hitd>1d4+2</hitd>
-            <damageType>Bludgeoning</damageType>
+            <hit type="damage">
+                <average>4</average>
+                <die>1d4+2</die>
+                <type>Bludgeoning</type>
+            </hit>
         </action>
-    </actionList>
+    </actions>
+    <source page="195">MM</source>
 </monster>

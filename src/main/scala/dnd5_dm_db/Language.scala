@@ -4,29 +4,32 @@ import scala.xml.Node
 
 
 object Language {
-  def fromString(str : String) : Language = str match {
-    case "Common" => Common
-    case "Dwarvish" => Dwarvish
-    case "Elvish" => Elvish
-    case "Giant" => GiantLang
-    case "Gnomish" => Gnomish
-    case "Goblin" => Goblin
-    case "Halfling" => Halfling
-    case "Orc" => Orc
+  def fromString(str : String) : Language = str.toLowerCase match {
+    case "common" => Common
+    case "dwarvish" => Dwarvish
+    case "elvish" => Elvish
+    case "giant" => GiantLang
+    case "gnomish" => Gnomish
+    case "goblin" => Goblin
+    case "halfling" => Halfling
+    case "orc" => Orc
 
-    case "Abyssal" => Abyssal
-    case "Celestial" => CelestialLang
-    case "Draconic" => Draconic
-    case "DeepSpeech" => DeepSpeech
-    case "Infernal" => Infernal
-    case "Primordial" => Primordial
-    case "Sylvan" => Sylvan
-    case "Undercommon" => Undercommon
+    case "abyssal" => Abyssal
+    case "celestial" => CelestialLang
+    case "draconic" => Draconic
+    case "deepSpeech" => DeepSpeech
+    case "infernal" => Infernal
+    case "primordial" => Primordial
+    case "sylvan" => Sylvan
+    case "undercommon" => Undercommon
+
+    case "troglodyte" => Troglodyte
+
     case _ => error(s"unknown language $str")
   }
 
   def fromXml(languageList : Node) : Seq[Language] = {
-    languageList.child
+
     val ls = (languageList \ "language") map (n => fromString(n.text))
     if(optionBooleanAttribute(languageList, "anyLanguage")){
       AnyLanguage(singleOptionAttribute(languageList, "default") map fromString) +: ls
@@ -55,5 +58,8 @@ case object Infernal extends Language
 case object Primordial extends Language
 case object Sylvan extends Language
 case object Undercommon extends Language
+
+case object Troglodyte extends Language
+
 case class AnyLanguage(default : Option[Language]) extends Language
 //case class CustomLanguage(name : String) extends Language

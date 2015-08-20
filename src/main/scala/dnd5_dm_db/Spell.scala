@@ -1,5 +1,7 @@
 package dnd5_dm_db
 
+import dnd5_dm_db.lang.Lang
+
 import scala.xml.Node
 
 case class Spell
@@ -13,7 +15,7 @@ case class Spell
   concentration : Boolean,
   description : String,
   highLevelDescription : Option[String],
-  source : Option[String])
+  source : Option[Source])
 
 object Spell extends FromXmlToHtml[Spell]{
 
@@ -28,7 +30,7 @@ object Spell extends FromXmlToHtml[Spell]{
       optionBooleanAttribute((spell \ "duration").toNode, "concentration"),
       spell \ "description" \ lang.id  ,
       spell \ "higher-level-description" \ lang.id,
-      spell \ "source"
+      (spell \ "source").toNodeOption map Source.fromXml
     )
   }
 
@@ -54,9 +56,9 @@ object Spell extends FromXmlToHtml[Spell]{
       |     <div><b>${lang.range}</b> : ${lang.length(s.range)}</div>
       |     <div><b>${lang.components}</b> : ${s.components map lang.component mkString ", "}</div>
       |     <div><b>${lang.duration}</b> : ${lang.time(s.duration)} </div>
-      |     <div class="description">${s.description.replaceAllLiterally("[","<").replaceAllLiterally("]",">")}</div>
+      |     <div class="description">${formatToHtml(s.description)}</div>
       |     ${optionHL(s.highLevelDescription)}
-      |    <div><em>${lang.source} : ${s.source.getOrElse(lang.unknown)}</em></div>
+      |     ${Source.toHtml(s.source)}
       |    </div>
       |</div> <!-- /bloc -->""".stripMargin
   }

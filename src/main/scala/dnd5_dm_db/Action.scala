@@ -1,5 +1,7 @@
 package dnd5_dm_db
 
+import dnd5_dm_db.lang.Lang
+
 import scala.xml.Node
 
 sealed abstract class Action
@@ -53,7 +55,7 @@ case class MeleeOrRange(reach : DnDLength, regularRange : DnDLength, maxRange : 
 
 object AttackKind {
 
-  def fromXml(node : Node) : AttackKind = {
+  def fromXml(node : Node)(implicit lang : Lang) : AttackKind = {
     val sreach : Option[DnDLength] =  (node \ "reach").toNodeOption map DnDLength.fromXml
     val srange : Option[(DnDLength, DnDLength)] =
       (node \ "range").toNodeOption map {
@@ -86,7 +88,7 @@ case class AttackAction
   hitBonus : Int,
   kind : AttackKind,
   numTarget : Int,
-  damages : Seq[Damage],
+  damages : Seq[Hit],
   desc : Option[String]
   ) extends Action
 
@@ -98,35 +100,41 @@ object AttackAction {
       (move \ "bonus").int,
       AttackKind.fromXml(move),
       (move \ "numTarget").int,
-      move \ "damage" map Damage.fromXml,
+      move \ "hit" map Hit.fromXml,
       move \ "description" \ lang.id
       )
 
   def toHtml( mwa : AttackAction)(implicit lang : Lang) : String =
     s"""<p><b><em>${mwa.name}.</em></b>
        | ${lang.actionName(mwa)}: ${Die.bonus_str(mwa.hitBonus)} ${lang.toHit},
-       | ${AttackKind.toHtml(mwa.kind)}},
+       | ${AttackKind.toHtml(mwa.kind)},
        | ${mwa.numTarget} ${lang.target(mwa.numTarget)}.
-       | ${lang.damages} : ${mwa.damages map Damage.toString mkString ","}.
+       | <em>${lang.hit} :</em> ${mwa.damages map lang.hits mkString ","}
        | ${mwa.desc.getOrElse("")}</p>""".stripMargin
 
 }
 
-case class Damage(average : Int, d : Die, types : Seq[DamageType])
+sealed abstract class Hit
+object Hit {
+  def fromXml(move: Node)(implicit lang: Lang): Hit = {
+    singleAttribute(move, "type") match {
+      case "damage" => Damage.fromXml(move)
+      case "special" => SpecialHit(move \ lang.id)
+      case str => error(s"unknown action move : $str")
+    }
+  }
+}
+
+case class Damage(average : Int, die : Die, types : Seq[DamageType], special : Option[String]) extends Hit
+case class SpecialHit(desc : String) extends Hit
 object Damage{
-  def fromXml(move : Node) : Damage = {
+  def fromXml(move : Node)(implicit lang: Lang) : Damage = {
     val (avg, d) = Die.fromXml(move)
     Damage(avg, d,
-      (move \ "type") map (n => DamageType.fromString(n.text)))
+      (move \ "type") map (n => DamageType.fromString(n.text)),
+      move \ "special" \ lang.id
+    )
   }
-
-  def toString(h : Damage)(implicit lang : Lang) : String = {
-    val types =
-      h.types map lang.damageType mkString (" ",", ", "")
-
-    s"${h.average} (${h.d}) ${lang.damages.toLowerCase}$types"
-  }
-
 
 }
 
