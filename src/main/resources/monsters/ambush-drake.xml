@@ -47,20 +47,11 @@
         <xp>100</xp>
     </skillMisc>
     <traits>
-        <trait>
-            <fr>
-                <name>Attaque surprise</name>
-                <description>Si le drake surprend une créature et touche pendant le premier round du combat, la cible prend 7 (2d6) dégâts supplémentaire.</description>
-            </fr>
-            <eng>
-                <name>Surprise Attack</name>
-                <description>If the drake surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.</description>
-            </eng>
-        </trait>
         <shared>
             <fr>Le drake</fr>
             <eng>The drake</eng>
             <id>pack-tactics</id>
+            <id>surprise-attack</id>
         </shared>
     </traits>
     <actions>
