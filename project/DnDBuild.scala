@@ -29,16 +29,16 @@ object DnDBuild extends Build {
         name := "dnd5-dm-db",
         version := "no-version",
         scalaVersion := "2.11.7",
-        sbtVersion := "0.13.8",
+        sbtVersion := "0.13.9",
 
         resolvers += Resolver.url("typesafe-ivy-repo",
-          url("http://typesafe.artifactoryonline.com/typesafe/releases"))(Resolver.ivyStylePatterns),
+          url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns),
 
         libraryDependencies ++= Seq(
             "org.scalaz" %% "scalaz-core" % "7.2.0-M2",
             "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
             "org.scala-lang.modules" %% "scala-xml" % "1.0.4",
-            "org.scala-sbt" %% "io" % "0.13.8"
+            "org.scala-sbt" %% "io" % "0.13.9"
           ),
         scalacOptions ++= myScalacOptions
 
