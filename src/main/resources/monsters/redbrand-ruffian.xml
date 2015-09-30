@@ -1,0 +1,75 @@
+<monster>
+    <identity>
+        <name>
+            <fr>Cultiste</fr>
+            <eng>Cultist</eng>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
+        <alignment restrict="non-g">any</alignment>
+        <ac>
+            <value>13</value>
+            <desc>
+                <fr>armure de cuir</fr>
+                <eng>leather armor</eng>
+            </desc>
+        </ac>
+        <hp>
+            <average>9</average>
+            <die>2d8</die>
+        </hp>
+        <speeds><speed unit="feet">30</speed></speeds>
+    </identity>
+    <abilities>
+        <str>11</str>
+        <dex>12</dex>
+        <con>10</con>
+        <int>10</int>
+        <wis>11</wis>
+        <cha>10</cha>
+    </abilities>
+    <skillMisc>
+        <skills>
+            <skill name="Deception" value="+2"/>
+            <skill name="Religion" value="+2"/>
+        </skills>
+        <senses>
+            <passivePerception>10</passivePerception>
+        </senses>
+        <languages anyLanguage="true" default="Common" />
+        <cr>1/8</cr>
+        <xp>25</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <fr><name>Dévotion obscure</name>
+                <description>Un cultiste a l'avantage aux jets de sauvegarde pour ne pas être charmé ou effrayé.</description>
+            </fr>
+            <eng><name>Dark Devotion</name>
+                <description>The cultist has advantage on saving throws against being charmed or frightened.</description>
+            </eng>
+        </trait>
+    </traits>
+    <actions>
+        <action type="attack">
+            <name>
+                <fr>Cimeterre</fr>
+                <eng>Scimitar</eng>
+            </name>
+            <bonus>+3</bonus>
+            <reach unit="feet">5</reach>
+            <numTarget>1</numTarget>
+            <hit type="damage">
+                <average>4</average>
+                <die>1d6+1</die>
+                <type>Slashing</type>
+            </hit>
+        </action>
+    </actions>
+    <description>
+        <fr>Les cultistes font allégeance à des puissances obscures tels que des princes élémentaires, des seigneurs démons ou des archidiables. La plupart masquent leur loyauté pour éviter d'être ostracisé, emprisonné ou exécuté pour leur croyance. Contrairement au acolyte mauvais, les cultistes montrent souvent des signes de folie dans leurs croyances et leurs pratiques.</fr>
+        <eng>Cultists swear allegiance to dark powers such as elemental princes, demon lords, or archevils. Most conceal their loyalties to avoid being ostracized, imprisoned, or executed for their beliefs. Unlike evil acolytes, cultists often show signs of insanity in their beliefs and practices.</eng>
+    </description>
+    <source page="345">MM</source>
+</monster>

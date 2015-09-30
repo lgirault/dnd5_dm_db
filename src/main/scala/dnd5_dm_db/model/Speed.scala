@@ -1,4 +1,4 @@
-package dnd5_dm_db
+package dnd5_dm_db.model
 
 import scala.xml.Node
 

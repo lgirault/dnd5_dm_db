@@ -1,4 +1,6 @@
-package dnd5_dm_db
+package dnd5_dm_db.model
+
+import dnd5_dm_db._
 
 sealed abstract class DamageType
 case object Acid extends DamageType

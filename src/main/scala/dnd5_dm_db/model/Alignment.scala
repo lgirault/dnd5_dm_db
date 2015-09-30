@@ -1,6 +1,6 @@
-package dnd5_dm_db
+package dnd5_dm_db.model
 
-import dnd5_dm_db.AlignmentRestriction.OrderOrMoral
+import dnd5_dm_db._
 import dnd5_dm_db.lang.Lang
 
 import scala.xml.Node
