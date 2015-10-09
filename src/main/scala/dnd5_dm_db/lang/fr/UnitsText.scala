@@ -1,10 +1,12 @@
-package dnd5_dm_db.lang.fr
+package dnd5_dm_db
+package lang.fr
 
-import dnd5_dm_db._
+import dnd5_dm_db.lang.Lang
+import dnd5_dm_db.model._
 
 
 trait UnitsText {
-
+  self : Lang =>
   val feetToMeter : Int => String ={
     import java.text.DecimalFormat
     val cmPerFoot = 30
@@ -15,7 +17,7 @@ trait UnitsText {
 
   val length : DnDLength => String = {
     case Feet(i) => feetToMeter(i) +" m"
-    case Contact => "contact"
+    case Touch => "contact"
     case Self => "soit-même"
   }
 
@@ -33,6 +35,7 @@ trait UnitsText {
     case Round(i) => i +" tour" + plural(i)
     case RegularAction(i) => i + " action" + plural(i)
     case BonusAction(i) => i + " action" + plural(i) + " bonus"
+    case Reaction(trigger) => "1 réaction" + trigger.value(self)
     case Instant => "instantané"
   }
 }

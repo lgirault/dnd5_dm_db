@@ -1,8 +1,9 @@
-package dnd5_dm_db.model
+package dnd5_dm_db
+package model
 
-import dnd5_dm_db._
 import dnd5_dm_db.lang.Lang
-
+import dnd5_dm_db.xml_parse.Utils
+import Utils._
 import scala.xml.Node
 
 case class Abilities
@@ -14,16 +15,6 @@ case class Abilities
   charisma : Int)
 
 object Abilities {
-
-  def fromXml(node : Node) : Abilities =
-    Abilities(
-      node \ "str",
-      node \ "dex",
-      node \ "con",
-      node \ "int",
-      node \ "wis",
-      node \ "cha")
-
 
   def toHtml(abilities: Abilities)(implicit lang : Lang) : String = {
     import Ability.{toHtml => h}

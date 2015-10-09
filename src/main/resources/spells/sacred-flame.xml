@@ -1,20 +1,20 @@
 <spell>
     <name>
-        <fr>Flamme sacrée</fr>
-        <eng>Sacred flame</eng>
+        <local id="fr">Flamme sacrée</local>
+        <local id="eng">Sacred flame</local>
     </name>
     <level>0</level>
     <type>evocation</type>
-    <ctime unit="action">1</ctime>
-    <range unit="feet">60</range>
+    <ctime unit="action" />
+    <range unit="feet" value="60" />
     <components verbose="true" somatic="true" material="false"/>
     <duration unit="instant"/>
     <description>
-        <fr>[p]Un rayonnement semblable à des flammes descend sur une créature que vous pouvez voir dans la portée du sort. La cible doit réussir un jet de sauvegarde de Dextérité ou subir 1d8 dégâts de type radiant. La cible ne gagne aucun bénéfice d'abri pour ce jet de sauvegarde.[/p]
+        <local id="fr">[p]Un rayonnement semblable à des flammes descend sur une créature que vous pouvez voir dans la portée du sort. La cible doit réussir un jet de sauvegarde de Dextérité ou subir 1d8 dégâts de type radiant. La cible ne gagne aucun bénéfice d'abri pour ce jet de sauvegarde.[/p]
             [p]Les dégâts du sort augmentent de 1d8 lorsque vous atteignez le niveau 5 (2d8), le niveau 11 (3d8), et le niveau 17 (4d8).[/p]
-        </fr>
-        <eng>[p]Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.[/p]
-            [p]The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).[/p]</eng>
+        </local>
+        <local id="eng">[p]Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw.[/p]
+            [p]The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).[/p]</local>
     </description>
     <source page="272">PHB</source>
 </spell>

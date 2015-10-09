@@ -1,26 +1,25 @@
 <spell>
     <name>
-        <fr>Bénédiction</fr>
-        <eng>Bless</eng>
+        <local id="fr">Bénédiction</local>
+        <local id="eng">Bless</local>
     </name>
     <level>1</level>
     <type>enchantment</type>
-    <ctime unit="action">1</ctime>
-    <range unit="feet">30</range>
+    <ctime unit="action" />
+    <range unit="feet"  value="30" />
     <components verbose="true" somatic="true" material="true">
-        <fr>un soupçon d'eau bénite</fr>
-        <eng>a sprinkling of holy water</eng>
+        <local id="fr">un soupçon d'eau bénite</local>
+        <local id="eng">a sprinkling of holy water</local>
     </components>
-    <duration unit="minute" upTo="true" concentration="true">1</duration>
+    <duration unit="minute" upTo="true" concentration="true" value="1" />
     <description>
-        <fr>Vous bénissez jusqu'à trois créatures de votre choix, dans la portée du sort. À chaque fois qu'une cible fait un jet d'attaque ou de sauvegarde avant la fin du sort, la cible peut lancer un d4 et ajouter le résultat au jet d'attaque ou de sauvegarde.</fr>
-        <eng>
-            You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll
-            a d4 and add the number rolled to the attack roll or saving throw.</eng>
+        <local id="fr">Vous bénissez jusqu'à trois créatures de votre choix, dans la portée du sort. À chaque fois qu'une cible fait un jet d'attaque ou de sauvegarde avant la fin du sort, la cible peut lancer un d4 et ajouter le résultat au jet d'attaque ou de sauvegarde.</local>
+        <local id="eng">You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll
+            a d4 and add the number rolled to the attack roll or saving throw.</local>
     </description>
     <higher-level-description>
-        <fr>Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez cibler une créature supplémentaire pour chaque niveau d'emplacement supérieur à 1.</fr>
-        <eng>When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</eng>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez cibler une créature supplémentaire pour chaque niveau d'emplacement supérieur à 1.</local>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</local>
     </higher-level-description>
     <source page="219">PHB</source>
 </spell>

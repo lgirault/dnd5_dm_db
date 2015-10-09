@@ -1,10 +1,14 @@
 package dnd5_dm_db.lang
 
-import dnd5_dm_db._
+import dnd5_dm_db.model._
 
 abstract class Lang
   extends SpellText {
   val id : String
+
+  val or : String
+
+  val seeBelow : String
 
   val monsters : String
 
@@ -62,6 +66,7 @@ abstract class Lang
 
   val damageType : DamageType => String
 
+  val versatile : Die => String
 
   val source : String
   val unknown : String
@@ -76,6 +81,7 @@ abstract class Lang
 
   val clear : String
 
+  val damageVulnerabilites : String
   val damageImmunities : String
   val conditionImmunities : String
   val resistance : String

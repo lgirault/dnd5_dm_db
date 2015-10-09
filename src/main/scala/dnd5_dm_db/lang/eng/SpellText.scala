@@ -1,30 +1,36 @@
-package dnd5_dm_db.lang.eng
+package dnd5_dm_db
+package lang.eng
 
+import dnd5_dm_db.lang.Lang
 import dnd5_dm_db.model._
 
 
 trait SpellText extends lang.SpellText {
+  self : Lang =>
+  val castingTime: String = "Casting Time"
 
-  val castingTime: String = "Temps d'incantation"
+  val components : String = "Components"
 
-  val components : String = "Composantes"
-
-  val duration: String = "Durée"
+  val duration: String = "Duration"
 
   val concentration : String = "Concentration"
 
-  val higherLevels = "Aux niveaux supérieurs"
+  val higherLevels = "At Higher Levels"
 
   val component : Components => String = {
     case Verbose => "V"
-    case Somatic => "G"
-    case Material(txt) => s"M ($txt)"
+    case Somatic => "S"
+    case Material(txt) => s"M (${txt.value(self)})"
+  }
+  val lengthAdj : DnDLength => String = {
+    case Feet(i) => s"$i-foot"
+    case d => length(d)
   }
 
   val sAreaOfEffect : Option[AreaOfEffect] => String = {
-    case Some(Line(l)) => s" (ligne de ${unitsText.length(l)})"
-    case Some(Sphere(r)) => s" (sur un rayon de ${unitsText.length(r)})"
-    case Some(Cube(sl)) => s" (cube de ${unitsText.length(sl)} de coté)"
+    case Some(Line(l)) => s" (${lengthAdj(l)} line)"
+    case Some(Sphere(r)) => s" (${lengthAdj(r)} radius)"
+    case Some(Cube(sl)) => s" (${lengthAdj(sl)} cube)"
     case None => ""
   }
 

@@ -26,37 +26,40 @@ object Utils {
     }
 
   implicit class NodeSeqOps(val ns : NodeSeq) extends AnyVal {
-    def toNode : Node = {
-      ns.theSeq match {
-        case Seq(n) => n
-        case _ => error("Should have only one node :" + ns)
-      }
-    }
-    def singleText : String = toNode.text
+    def toNode : Node = nodeSeqToNode(ns)
+
+    def singleText : String = nodeSeqToNode(ns).text
 
     def int : Int = singleText.toInt
 
-    def toNodeOption : Option[Node] = {
-      ns.theSeq match {
-        case Seq(n) => Some(n)
-        case Nil => None
-        case _ => error("Should have only one or zero node :" + ns.mkString(","))
-      }
-    }
+    def toNodeOption : Option[Node] = nodeSeqToNodeOption(ns)
 
-    def textOption : Option[String] = toNodeOption map (_.text)
+    def textOption : Option[String] = nodeSeqToStringOption(ns)
 
   }
 
   implicit def nodeSeqToString( ns : NodeSeq) : String =
     NodeSeqOps(ns).singleText
 
-  implicit def nodeSeqToInt( ns : NodeSeq) : Int =
-    NodeSeqOps(ns).int
+//  implicit def nodeSeqToInt( ns : NodeSeq) : Int =
+//    NodeSeqOps(ns).int
 
+  implicit def nodeSeqToNodeOption( ns : NodeSeq) : Option[Node] = {
+    ns.theSeq match {
+      case Seq(n) => Some(n)
+      case Nil => None
+      case _ => error("Should have only one or zero node :" + ns.mkString(","))
+    }
+  }
 
   implicit def nodeSeqToStringOption( ns : NodeSeq) : Option[String] =
-    NodeSeqOps(ns).textOption
+    nodeSeqToNodeOption(ns) map (_.text)
 
+  implicit def nodeSeqToNode( ns : NodeSeq) : Node = {
+    ns.theSeq match {
+      case Seq(n) => n
+      case _ => error("Should have only one node :" + ns)
+    }
+  }
 
 }

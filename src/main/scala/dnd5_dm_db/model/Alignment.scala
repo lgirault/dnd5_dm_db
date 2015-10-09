@@ -1,8 +1,10 @@
-package dnd5_dm_db.model
+package dnd5_dm_db
+package model
 
-import dnd5_dm_db._
+import dnd5_dm_db.xml_parse.Utils
+import Utils._
+import AlignmentRestriction.OrderOrMoral
 import dnd5_dm_db.lang.Lang
-
 import scala.xml.Node
 
 sealed abstract class Alignment
@@ -39,7 +41,7 @@ case class RestrictNot(a : Either[Aligned, OrderOrMoral]) extends AlignmentRestr
 
 object Alignment {
 
-  def fromXml(n : Node)(implicit lang : Lang) : Alignment = {
+  def fromXml(n : Node) : Alignment = {
 
     val sr = singleOptionAttribute(n, "restrict") map {
       r =>

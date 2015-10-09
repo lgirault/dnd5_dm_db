@@ -1,0 +1,10 @@
+<trait>
+    <name>
+        <local id="fr">Escalade d'arraignée</local>
+        <local id="eng">Spider Climb</local>
+    </name>
+    <description>
+        <local id="fr">L'araignée peut grimper sur des surfaces difficiles, plafond inclus, sans avoir besoin de faire de jet de compétence.</local>
+        <local id="eng">The spider can climb difficult surfaces, including upside down on ceilings without needing to make an ability check.</local>
+    </description>
+</trait>

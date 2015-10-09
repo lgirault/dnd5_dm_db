@@ -1,9 +1,5 @@
-package dnd5_dm_db.model
-
-import dnd5_dm_db._
-
-import scala.xml.Node
-
+package dnd5_dm_db
+package model
 
 object Language {
   def fromString(str : String) : Language = str.toLowerCase match {
@@ -29,22 +25,6 @@ object Language {
 
     case _ => error(s"unknown language $str")
   }
-
-  def fromXml(languageList : Node) : Seq[Language] = {
-
-    val ls = (languageList \ "language") map {n =>
-      val l = fromString(n.text)
-      singleOptionAttribute(languageList, "doNotSpeak") match {
-        case Some("true") => UnderstandOnly(l)
-        case _ => l
-      }
-    }
-    if(optionBooleanAttribute(languageList, "anyLanguage")){
-      AnyLanguage(singleOptionAttribute(languageList, "default") map fromString) +: ls
-    }
-    else ls
-  }
-
 }
 sealed abstract class Language
 
@@ -71,4 +51,4 @@ case object Troglodyte extends Language
 
 case class AnyLanguage(default : Option[Language]) extends Language
 case class UnderstandOnly(lang : Language) extends Language
-//case class CustomLanguage(name : String) extends Language
+case class LanguageSpecial(name : Local) extends Language

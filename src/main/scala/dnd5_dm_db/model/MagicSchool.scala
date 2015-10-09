@@ -1,9 +1,8 @@
-package dnd5_dm_db.model
-
-import dnd5_dm_db._
+package dnd5_dm_db
+package model
 
 object MagicSchool {
-  def fromString(str : String) : MagicSchool = str match {
+  def fromString(str : String) : MagicSchool = str.toLowerCase match {
     case "abjuration" => Abjuration
     case "conjuration" => Conjuration
     case "divination" => Divination

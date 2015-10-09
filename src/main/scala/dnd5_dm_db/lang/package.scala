@@ -5,4 +5,8 @@ package dnd5_dm_db
  */
 package object lang {
 
+  val register = Map("fr" -> Fr, "eng" -> Eng)
+  def langFromString(id : String) : Lang =
+    register(id)
+
 }

@@ -1,41 +1,25 @@
-package dnd5_dm_db.model
+package dnd5_dm_db
+package model
 
-import dnd5_dm_db._
 import dnd5_dm_db.lang.Lang
 
-import scala.xml.Node
-
+import Spell.Concentration
 case class Spell
-( name : String,
+( name : Local,
   level : Int,
   school : MagicSchool,
   castingTime : DnDTime,
   range : DnDLength,
   sAreaOfEffect: Option[AreaOfEffect],
   components : List[Components],
-  duration : DnDTime,
-  concentration : Boolean,
-  description : String,
-  highLevelDescription : Option[String],
+  durations : Seq[(DnDTime, Concentration)],
+  description : Local,
+  highLevelDescription : Option[Local],
   source : Option[Source])
 
-object Spell extends FromXmlToHtml[Spell]{
+object Spell extends ToHtml[Spell]{
 
-  def fromXml(spell: Node)(implicit lang : Lang) : Spell = {
-    Spell(spell \ "name" \ lang.id ,
-      spell \ "level" ,
-      MagicSchool.fromString(spell \ "type"),
-      DnDTime fromXml (spell \ "ctime").toNode,
-      DnDLength fromXml (spell \ "range").toNode,
-      (spell \ "areaOfEffect").toNodeOption map AreaOfEffect.fromXml,
-      Components.fromXml((spell \ "components").toNode, lang),
-      DnDTime fromXml (spell \ "duration").toNode,
-      optionBooleanAttribute((spell \ "duration").toNode, "concentration"),
-      spell \ "description" \ lang.id  ,
-      spell \ "higher-level-description" \ lang.id,
-      (spell \ "source").toNodeOption map Source.fromXml
-    )
-  }
+  type Concentration = Boolean
 
   def optionHL (shl: Option[String])(implicit lang : Lang): String =
   shl match {
@@ -49,8 +33,20 @@ object Spell extends FromXmlToHtml[Spell]{
     toHtmlWithClass(s, "bloc")
 
   def toHtmlWithClass(s : Spell, clazz : String)(implicit lang : Lang)  : String = {
+
+    def optionConcentrationText(t : DnDTime, c : Concentration) : String = {
+      if (c) lang.concentration + ", " + lang.time(t)
+      else lang.time(t)
+    }
+
+    val duration0 = s.durations map (t => optionConcentrationText(t._1, t._2))
+    //    val duration0 = s.durations map  optionConcentrationText.tupled
+    val duration = if(duration0.length == 1) duration0.head
+    else duration0 mkString ("", s" ${lang.or} ", s" (${lang.seeBelow})")
+
+
   s"""<div class="$clazz">
-      |     <div class="name">${s.name}</div>
+      |     <div class="name">${s.name.value}</div>
       |     <div class="toHide">
       |     <div class="level">
       |       <em>${lang.level} ${s.level} ${lang.magicSchool(s.school)}</em>
@@ -58,9 +54,9 @@ object Spell extends FromXmlToHtml[Spell]{
       |     <div><b>${lang.castingTime} : </b> ${lang.time(s.castingTime)}</div>
       |     <div><b>${lang.range}</b> : ${lang.length(s.range)}${lang.sAreaOfEffect(s.sAreaOfEffect)}</div>
       |     <div><b>${lang.components}</b> : ${s.components map lang.component mkString ", "}</div>
-      |     <div><b>${lang.duration}</b> : ${lang.time(s.duration)} </div>
-      |     <div class="description">${formatToHtml(s.description)}</div>
-      |     ${optionHL(s.highLevelDescription)}
+      |     <div><b>${lang.duration}</b> : $duration </div>
+      |     <div class="description">${formatToHtml(s.description.value)}</div>
+      |     ${optionHL(s.highLevelDescription map (_.value))}
       |     ${Source.toHtml(s.source)}
       |    </div>
       |</div> <!-- /bloc -->""".stripMargin

@@ -4,7 +4,10 @@ import dnd5_dm_db.lang.Lang
 
 import scala.xml.Node
 
-trait FromXmlToHtml[A] {
-  def fromXml(n : Node)(implicit lang : Lang) : A
+trait FromXml[A] {
+  def fromXml(n : Node) : A
+}
+
+trait ToHtml[A]{
   def toHtml(s : A)(implicit lang : Lang)  : String
 }

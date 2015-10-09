@@ -1,8 +1,10 @@
 package dnd5_dm_db.lang
 
-import dnd5_dm_db.{MagicSchool, AreaOfEffect, Components}
+import dnd5_dm_db.model.{Components, MagicSchool, AreaOfEffect}
+
 
 trait SpellText {
+
   val castingTime : String
 
   val components : String
@@ -10,6 +12,8 @@ trait SpellText {
   val component : Components => String
 
   val duration : String
+
+  val concentration : String
 
   val higherLevels : String
 

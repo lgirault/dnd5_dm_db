@@ -5,14 +5,14 @@ import dnd5_dm_db.model._
 
 trait AlignmentText {
   val moral : Moral => String = {
-    case Good => "bon"
-    case Neuter => "neutre"
-    case Evil => "mauvais"
+    case Good => "good"
+    case Neuter => "neutral"
+    case Evil => "evil"
   }
   val order : Order => String = {
     case Lawful => "loyal"
-    case Neuter => "neutre"
-    case Chaotic => "chaotique"
+    case Neuter => "neutral"
+    case Chaotic => "chaotic"
   }
 
   def moralOrOrderToString : Either[Order, Moral] => String = {
@@ -26,11 +26,11 @@ trait AlignmentText {
   }
 
   val alignment : Alignment => String = {
-    case Unaligned => "non aligné"
-    case AnyAlignment(None) => "alignement quelconque"
-    case AnyAlignment(Some(res : Restrict)) => s"alignement ${alignmentRestrictionToStr(res)} quelconque"
-    case AnyAlignment(Some(res : RestrictNot)) => s"alignement quelconque non ${alignmentRestrictionToStr(res)}"
-    case Aligned(Neuter, Neuter) => "neutre"
+    case Unaligned => "unaligned"
+    case AnyAlignment(None) => "any alignment"
+    case AnyAlignment(Some(res : Restrict)) => s"any ${alignmentRestrictionToStr(res)} alignment"
+    case AnyAlignment(Some(res : RestrictNot)) => s"any non-${alignmentRestrictionToStr(res)} alignment"
+    case Aligned(Neuter, Neuter) => "neutral"
     case Aligned(o, m) => order(o) +" " + moral(m)
   }
 }

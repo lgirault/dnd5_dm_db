@@ -5,5 +5,4 @@ package object eng {
     if(i>1) "s"
     else ""
 
-  val unitsText = new UnitsText {}
 }

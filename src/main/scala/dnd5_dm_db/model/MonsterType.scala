@@ -1,8 +1,5 @@
-package dnd5_dm_db.model
-
-import dnd5_dm_db._
-
-import scala.xml.Node
+package dnd5_dm_db
+package model
 
 sealed abstract class MonsterType
 case object Aberration extends MonsterType
@@ -23,10 +20,6 @@ case class AnyRace(typ : MonsterType) extends MonsterType
 case class TaggedType(typ : MonsterType, tags : Seq[String]) extends MonsterType
 
 object MonsterType {
-
-  def fromNode(identity : Node) : MonsterType =
-    fromString(identity \ "type",
-      (identity \ "typeTags" \ "race").toNodeOption map (_.text))
 
   def fromString(tstr : String, sr : Option[String])  : MonsterType = {
     val t = tstr match {

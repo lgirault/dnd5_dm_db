@@ -1,6 +1,5 @@
-package dnd5_dm_db.model
-
-import dnd5_dm_db._
+package dnd5_dm_db
+package model
 
 object Condition {
   def fromString(str : String) : Condition = str.toLowerCase match {
@@ -18,6 +17,7 @@ object Condition {
     case "invisible" => Invisible
     case "paralyzed" => Paralyzed
     case "petrified" => Petrified
+    case "exhaustion" => Exhaustion
     case _ => error(s"unknown Condition $str")
   }
 }
@@ -36,3 +36,4 @@ case object Unconscious extends Condition
 case object Invisible extends Condition
 case object Paralyzed extends Condition
 case object Petrified extends Condition
+case object Exhaustion extends Condition

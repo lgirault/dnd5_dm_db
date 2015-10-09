@@ -1,8 +1,8 @@
-package dnd5_dm_db.model
+package dnd5_dm_db
+package model
 
+import dnd5_dm_db.xml_parse.Utils
 import dnd5_dm_db.lang.Lang
-
-import scala.xml.Node
 
 case class SpellCasting
 ( casterLevel : Int,
@@ -14,16 +14,6 @@ case class SpellCasting
   )
 
 object SpellCasting {
-
-  def fromXml(node : Node) : SpellCasting = {
-    SpellCasting(
-      node \ "casterLevel",
-      DnDClass.fromString(node \ "class"),
-      Ability.fromString(node \ "ability"),
-      node \ "dc",
-      node \ "attackBonus",
-      node \ "spells" \ "spellList" map SpellList.fromNode)
-  }
 
   def toHtml
   ( spells : Map[String, Spell],
@@ -44,12 +34,6 @@ case class SpellList
   spells : Seq[String])
 
 object SpellList{
-  def fromNode(spellList : Node) : SpellList =
-    SpellList(
-      singleAttribute( spellList, "level").toInt,
-      singleOptionAttribute(spellList, "slots") map (_.toInt),
-      (spellList \ "spell").theSeq map (_.text)
-    )
 
   def toHtml
   ( spells : Map[String, Spell],

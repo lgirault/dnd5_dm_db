@@ -1,44 +1,30 @@
 <monster>
     <identity>
         <name>
-            <fr>Drake Embusqué</fr>
-            <eng>Ambush Drake</eng>
+            <local id="fr">Drake Embusqué</local>
+            <local id="eng">Ambush Drake</local>
         </name>
         <size>Medium</size>
         <type>Dragon</type>
         <alignment>none</alignment>
-        <ac>
-            <value>13</value>
-            <desc>
-                <fr>armure naturelle</fr>
-                <eng>natural armor</eng>
-            </desc>
+        <ac value="13" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
         </ac>
-        <hp>
-            <average>22</average>
-            <die>4d6+8</die>
-        </hp>
-        <speeds><speed unit="feet">30</speed></speeds>
+        <hp>4d6+8</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
     </identity>
-    <abilities>
-        <str>13</str>
-        <dex>15</dex>
-        <con>14</con>
-        <int>4</int>
-        <wis>11</wis>
-        <cha>6</cha>
-    </abilities>
+    <abilities str="13" dex="15" con="14" int="4" wis="11" cha="6" />
     <skillMisc>
         <skills>
             <skill name ="Perception" value ="+4"/>
             <skill name ="Stealth" value ="+4"/>
         </skills>
         <resistances>
-            <resist>Poison</resist>
+            <damageType>Poison</damageType>
         </resistances>
         <senses>
-            <passivePerception>14</passivePerception>
-            <darkvision unit="feet">60</darkvision>
+            <darkvision unit="feet" value="60" />
         </senses>
         <languages>
             <language doNotSpeak="true">Draconic</language>
@@ -48,8 +34,8 @@
     </skillMisc>
     <traits>
         <shared>
-            <fr>Le drake</fr>
-            <eng>The drake</eng>
+            <local id="fr">Le drake</local>
+            <local id="eng">The drake</local>
             <id>pack-tactics</id>
             <id>surprise-attack</id>
         </shared>
@@ -57,17 +43,13 @@
     <actions>
         <action type="attack">
             <name>
-                <fr>Morsure</fr>
-                <eng>Bite</eng>
+                <local id="fr">Morsure</local>
+                <local id="eng">Bite</local>
             </name>
             <bonus>+4</bonus>
-            <reach unit="feet">5</reach>
+            <reach unit="feet" value="5" />
             <numTarget>1</numTarget>
-            <hit type="damage">
-                <average>4</average>
-                <die>1d6+1</die>
-                <type>Piercing</type>
-            </hit>
+            <hit type="damage" die="1d6+1" damageType="Piercing" />
         </action>
     </actions>
     <source page="88">HOTDQ</source>

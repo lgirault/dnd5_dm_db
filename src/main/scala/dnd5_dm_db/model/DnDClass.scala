@@ -1,6 +1,6 @@
-package dnd5_dm_db.model
+package dnd5_dm_db
+package model
 
-import dnd5_dm_db._
 
 sealed abstract class DnDClass
 case object Barbarian extends DnDClass

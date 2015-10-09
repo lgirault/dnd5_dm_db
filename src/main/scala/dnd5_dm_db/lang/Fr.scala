@@ -1,6 +1,7 @@
-package dnd5_dm_db.lang
+package dnd5_dm_db
+package lang
 
-import dnd5_dm_db._
+import dnd5_dm_db.model._
 
 
 object Fr
@@ -12,6 +13,10 @@ object Fr
   with fr.SkillAndLanguageText{
 
   val id: String = "fr"
+
+  val or : String = "ou"
+
+  val seeBelow : String = "voir ci-dessous"
 
   val monsters : String = "Monstres"
 
@@ -65,13 +70,13 @@ object Fr
   val actionName : Action => String = {
     case aa : AttackAction =>
       aa.kind match {
-        case _ : Melee => "Attaque d'arme de corps à corps"
-        case _ : Ranged | _ : RangedSpecial => "Attaque d'arme à distance"
+        case _ : MeleeAttack => "Attaque d'arme de corps à corps"
+        case _ : RangedAttack | _ : RangedSpecial => "Attaque d'arme à distance"
         case _ : MeleeOrRange => "Attaque d'arme de corps à corps ou à distance"
       }
 
     case _ : MultiAttack => "Attaque multiple"
-    case sa : SpecialAction => sa.name
+    case sa : SpecialAction => sa.name.value(this)
   }
   val toHit : String = "au toucher"
   val target : Int => String = "cible" + fr.plural(_)
@@ -79,7 +84,7 @@ object Fr
   val senses : String = "Sens"
 
   val sens : Sens => String = {
-    case PassivePerception(v) => s"Percepion passive $v"
+    case PassivePerception(v) => s"Perception passive $v"
     case BlindSight(r) => s"Perception aveugle ${length(r)}"
     case DarkVision(r) => s"Visibilité dans l'obscurité ${length(r)}"
     case Tremorsense(r) => s"Détection des vibrations ${length(r)}"
@@ -87,6 +92,7 @@ object Fr
   }
 
   val damageType : DamageType => String = {
+    case FromNonMagicalWeapon(dt) => (dt map damageType mkString ", ") + " d'une arme non magique."
     case Acid => "acides"
     case Bludgeoning => "contondants"
     case Cold => "de froid"
@@ -101,6 +107,13 @@ object Fr
     case Slashing => "tranchants"
     case Thunder => "de tonnerre"
   }
+
+
+  val versatile : Die => String =
+    d =>
+      s", ou ${d.average} ($d) dégâts tranchants si utilisé à deux mains."
+//, or 6 (1d10 + 1) slashing damage if used with two hands.
+
   val reach: String = "allonge"
 
   val hit : String = "Touche"
@@ -108,14 +121,14 @@ object Fr
   val damages: String = "dégâts"
 
   val hits : Hit => String = {
-    case Damage(avg, die, types0, sdesc) =>
-      val types =
-        types0 map damageType mkString (" ",", ", "")
+    case Damage(die, types, sdesc) =>
+//      val types =
+//        types0 map damageType mkString (" ",", ", "")
 
-      val descStr = sdesc map (desc => formatToHtml(desc)) getOrElse "."
-      s"$avg ($die) $damages $types$descStr"
+      val descStr = sdesc map (desc => formatToHtml(desc.value(this))) getOrElse ""
+      s"${die.average} ($die) $damages ${damageType(types)}$descStr"
 
-    case SpecialHit(desc) => desc
+    case SpecialHit(desc) => desc.value(this)
     }
 
 
@@ -158,6 +171,7 @@ object Fr
 
   val clear : String = "Tout effacer"
 
+  val damageVulnerabilites : String = "Vulnérable aux dégâts"
   val damageImmunities : String = "Immunisé aux dégâts"
   val conditionImmunities : String = "Immunisé aux conditions"
   val resistance : String = "Résistances"
@@ -177,6 +191,7 @@ object Fr
     case Invisible => "Invisible"
     case Paralyzed => "Paralysé"
     case Petrified => "Pétrifié"
+    case Exhaustion => "Épuisement"
   }
 
 }

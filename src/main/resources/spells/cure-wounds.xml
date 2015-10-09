@@ -1,21 +1,21 @@
 <spell>
     <name>
-        <fr>Soins</fr>
-        <eng>Cure Wounds</eng>
+        <local id="fr">Soins</local>
+        <local id="eng">Cure Wounds</local>
     </name>
     <level>1</level>
     <type>evocation</type>
-    <ctime unit="action">1</ctime>
-    <range unit="contact" />
+    <ctime unit="action" />
+    <range unit="touch"/>
     <components verbose="true" somatic="true" material="false"/>
     <duration unit="instant" />
     <description>
-        <eng>A creature you touch regains a number of hit points equal to 1d8 + your spell casting ability modifier. This spell has no effect on undead or constructs.</eng>
-        <fr>Une créature que vous touchez récupère un nombre de points de vie égal à 1d8 + votre modificateur de caractéristique pour lancer vos sorts. Ce sort n'a aucun effet sur les morts-vivants ou les créatures artificielles.</fr>
+        <local id="eng">A creature you touch regains a number of hit points equal to 1d8 + your spell casting ability modifier. This spell has no effect on undead or constructs.</local>
+        <local id="fr">Une créature que vous touchez récupère un nombre de points de vie égal à 1d8 + votre modificateur de caractéristique pour lancer vos sorts. Ce sort n'a aucun effet sur les morts-vivants ou les créatures artificielles.</local>
     </description>
     <higher-level-description>
-        <eng>When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</eng>
-        <fr>Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, la quantité de points de vie récupérés est augmentée de 1d8 pour chaque niveau d'emplacement supérieur à 1.</fr>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.</local>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, la quantité de points de vie récupérés est augmentée de 1d8 pour chaque niveau d'emplacement supérieur à 1.</local>
     </higher-level-description>
     <source page="230">PHB</source>
 </spell>

@@ -1,121 +1,121 @@
-package dnd5_dm_db.lang
+package dnd5_dm_db
+package lang
 
 import dnd5_dm_db.model._
 
 
 object Eng
   extends Lang
-  with fr.AlignmentText
-  with fr.UnitsText
-  with fr.SpellText
-  with fr.MonsterText
-  with fr.SkillAndLanguageText{
+  with eng.AlignmentText
+  with eng.UnitsText
+  with eng.SpellText
+  with eng.MonsterText
+  with eng.SkillAndLanguageText{
 
-  val id: String = "fr"
+  val id: String = "eng"
 
-  val or : String = "ou"
+  val or : String = "or"
 
-  val seeBelow : String = "voir ci-dessous"
+  val seeBelow : String = "see below"
 
-  val monsters : String = "Monstres"
+  val monsters : String = "Monsters"
 
-  val range: String = "Portée"
+  val range: String = "Range"
 
-  val level: String = "niveau"
-
-
-  val armorClass : String = "Classe d'armure"
+  val level: String = "level"
 
 
+  val armorClass : String = "Armor Class"
 
-  val hp : String = "PV"
-  val speed : String = "Vitesse"
+
+
+  val hp : String = "HP"
+  val speed : String = "Speed"
 
   val speedLength : Speed => String = {
     s =>
       val kind = s match {
       case Regular(_) => ""
-      case Burrow(_) => "creuser : "
-      case Climb(_) => "escalade : "
-      case Fly(_) => "vol : "
-      case Swim(_) => "nage : "
+      case Burrow(_) => "burrow : "
+      case Climb(_) => "climb : "
+      case Fly(_) => "fly : "
+      case Swim(_) => "swim : "
     }
     kind + length(s.speed)
   }
 
   val ability_short : Ability => String = {
-    case Strength => "FOR"
+    case Strength => "STR"
     case Dexterity => "DEX"
     case Constitution => "CON"
     case Intelligence => "INT"
-    case Wisdom => "SAG"
+    case Wisdom => "WIS"
     case Charisma => "CHA"
   }
 
   val ability_long : Ability => String = {
-    case Strength => "la Force"
-    case Dexterity => "la Dextérité"
-    case Constitution => "la Constitution"
-    case Intelligence => "l'Intelligence"
-    case Wisdom => "la Sagesse"
-    case Charisma => "le Charisme"
+    case Strength => "Strength"
+    case Dexterity => "Dexterity"
+    case Constitution => "Constitution"
+    case Intelligence => "Intelligence"
+    case Wisdom => "Wisdom"
+    case Charisma => "Charisma"
   }
 
-  val savingThrows : String = "Jets de sauvegarde"
+  val savingThrows : String = "Saving Throws"
 
-  val challengeRanking : String = "Facteur de puissance"
-  val xp : String = "PX"
+  val challengeRanking : String = "Challenge Ranking"
+  val xp : String = "XP"
 
   val actionName : Action => String = {
     case aa : AttackAction =>
       aa.kind match {
-        case _ : MeleeAttack => "Attaque d'arme de corps à corps"
-        case _ : RangedAttack | _ : RangedSpecial => "Attaque d'arme à distance"
-        case _ : MeleeOrRange => "Attaque d'arme de corps à corps ou à distance"
+        case _ : MeleeAttack => "Melee Attack"
+        case _ : RangedAttack | _ : RangedSpecial => "Ranged Attack"
+        case _ : MeleeOrRange => "Melee or Ranged Attack"
       }
 
-    case _ : MultiAttack => "Attaque multiple"
-    case sa : SpecialAction => sa.name
+    case _ : MultiAttack => "Multiattack"
+    case sa : SpecialAction => sa.name.value(this)
   }
-  val toHit : String = "au toucher"
-  val target : Int => String = "cible" + fr.plural(_)
+  val toHit : String = "to hit"
+  val target : Int => String = "target" + fr.plural(_)
 
-  val senses : String = "Sens"
+  val senses : String = "Senses"
 
   val sens : Sens => String = {
-    case PassivePerception(v) => s"Perception passive $v"
-    case BlindSight(r) => s"Perception aveugle ${length(r)}"
-    case DarkVision(r) => s"Visibilité dans l'obscurité ${length(r)}"
-    case Tremorsense(r) => s"Détection des vibrations ${length(r)}"
-    case TrueSight(r) => s"Vision véritable ${length(r)}"
+    case PassivePerception(v) => s"Passive perception $v"
+    case BlindSight(r) => s"blindsight ${length(r)}"
+    case DarkVision(r) => s"darkvision ${length(r)}"
+    case Tremorsense(r) => s"tremorsense ${length(r)}"
+    case TrueSight(r) => s"truesight ${length(r)}"
   }
 
   val damageType : DamageType => String = {
-    case FromNonMagicalWeapon(dt) => (dt map damageType mkString ", ") + " d'une arme non magique."
-    case Acid => "acides"
-    case Bludgeoning => "contondants"
-    case Cold => "de froid"
-    case Fire => "de feu"
-    case Force => "de force"
-    case Lightning => "de foudre"
-    case Necrotic => "nécrotiques"
-    case Piercing => "perforants"
-    case Poison => "empoisonnés"
-    case Psychic => "psychiques"
-    case Radiant => "rayonnants"
-    case Slashing => "tranchants"
-    case Thunder => "de tonnerre"
+    case FromNonMagicalWeapon(dt) => (dt map damageType mkString ", ") + " from a non-magical weapon."
+    case Acid => "acid"
+    case Bludgeoning => "bludgeoning"
+    case Cold => "cold"
+    case Fire => "fire"
+    case Force => "force"
+    case Lightning => "lightning"
+    case Necrotic => "necrotic"
+    case Piercing => "piercing"
+    case Poison => "poins"
+    case Psychic => "psychic"
+    case Radiant => "radiant"
+    case Slashing => "slashing"
+    case Thunder => "thunder"
   }
 
 
   val versatile : Die => String =
     d =>
-      s", ou ${d.average} ($d) dégâts tranchants si utilisé à deux mains."
-//, or 6 (1d10 + 1) slashing damage if used with two hands.
+      s", or ${d.average} ($d) damage if used with two hands."
 
-  val reach: String = "allonge"
+  val reach: String = "reach"
 
-  val hit : String = "Touche"
+  val hit : String = "hit"
 
   val damages: String = "dégâts"
 
@@ -124,73 +124,79 @@ object Eng
 //      val types =
 //        types0 map damageType mkString (" ",", ", "")
 
-      val descStr = sdesc map (desc => formatToHtml(desc)) getOrElse ""
+      val descStr = sdesc map (desc => formatToHtml(desc.value(this))) getOrElse ""
       s"${die.average} ($die) $damages ${damageType(types)}$descStr"
 
-    case SpecialHit(desc) => desc
+    case SpecialHit(desc) => desc.value(this)
     }
 
 
 
   val source : String = "Source"
-  val unknown : String = "inconnue"
+  val unknown : String = "unknown"
 
-  val atWill : String = "à volonté"
+  val atWill : String = "at will"
 
   val spellLvl : Int => String = {
-    case 0 => "Sorts mineurs"
-    case x => s"Niveau $x"
+    case 0 => "Cantrips"
+    case x => s"Level $x"
   }
   val slots : Option[Int] => String = {
     case None => atWill
-    case Some(x) => s"$x emplacement${fr.plural(x)}"
+    case Some(x) => s"$x slot${fr.plural(x)}"
   }
 
-  val spells : String = "Sorts"
+  val spells : String = "Spells"
+  val intAdj : Int => String = {
+    case 1 => "1st"
+    case 2 => "2nd"
+    case 3 => "3rd"
+    case x => x +"th"
+  }
   val spellCastingText : (String, SpellCasting) => String = {
     case (name, sc) =>
-      s"Un $name est un lanceur de sorts de niveau ${sc.casterLevel}. Sa caractéristique pour lancer des sorts est ${ability_long(sc.ability)} (sauvegarde DD ${sc.saveDifficultyClass}, ${Die.bonus_str(sc.attackBonus)} au jet d\'attaque). Un $name a les sorts de ${clazz(sc.clazz)} suivants préparés:"
+      s"The $name is a ${intAdj(sc.casterLevel)}-level spellcaster. Its spellcasting ability is ${ability_long(sc.ability)} (spell save DC ${sc.saveDifficultyClass}, ${Die.bonus_str(sc.attackBonus)} to hit with spell attacks). The $name has the following ${clazz(sc.clazz)} spells prepared:"
   }
 
   val clazz : DnDClass => String = {
-    case Barbarian => "Barbare"
-    case Bard => "Barde"
-    case Cleric => "Clerc"
-    case Druid => "Druide"
-    case Fighter => "Guerrier"
-    case Monk => "Moine"
+    case Barbarian => "Barbarian"
+    case Bard => "Bard"
+    case Cleric => "Cleric"
+    case Druid => "Druid"
+    case Fighter => "Fighter"
+    case Monk => "Monk"
     case Paladin => "Paladin"
     case Ranger => "Ranger"
-    case Rogue => "Roublard"
-    case Sorcerer => "Ensorceleur"
-    case Warlock => "Sorcier"
-    case Wizard => "Magicien"
+    case Rogue => "Rogue"
+    case Sorcerer => "Sorcerer"
+    case Warlock => "Warlock"
+    case Wizard => "Wizard"
   }
 
 
-  val clear : String = "Tout effacer"
+  val clear : String = "Clear"
 
-  val damageVulnerabilites : String = "Vulnérable aux dégâts"
-  val damageImmunities : String = "Immunisé aux dégâts"
-  val conditionImmunities : String = "Immunisé aux conditions"
-  val resistance : String = "Résistances"
+  val damageVulnerabilites : String = "Damage vulnerabilites"
+  val damageImmunities : String = "Damage immunities"
+  val conditionImmunities : String = "Condition immunities"
+  val resistance : String = "Resistance"
 
   val conditions : Condition => String = {
-    case Prone => "À terre"
-    case Grappled => "Agrippé"
-    case Deafened => "Assourdi"
-    case Blinded => "Aveuglé"
-    case Charmed => "Charmé"
-    case Frightened => "Effrayé"
-    case Poisoned => "Empoisonné"
-    case Restrained => "Entravé"
-    case Stunned => "Étourdi"
-    case Incapacitated => "Incapable d'agir"
-    case Unconscious => "Inconscient"
+    case Prone => "Prone"
+    case Grappled => "Grappled"
+    case Deafened => "Deafened"
+    case Blinded => "Blinded"
+    case Charmed => "Charmed"
+    case Frightened => "Frightened"
+    case Poisoned => "Poisoned"
+    case Restrained => "Restrained"
+    case Stunned => "Stunned"
+    case Incapacitated => "Incapacitated"
+    case Unconscious => "Unconscious"
     case Invisible => "Invisible"
-    case Paralyzed => "Paralysé"
-    case Petrified => "Pétrifié"
-    case Exhaustion => "Épuisement"
+    case Paralyzed => "Paralyzed"
+    case Petrified => "Petrified"
+    case Exhaustion => "Exhaustion"
   }
 
 }

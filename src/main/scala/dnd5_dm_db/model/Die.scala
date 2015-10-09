@@ -1,21 +1,28 @@
-package dnd5_dm_db.model
+package dnd5_dm_db
+package model
 
-import dnd5_dm_db._
-
+import dnd5_dm_db.xml_parse.Utils
+import Utils._
 import scala.xml.Node
 
 case class Die(number : Int, faces: Int, bonus : Int){
   override def toString : String = {
-    import Die.bonus_str
-    s"${number}d$faces${bonus_str(bonus)}"
+
+    s"${number}d$faces" +
+      (if(bonus != 0) Die.bonus_str(bonus)
+      else "")
   }
+
+  def average : Int = (number * ((faces / 2) + 0.5) + bonus).floor.toInt
+
+  def +(i : Int) : Die= copy(bonus = bonus + i)
 }
 
 object Die {
 
-  def bonus_str(bonus : Int) = {
-    if(bonus > 0) s"+$bonus"
-    else if (bonus == 0) ""
+  def bonus_str(bonus : Int) : String = {
+    if(bonus >= 0) s"+$bonus"
+//    else if (bonus == 0) ""
     else bonus.toString
   }
 
@@ -33,7 +40,6 @@ object Die {
     case _ => error(s"unknown die pattern : $str")
   }
 
-  def fromXml(node : Node) : (Int, Die) =
-    (node \ "average", fromString(node \"die"))
+  def fromXml(node : Node) : Die = fromString( node )
 
 }

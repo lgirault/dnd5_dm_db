@@ -1,16 +1,16 @@
 <spell>
     <name>
-        <fr>Thaumaturgie</fr>
-        <eng>Thaumaturgy</eng>
+        <local id="fr">Thaumaturgie</local>
+        <local id="eng">Thaumaturgy</local>
     </name>
     <level>0</level>
     <type>transmutation</type>
-    <ctime unit="action">1</ctime>
-    <range unit="feet">30</range>
+    <ctime unit="action" />
+    <range unit="feet" value="30" />
     <components verbose="true" somatic="false" material="false"/>
-    <duration unit="minute" upTo="true">1</duration>
+    <duration unit="minute" upTo="true" value="1" />
     <description>
-        <fr>Vous simulez une chose extraordinaire, un signe de puissance surnaturelle. Vous créez un des effets magiques suivants dans la limite de portée du sort :
+        <local id="fr">Vous simulez une chose extraordinaire, un signe de puissance surnaturelle. Vous créez un des effets magiques suivants dans la limite de portée du sort :
         [ul][li] Votre voix devient trois fois plus puissante que la normale pour 1 minute.[/li]
             [li] Vous faîtes vaciller des flammes, augmentez ou diminuez leur intensité, ou bien encore vous changez leur couleur pendant 1 minute.[/li]
             [li] Vous causez des tremblements inoffensifs dans le sol pendant 1 minute.[/li]
@@ -18,8 +18,8 @@
             [li] Vous provoquez instantanément l'ouverture ou le claquement brusque d'une porte ou d'une fenêtre non verrouillée.[/li]
             [li] Vous altérez l'apparence de vos yeux pendant 1 minute.[/li][/ul]
 Si vous lancez ce sort plusieurs fois, vous pouvez avoir activement jusqu'à trois de ses effets à la fois, et vous pouvez rompre un effet au prix d'une action.
-        </fr>
-        <eng>
+        </local>
+        <local id="eng">
             You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range:
             [ul][li]Your voice booms up to three times as loud as normal for 1 minute.[/li]
             [li]You cause flames to flicker, brighten, dim, or change color for 1 minute.[/li]
@@ -28,7 +28,7 @@ Si vous lancez ce sort plusieurs fois, vous pouvez avoir activement jusqu'à tro
             [li]You instantaneously cause an unlocked door or window to fly open or slam shut.[/li]
             [li]You alter the appearance of your eyes for 1 minute.[/li][/ul]
             If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.
-        </eng>
+        </local>
     </description>
     <source page="282">PHB</source>
 </spell>

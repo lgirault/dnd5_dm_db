@@ -1,8 +1,8 @@
 package dnd5_dm_db
 
-import org.scalatest.{FeatureSpec, Matchers}
+import org.scalatest.{FeatureSpec, MustMatchers}
 
 
 class AcceptanceSpec
   extends FeatureSpec
-  with Matchers
+  with MustMatchers

@@ -1,6 +1,5 @@
-package dnd5_dm_db.model
-
-import dnd5_dm_db._
+package dnd5_dm_db
+package model
 
 sealed abstract class Size
 case object Tiny extends Size

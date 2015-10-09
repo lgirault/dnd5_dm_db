@@ -5,34 +5,34 @@ import dnd5_dm_db.model._
 trait MonsterText {
 
   val size : Size => String = {
-    case Tiny => "très petite"
-    case Small => "petite"
-    case Medium => "moyenne"
-    case Large => "grande"
-    case Huge => "très grande"
-    case Gargantuan => "gigantesque"
+    case Tiny => "tiny"
+    case Small => "small"
+    case Medium => "medium"
+    case Large => "large"
+    case Huge => "huge"
+    case Gargantuan => "gargantuan"
   }
 
 
   val monsterType : MonsterType => String = {
     case Aberration => "Aberration"
-    case Beast => "Bête"
-    case CelestialType => "Célese"
-    case Construct => "Construction"
+    case Beast => "Beast"
+    case CelestialType => "Celestial"
+    case Construct => "Construct"
     case Dragon => "Dragon"
-    case Elemental => "Elémentaire"
-    case Fey => "Fée"
-    case Fiend => "Démon"
-    case GiantType => "Géant"
-    case Humanoid => "Humanoïde"
-    case Monstrosity => "Monstruosité"
-    case Ooze => "Gelée"
-    case Plant => "Plante"
-    case Undead => "Mort-Vivant"
-    case AnyRace(t) => monsterType(t) + " (race quelconque)"
+    case Elemental => "Elemental"
+    case Fey => "Fey"
+    case Fiend => "Fiend"
+    case GiantType => "Giant"
+    case Humanoid => "Humanoid"
+    case Monstrosity => "Monstrosity"
+    case Ooze => "Ooze"
+    case Plant => "Plant"
+    case Undead => "Undead"
+    case AnyRace(t) => monsterType(t) + " (any race)"
     case TaggedType(t, r) => s"${monsterType(t)} ($r)"
   }
   val monsterTypeAndSize : (Size, MonsterType) => String = {
-    case (s, mt) => monsterType(mt)+ s" de taille ${size(s)}"
+    case (s, mt) => size(s) + " " +monsterType(mt)
   }
 }

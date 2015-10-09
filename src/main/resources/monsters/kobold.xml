@@ -1,33 +1,20 @@
 <monster>
     <identity>
         <name>
-            <fr>Kobold</fr>
-            <eng>Kobold</eng>
+            <local id="fr">Kobold</local>
+            <local id="eng">Kobold</local>
         </name>
         <size>Small</size>
         <type>Humanoid</type>
         <typeTags><race>kobold</race></typeTags>
         <alignment>le</alignment>
-        <ac><value>12</value></ac>
-        <hp>
-            <average>5</average>
-            <die>2d6-2</die>
-        </hp>
-        <speeds><speed unit="feet">30</speed></speeds>
+        <ac value="12" />
+        <hp>2d6-2</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
     </identity>
-    <abilities>
-        <str>7</str>
-        <dex>15</dex>
-        <con>9</con>
-        <int>8</int>
-        <wis>7</wis>
-        <cha>8</cha>
-    </abilities>
+    <abilities str="7" dex="15" con="9" int="8" wis="7" cha="8" />
     <skillMisc>
-        <senses>
-            <passivePerception>8</passivePerception>
-            <darkvision unit="feet">60</darkvision>
-        </senses>
+        <senses> <darkvision unit="feet" value="60" /> </senses>
         <languages>
             <language>Common</language>
             <language>Draconic</language>
@@ -37,43 +24,20 @@
     </skillMisc>
     <traits>
         <shared>
-            <fr>Le kobold</fr>
-            <eng>The kobold</eng>
+            <local id="fr">Le kobold</local>
+            <local id="eng">The kobold</local>
             <id>pack-tactics</id>
             <id>sunlight-sensitivity</id>
         </shared>
     </traits>
     <actions>
-        <action type="attack">
-            <name>
-                <fr>Dague</fr>
-                <eng>Dagger</eng>
-            </name>
-            <bonus>+4</bonus>
-            <reach unit="feet">5</reach>
-            <numTarget>1</numTarget>
-            <hit type="damage">
-                <average>4</average>
-                <die>1d4+2</die>
-                <type>Piercing</type>
-            </hit>
+        <action type="weapon" id="dagger">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
         </action>
-        <action type="attack">
-            <name>
-                <fr>Lance-pierre</fr>
-                <eng>Sling</eng>
-            </name>
-            <bonus>+4</bonus>
-            <range>
-                <regular unit="feet">30</regular>
-                <max unit="feet">120</max>
-            </range>
-            <numTarget>1</numTarget>
-            <hit type="damage">
-                <average>4</average>
-                <die>1d4+2</die>
-                <type>Bludgeoning</type>
-            </hit>
+        <action type="weapon" id="sling">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
         </action>
     </actions>
     <source page="195">MM</source>

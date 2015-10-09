@@ -1,9 +1,11 @@
 package dnd5_dm_db.lang.fr
 
-import dnd5_dm_db._
+import dnd5_dm_db.lang.Lang
+import dnd5_dm_db.model._
 
 
 trait SkillAndLanguageText {
+  self : Lang =>
   val skills : String = "Compétences"
   val skill : Skill => String = {
     case Athletics => "Athlétisme"
@@ -31,6 +33,7 @@ trait SkillAndLanguageText {
   val language : Language => String = {
     case AnyLanguage(default) => "une langue au choix"+
       default.map(d => s" (généralement le ${language(d)})").getOrElse("")
+    case LanguageSpecial(str) => str.value(self)
     case UnderstandOnly(l) =>
       s"comprends le ${language(l)} mais ne le parle pas"
     case Common => "Commun"
@@ -39,7 +42,7 @@ trait SkillAndLanguageText {
     case GiantLang => "Géant"
     case Gnomish => "Gnome"
     case Goblin => "Gobelin"
-    case Halfling => "Hobbit"
+    case Halfling => "Halfelin"
     case Orc => "Orc"
 
     case Abyssal => "Abyssal"

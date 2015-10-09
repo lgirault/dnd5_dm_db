@@ -1,6 +1,6 @@
 package dnd5_dm_db.lang.fr
 
-import dnd5_dm_db._
+import dnd5_dm_db.model._
 
 
 trait AlignmentText {

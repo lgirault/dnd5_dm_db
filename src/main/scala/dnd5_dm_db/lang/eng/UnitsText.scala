@@ -1,39 +1,34 @@
-package dnd5_dm_db.lang.eng
+package dnd5_dm_db
+package lang.eng
 
+import dnd5_dm_db.lang.Lang
 import dnd5_dm_db.model._
 
 
 trait UnitsText {
-
-  val feetToMeter : Int => String ={
-    import java.text.DecimalFormat
-    val cmPerFoot = 30
-    val formatter = new DecimalFormat("#.##")
-
-    { i => formatter.format((i * cmPerFoot).toDouble / 100) }
-  }
+  self : Lang =>
 
   val length : DnDLength => String = {
-    case Feet(i) => feetToMeter(i) +" m"
-    case Touch => "contact"
-    case Self => "soit-même"
+    case Feet(i) => s"$i feet"
+    case Touch => "Touch"
+    case Self => "Self"
   }
 
   val rangeLength : ((DnDLength, DnDLength)) => String = {
-    case (Feet(reg), Feet(extra)) => feetToMeter(reg) +"/" +feetToMeter(extra) +"m"
+    case (Feet(reg), Feet(extra)) => s"$reg/$extra feet"
     case _ => error("rangeLength expect a pair of feet length")
   }
 
 
 
   val time : DnDTime => String = {
-    case UpTo(t) => "jusqu'à " + time(t)
+    case UpTo(t) => "up to " + time(t)
     case Minute(i) => i + " minute" + plural(i)
-    case Hour(i) => i +" heure" + plural(i)
+    case Hour(i) => i +" hour" + plural(i)
     case Round(i) => i +" tour" + plural(i)
     case RegularAction(i) => i + " action" + plural(i)
-    case BonusAction(i) => i + " action" + plural(i) + " bonus"
-    case Reaction(trigger) => "1 réaction" + trigger
-    case Instant => "instantané"
+    case BonusAction(i) => i + " bonus action" + plural(i)
+    case Reaction(trigger) => "1 reaction" + trigger.value(self)
+    case Instant => "instantaneous"
   }
 }

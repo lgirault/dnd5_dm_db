@@ -1,6 +1,5 @@
-package dnd5_dm_db.model
-
-import dnd5_dm_db._
+package dnd5_dm_db
+package model
 
 sealed abstract class DamageType
 case object Acid extends DamageType
@@ -16,6 +15,7 @@ case object Psychic extends DamageType
 case object Radiant extends DamageType
 case object Slashing extends DamageType
 case object Thunder extends DamageType
+case class FromNonMagicalWeapon(dts : Seq[DamageType]) extends DamageType
 
 object DamageType {
   def fromString(str : String) : DamageType = str.toLowerCase match {

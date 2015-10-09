@@ -1,6 +1,8 @@
-package dnd5_dm_db.model
+package dnd5_dm_db
+package model
 
-import dnd5_dm_db._
+import dnd5_dm_db.xml_parse.Utils
+import Utils._
 import dnd5_dm_db.lang.Lang
 
 import scala.xml.Node
