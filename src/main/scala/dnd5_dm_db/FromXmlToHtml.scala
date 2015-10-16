@@ -9,5 +9,5 @@ trait FromXml[A] {
 }
 
 trait ToHtml[A]{
-  def toHtml(s : A)(implicit lang : Lang)  : String
+  def toHtml(id : String, s : A)(implicit lang : Lang)  : String
 }

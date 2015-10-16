@@ -58,6 +58,10 @@ object TraitXmlParser extends FromXml[Trait] {
 
 trait MiscXmlParsers extends DnDMeasuresXmlParser{
 
+  def sourceFromXml(node : Node): Source =
+    Source(node.text, singleOptionAttribute(node, "page") map (_.toInt))
+
+
   def damageFromXml(node : Node) : DamageType =
     if (optionBooleanAttribute(node, "fromNonMagicalWeapon"))
       FromNonMagicalWeapon(node \ "damageType" map (DamageType fromString _.text))

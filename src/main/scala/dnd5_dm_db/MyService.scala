@@ -1,14 +1,14 @@
 package dnd5_dm_db
 
-import java.io.File
+import java.io.{FileNotFoundException, File}
 
 import akka.actor.{Actor, Props}
-import dnd5_dm_db.lang.{Fr, Lang, langFromString}
-import dnd5_dm_db.model.{Spell, Templates}
+import dnd5_dm_db.html_gen.{Templates, SpellHtmlGen, MonsterHtmlGen}
+import dnd5_dm_db.lang.{Fr, langFromString}
+import dnd5_dm_db.model._
 import dnd5_dm_db.xml_parse._
 import sbt.PathFinder
 import spray.http.MediaTypes._
-import spray.httpx.marshalling.ToResponseMarshallable
 import spray.routing._
 
 import scala.xml.XML
@@ -29,7 +29,7 @@ class MyServiceActor(val root : String) extends Actor with MyService {
   // this actor only runs our route, but you could add
   // other things here, like request stream processing
   // or timeout handling
-  def receive = runRoute(myRoute ~ getSpell ~ getFileRoute)
+  def receive = runRoute( myRoute ~ getMonster ~ getSpell ~ getFileRoute )
 
 }
 
@@ -37,10 +37,9 @@ class MyServiceActor(val root : String) extends Actor with MyService {
 // this trait defines our service behavior independently from the service actor
 trait MyService extends HttpService {
 
-
   val root : String
   val pathFinder : PathFinder = PathFinder(new File(root))
-  import GenAll.{monsters, resources, spells}
+  import GenAll.{monsters, resources, spells, traits, weapons}
 
   val myRoute : Route =
     path("") {
@@ -61,41 +60,55 @@ trait MyService extends HttpService {
     }
 
 
-  def makeXmlRoute(prefix : String)
-                  ( makeResponse : (Lang, String) => ToResponseMarshallable) : Route =
+  def makeXmlRoute[A](prefix : String, fromXml: FromXml[A], toHtml : ToHtml[A]) : Route =
     pathPrefix(prefix / Segment){
       langSegment =>
-        pathPrefix(Segment){
+        path(Segment){
           idSegment =>
-            pathEnd {
               get {
                 respondWithMediaType(`text/html`) {
                   complete {
                     try {
                       val lang = langFromString(langSegment)
-                      makeResponse(lang, idSegment.replaceAllLiterally(".html", ".xml"))
+                      val id = idSegment.replaceAllLiterally(".html", ".xml")
+                      val node = XML.loadFile(s"$resources/$prefix/$id")
+                      toHtml.toHtml(id, fromXml.fromXml(node))(lang)
+
                     } catch {
+                      case e : FileNotFoundException =>
+                        e.getMessage
                       case _ : NoSuchElementException =>
                         "unknown lang"
                     }
                   }
                 }
               }
-            }
         }
     }
 
+  def fetchSpell : Retriever[Spell] = {
+    id =>
+      val node = XML.loadFile(s"$resources/$spells/$id.xml")
+      SpellXmlParser.fromXml(node)
+  }
+
+  def fetchTrait : Retriever[Trait] = {
+    id =>
+      val node = XML.loadFile(s"$resources/$traits/$id.xml")
+      TraitXmlParser.fromXml(node)
+  }
+
+  def fetchWeapon : Retriever[Weapon] = {
+    id =>
+      val node = XML.loadFile(s"$resources/$weapons/$id.xml")
+      WeaponXmlParser.fromXml(node)
+  }
+
+  val getMonster : Route = makeXmlRoute(monsters, MonsterXmlParser.fromXml(fetchSpell, fetchTrait, fetchWeapon), MonsterHtmlGen)
+
+
   val getSpell : Route =
-    makeXmlRoute(spells){
-      (l, id) =>
-        try {
-          val node = XML.loadFile(s"$resources/$spells/$id")
-          val s = SpellXmlParser.fromXml(node)
-          Spell.toHtml(s)(l)
-        } catch {
-          case e: Exception => s"$id unknown spell"
-        }
-    }
+    makeXmlRoute(spells, SpellXmlParser, SpellHtmlGen)
 
 
   def getFileRouteGen(name : String) : Route =

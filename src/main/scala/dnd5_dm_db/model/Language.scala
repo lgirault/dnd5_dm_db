@@ -48,7 +48,8 @@ case object Sylvan extends Language
 case object Undercommon extends Language
 
 case object Troglodyte extends Language
-
-case class AnyLanguage(default : Option[Language]) extends Language
+//Todo handle case of any X language
+//exemple with spy and any 2 language
+case class AnyLanguage(num : Int, default : Option[Language]) extends Language
 case class UnderstandOnly(lang : Language) extends Language
 case class LanguageSpecial(name : Local) extends Language

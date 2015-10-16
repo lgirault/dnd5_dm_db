@@ -5,5 +5,5 @@ package dnd5_dm_db
  */
 package object xml_parse {
 
-  type Retriever[A] = Map[String, A]
+  type Retriever[A] = String => A
 }

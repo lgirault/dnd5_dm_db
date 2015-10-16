@@ -1,5 +1,6 @@
 package dnd5_dm_db
-package model
+package html_gen
+import model._
 
 import dnd5_dm_db.lang.Lang
 
@@ -24,7 +25,12 @@ object Templates {
   implicit val spellNameExtractor : NameExtractor[Spell] =
     s => s.name
 
+  def tradDiv(t : String, id : String, name : Local, l : Lang) = {
+    val links = lang.otherLocales(l) map {l => s"""<a href="?$t=${l.id}/$id">${name.value(l)}</a>""" }
+    val linksStr = links mkString "<br/>"
 
+    s"""<div class="trad">$linksStr</div>"""
+  }
 
   implicit val monsterNameExtractor : NameExtractor[Monster] =
     m => m.name
@@ -52,10 +58,13 @@ object Templates {
          |</div>""".stripMargin +
         keyNameDivs("spells", spells, "spells") +
         keyNameDivs("monsters", monsters, "monsters") +
-    s"""</div><div class="frame" >
-      |   <div id="monsters_screen"><h1>${lang.monsters}<button class="clear">${lang.clear}</button></h1></div>
-      |   <div id="spells_screen"><h1>${lang.spells}<button class="clear">${lang.clear}</button></h1></div>
+    s"""</div><div id="right_frame" class="frame" >
+      |   <div id="monsters_screen"><h1>${lang.monsters}<button class="clearScreen">${lang.clear}</button></h1></div>
+      |   <div id="spells_screen"><h1>${lang.spells}<button class="clearScreen">${lang.clear}</button></h1></div>
       </div>""".stripMargin +
       html_footer
+
+  def sourceToHtml(ssource : Option[Source]) ( implicit lang : Lang) : String =
+    s"""<div class="source">${lang.source} : ${ssource.getOrElse(lang.unknown)}</div>"""
 
 }

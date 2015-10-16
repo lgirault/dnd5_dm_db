@@ -1,11 +1,6 @@
 package dnd5_dm_db
 package model
 
-import dnd5_dm_db.lang.Lang
-import dnd5_dm_db.xml_parse.Utils
-import Utils._
-import scala.xml.Node
-
 case class Abilities
 ( strength : Int,
   dexterity: Int,
@@ -13,21 +8,6 @@ case class Abilities
   intelligence : Int,
   wisdom : Int,
   charisma : Int)
-
-object Abilities {
-
-  def toHtml(abilities: Abilities)(implicit lang : Lang) : String = {
-    import Ability.{toHtml => h}
-    h(Strength, abilities.strength) +
-     h(Dexterity, abilities.dexterity) +
-     h(Constitution, abilities.constitution) +
-     h(Intelligence, abilities.intelligence) +
-     h(Wisdom, abilities.wisdom) +
-     h(Charisma, abilities.charisma)
-  }
-
-
-}
 
 sealed abstract class Ability
 case object Strength extends Ability
@@ -42,11 +22,6 @@ object Ability {
   def modifier(value : Int) : Int =
     Math.floor((value - 10).toDouble / 2).toInt
 
-  def savingThrowFromXml(node : Node) : (Ability, Int) =
-      (fromString(singleAttribute(node, "name")),
-        singleAttribute(node, "value").toInt)
-
-
   def fromString(str : String) : Ability = str match {
     case "str" => Strength
     case "dex" => Dexterity
@@ -57,11 +32,4 @@ object Ability {
     case _ => error(s"unknown ability : $str")
   }
 
-  def toHtml
-  ( ability: Ability,
-    value: Int)(implicit lang : Lang) : String = {
-   s"""<div class="ability"><strong>${lang.ability_short(ability)}</strong><br/>
-      |    $value (${Die.bonus_str(modifier(value))})
-      |</div>""".stripMargin
-  }
 }

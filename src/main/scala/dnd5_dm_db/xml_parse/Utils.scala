@@ -12,11 +12,12 @@ object Utils {
       case _ => error(s"one or zero attribute $attr expected in node " + node.toString())
     }
 
+  def optionAttribute[A](node : Node, attr : String, convert : String => A) : Option[A] =
+    singleOptionAttribute(node, attr) map convert
+
   def optionBooleanAttribute(node : Node, attr : String) : Boolean =
-    singleOptionAttribute(node, attr) match {
-      case Some(b) => b.toBoolean
-      case None => false
-    }
+    optionAttribute(node,attr, _.toBoolean) getOrElse false
+
 
   def singleAttribute(node : Node, attr : String) : String =
     node attribute attr match {

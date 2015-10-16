@@ -7,7 +7,7 @@ import dnd5_dm_db.xml_parse.Utils._
 import scala.xml.Node
 import LocalXmlParser._
 object SpellXmlParser extends FromXml[Spell]
-  with DnDMeasuresXmlParser {
+  with MiscXmlParsers {
 
   def componentsFromXml(node : Node): List[Components] =
     List[Option[Components]](
@@ -35,7 +35,7 @@ object SpellXmlParser extends FromXml[Spell]
       spell \ "duration" map (n => (timeFromXml(n), optionBooleanAttribute(n, "concentration"))),
       localFromXml(spell \ "description" )  ,
       (spell \ "higher-level-description" ).toNodeOption map localFromXml,
-      (spell \ "source").toNodeOption map Source.fromXml
+      (spell \ "source").toNodeOption map sourceFromXml
     )
   }
 

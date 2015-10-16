@@ -31,7 +31,7 @@ trait SkillAndLanguageText {
   val languages : String = "Languages"
 
   val language : Language => String = {
-    case AnyLanguage(default) => "any one language"+
+    case AnyLanguage(x, default) => s"any $x language"+
       default.map(d => s" (usually ${language(d)})").getOrElse("")
     case LanguageSpecial(str) => str.value(self)
     case UnderstandOnly(l) =>

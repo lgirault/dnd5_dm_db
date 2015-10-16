@@ -14,7 +14,7 @@ object MonsterXmlParser extends MiscXmlParsers {
     traits : Retriever[Trait],
     weapons: Retriever[Weapon]) : FromXml[Monster] = new FromXml[Monster] {
     def fromXml(n : Node) : Monster =
-      monsterFromXml(n, traits, weapons)
+      monsterFromXml(n, spells, traits, weapons)
 
   }
 
@@ -23,9 +23,11 @@ object MonsterXmlParser extends MiscXmlParsers {
       (identity \ "typeTags" \ "race").toNodeOption map (_.text))
 
 
-  def monsterFromXml(monster : Node,
-              traitsMap : Retriever[Trait],
-              weaponsMap: Retriever[Weapon]) : Monster = {
+  def monsterFromXml
+  ( monster : Node,
+    spellsRetriever : Retriever[Spell],
+    traitsRetriever : Retriever[Trait],
+    weaponsRetriever: Retriever[Weapon]) : Monster = {
     val identity : Node = monster \ "identity"
     val abilities = abilitiesFromXml(monster \ "abilities")
     val skillMisc : Node = monster \ "skillMisc"
@@ -50,13 +52,13 @@ object MonsterXmlParser extends MiscXmlParsers {
       val sts = sShared map {
         shared =>
           val name = localFromXml(shared)
-          shared \ "id" map (n => traitsMap(n.text).withMonsterName(name) )
+          shared \ "id" map (n => traitsRetriever(n.text).withMonsterName(name) )
       } getOrElse Seq()
 
       ts ++: sts
     }
 
-    implicit val iwm = weaponsMap
+    implicit val iwm = weaponsRetriever
     val spellCasting = (monster \ "spellcasting").toNodeOption
     val actions = monster \ "actions" \ "action" map ActionXmlParser.actionFromXml
     val reactions = monster \ "reactions" \ "action" map ActionXmlParser.actionFromXml
@@ -91,7 +93,7 @@ object MonsterXmlParser extends MiscXmlParsers {
       Die fromXml (identity \ "hp").toNode,
       speedFromXml (identity \ "speeds"),
       abilities,
-      (skillMisc \ "savingThrows" \ "save") map Ability.savingThrowFromXml,
+      (skillMisc \ "savingThrows" \ "save") map savingThrowFromXml,
       skills,
       damageVulnerabilities,
       damageImmunities,
@@ -102,13 +104,16 @@ object MonsterXmlParser extends MiscXmlParsers {
       ChallengeRanking.fromString(skillMisc \ "cr"),
       (skillMisc \ "xp").text.toInt,
       traits,
-      spellCasting map spellCastingFromXml,
+      spellCasting map spellCastingFromXml(spellsRetriever),
       actions,
       reactions,
       (monster \ "description").toNodeOption map localFromXml,
-      (monster \ "source" ).toNodeOption map Source.fromXml )
+      (monster \ "source" ).toNodeOption map sourceFromXml )
   }
 
+  def savingThrowFromXml(node : Node) : (Ability, Int) =
+    (Ability.fromString(singleAttribute(node, "name")),
+      singleAttribute(node, "value").toInt)
 
   def abilitiesFromXml(node : Node) : Abilities =
     Abilities(singleAttribute(node, "str").toInt,
@@ -119,22 +124,22 @@ object MonsterXmlParser extends MiscXmlParsers {
       singleAttribute(node, "cha").toInt)
 
 
-  def spellCastingFromXml(node : Node) : SpellCasting = {
+  def spellCastingFromXml(spellsRetriever : Retriever[Spell])(node : Node) : SpellCasting = {
     SpellCasting(
       (node \ "casterLevel").text.toInt,
       DnDClass.fromString(node \ "class"),
       Ability.fromString(node \ "ability"),
       ( node \ "dc").text.toInt,
       (node \ "attackBonus").text.toInt,
-      node \ "spells" \ "spellList" map spellListFromXml)
+      node \ "spells" \ "spellList" map spellListFromXml(spellsRetriever))
   }
 
 
-  def spellListFromXml(spellList : Node) : SpellList =
+  def spellListFromXml(spellsRetriever : Retriever[Spell])(spellList : Node) : SpellList =
     SpellList(
       singleAttribute( spellList, "level").toInt,
       singleOptionAttribute(spellList, "slots") map (_.toInt),
-      (spellList \ "spell").theSeq map (_.text)
+      (spellList \ "spell").theSeq map (n => spellsRetriever(n.text))
     )
 
   def languageFromXml(languageList : Node) : Seq[Language] = {
@@ -150,9 +155,10 @@ object MonsterXmlParser extends MiscXmlParsers {
         }
       }
     }
-    if(optionBooleanAttribute(languageList, "anyLanguage")){
-      AnyLanguage(singleOptionAttribute(languageList, "default") map Language.fromString) +: ls
+    optionAttribute(languageList, "anyLanguage", _.toInt) match {
+      case None => ls
+      case Some(x) =>
+        AnyLanguage(x, singleOptionAttribute(languageList, "default") map Language.fromString) +: ls
     }
-    else ls
   }
 }

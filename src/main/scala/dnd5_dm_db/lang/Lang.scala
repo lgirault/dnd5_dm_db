@@ -2,6 +2,7 @@ package dnd5_dm_db.lang
 
 import dnd5_dm_db.model._
 
+
 abstract class Lang
   extends SpellText {
   val id : String

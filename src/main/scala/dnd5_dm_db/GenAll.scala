@@ -2,6 +2,7 @@ package dnd5_dm_db
 
 import java.io.File
 
+import dnd5_dm_db.html_gen.{Templates, MonsterHtmlGen, SpellHtmlGen}
 import dnd5_dm_db.lang.{Fr, Lang}
 import dnd5_dm_db.model._
 import dnd5_dm_db.xml_parse._
@@ -31,7 +32,7 @@ object GenAll {
   ( implicit builder : ToHtml[A], lang : Lang) =
   keySeq.foreach {
     case (n, l, s) =>
-      IO.write(new File(s"$out/$typ/$l/$n.html"), builder.toHtml(s))
+      IO.write(new File(s"$out/$typ/$l/$n.html"), builder.toHtml(n, s))
   }
 
   def main(args : Array[String]): Unit = {
@@ -64,10 +65,10 @@ object GenAll {
 
     index.createNewFile()
 
-    genPages(frSpellSeq, spells)(Spell, Fr)
+    genPages(frSpellSeq, spells)(SpellHtmlGen, Fr)
 
 
-    genPages(frMonsterSeq, monsters)(MonsterHtmlGen.toHtml(spellsMap), Fr)
+    genPages(frMonsterSeq, monsters)(MonsterHtmlGen, Fr)
 
     import Templates._
     IO.write(index, genIndex(frSpellSeq, frMonsterSeq))

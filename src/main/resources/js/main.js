@@ -2,14 +2,31 @@
 NodeList.prototype.forEach = Array.prototype.forEach
 HTMLCollection.prototype.forEach = Array.prototype.forEach
 
+Element.prototype.remove = function() {
+        this.parentElement.removeChild(this);
+}
+
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+   for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+   }
+}
+
+Element.prototype.prependChild = function(newChild) {
+        this.insertBefore(newChild, this.firstChild)
+}
+
+
 Array.prototype.contains = function (elt){
     return this.indexOf(elt)!=-1;
 }
 
 var UNDEFINED = "undefined";
 var SCREEN = "screen";
-var MONSTERS = "monsters";
-var SPELLS= "spells";
+var MONSTERS = 'monsters';
+var SPELLS= 'spells';
 var MONSTERS_SCREEN = "monsters_screen";
 var SPELLS_SCREEN = "spells_screen";
 
@@ -49,42 +66,110 @@ function hideInnerBlockSpells(){
        desc.style.display = "none";
        name.onclick = function(){
         toggleBlockDisplay(desc);
-        normalizeBlockHeight(MONSTERS_SCREEN);
+        normalizeBlockDim(MONSTERS_SCREEN);
         return false;
        }
     });
 }
 
 
-function normalizeBlockHeight(id){
-    var height = 0;
-    var blocks = document.querySelectorAll("#"+id+" .bloc"); //nodeList
+function normalizeBlockDim(screen_id){
+    var blocks = document.querySelectorAll("#"+screen_id+" .bloc"); //nodeList
+    if(blocks.length == 0)
+        return;
+        
+    var height = blocks[0].clientHeight;
+    var firstOfLine = 0;
+    var setDimUntil = function(index){
+        for(var i=firstOfLine; i<index; i++){
+            var b = blocks[i];
+            b.style.height = height+"px";
+            b.style.width = context.getColumnWidth()+"px";
+            var ds = b.querySelectorAll(".dragbar");
+            ds.forEach(function(d){
+                //d.style.height = height+"px";
+                setUpGhostBarEvent(d);
+            });
+        }
+    }
+    
+    var prevOffset = blocks[0].prevOffset;
+    for(var i=1; i < blocks.length; i++){
 
-    blocks.forEach(function(b){
-           var h = b.clientHeight;
-           if(h > height){
-             height = h;
-           }
-    });
+        var b = blocks[i];
+        var h = b.clientHeight;
+        
+        var newLine = b.offsetTop != prevOffset;
+        if(newLine){
+            setDimUntil(i);
+            firstOfLine = i;
+            height = 0;
+        }
 
-    blocks.forEach(function(b){
-        b.clientHeight = height;
-    });
+        if(h > height){
+           height = h;
+        }
+
+        prevOffset = b.offsetTop;
+    }
+    setDimUntil(blocks.length);
+   
+    
+
 }
+
 
 function appendMonsterBlock(text){
     document.getElementById(MONSTERS_SCREEN).innerHTML += text;
     hideInnerBlockSpells();
-    normalizeBlockHeight(MONSTERS_SCREEN);
+    normalizeBlockDim(MONSTERS_SCREEN);
 }
 
 function appendSpellBlock(text){
     document.getElementById(SPELLS_SCREEN).innerHTML += text;
-    normalizeBlockHeight(SPELLS_SCREEN);
+    normalizeBlockDim(SPELLS_SCREEN);
 }
 
 
+function setUpGhostBarEvent(dragbar_div_element){
 
+    dragbar_div_element.onmousedown = function(e){
+
+           e.preventDefault();
+
+           var ghostbar = document.createElement("div");
+           ghostbar.id = "ghostbar";
+
+           var t = dragbar_div_element.offsetTop;
+           var h = document.getElementById("right_frame").clientHeight - t ;
+           ghostbar.style.height = h+"px";
+           ghostbar.style.top = t+"px";
+           ghostbar.style.left = (e.pageX-2) +"px";
+
+           var blocWidth = dragbar_div_element.parentElement.clientWidth;
+           var xInit = e.pageX;
+
+           document.body.appendChild(ghostbar);
+
+           document.onmousemove = function(e){
+              ghostbar.style.left = (e.pageX-2)+"px";
+           };
+
+        document.onmouseup = function(e){
+                   document.getElementById("ghostbar").remove();
+                   document.onmousemove = null;
+                   document.onmouseup = null;
+
+                context.setColumnWidth(blocWidth + (e.pageX - xInit));
+                var blocks = document.querySelectorAll("#"+context.screen+"_screen .bloc");
+                blocks.forEach(function(b){
+                        b.style.width = context.getColumnWidth()+"px";
+                        b.style.height = "auto";
+                });
+                normalizeBlockDim(context.screen+"_screen");
+        };
+    };
+}
 
 
 
@@ -118,10 +203,10 @@ function Context(){
             }
 
     }
-
-    this.monsters = new Array();
-    this.spells = new Array();
-
+    this.elements = {monsters : new Array(), spells : new Array()};
+    
+    this.appendBlock = {monsters : appendMonsterBlock, spells : appendSpellBlock};
+    
     this.parseAndLoadQuery= function (query) {
         var keyVal = query.split('=');
         var key = decodeURIComponent(keyVal[0]);
@@ -132,50 +217,44 @@ function Context(){
         else {
             this.loadQuery(key, keyVal[1]);
         }
-        //var relativeAddress = parseDBEntry(keyVal[1]);
     }
-
+    var thisContext = this;
     this.setURL = function (){
+        
         var str = "?screen="+this.screen;
-        for(var i =0; i< this.monsters.length; i++){
-           str += "&" + MONSTERS + "=" + this.monsters[i];
+        
+        var addTypeUrl = function(type){
+            for(var i =0; i< thisContext.elements[type].length; i++){
+                str += "&" + type + "=" + thisContext.elements[type][i];
+            }
         }
-        for(var i =0; i< this.spells.length; i++){
-           str += "&" + SPELLS + "=" + this.spells[i];
-        }
-
-
+        addTypeUrl(MONSTERS);             
+        addTypeUrl(SPELLS);             
+        
         // !!! do not use  window.location.search = XXX; it reload the page !
-
          history.pushState({}, "", this.address + str);
 
     }
 
     this.loadQuery = function(type, query){
-        var answerProcess;
         var relativeAddress = type + "/" + query + ".html"
-        var load = false;
-
-       if (type == MONSTERS){
-            if(!this.monsters.contains(query)){
-                this.monsters.push(query);
-                answerProcess = appendMonsterBlock;
-                load = true;
-            }
-       }
-       else if (type == SPELLS){
-            if(!this.spells.contains(query)){
-                this.spells.push(query);
-                answerProcess = appendSpellBlock;
-                load = true;
-            }
-       }
-
-       if(load){
-            loadXMLDoc(this.address + relativeAddress, answerProcess);
-       }
-
+        
+        if(!this.elements[type].contains(query)){
+            this.elements[type].push(query);
+            loadXMLDoc(this.address + relativeAddress, this.appendBlock[type]);
+        }
     }
+
+    this.columnWidth = {monsters : 200, spells : 200};
+    
+    this.getColumnWidth = function(){
+        return this.columnWidth[this.screen];
+    }
+
+    this.setColumnWidth = function(newWidth){
+        this.columnWidth[this.screen] = newWidth;    
+    }
+    
 
     this.setScreen = function (name){
         var other = otherScreen(name);
@@ -216,7 +295,6 @@ function initMenuLinks(){
     var toggleButton = document.getElementById("toggle_button");
 
     toggleButton.onclick = function(e) {
-        console.log("click");
         context.toggleScreen();
         return false;
     };
@@ -227,4 +305,13 @@ window.onload = function(){
     context.parseSearchString();
     if(context.screen == UNDEFINED)
         context.setScreen(MONSTERS);
+
+    var buttons = document.querySelectorAll(".clearScreen");    
+
+    buttons.forEach(function(b){
+        b.onclick = function(e){
+            console.log("TODO !");
+            return false;
+        };   
+    });
 };
