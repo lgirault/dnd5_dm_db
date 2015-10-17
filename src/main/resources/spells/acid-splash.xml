@@ -1,0 +1,20 @@
+<spell>
+    <name>
+        <local id="fr">Aspersion d'acide</local>
+        <local id="eng">Acid splash</local>
+    </name>
+    <level>0</level>
+    <type>conjuration</type>
+    <ctime unit="action" />
+    <range unit="feet" value="60" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="instant" />
+    <description>
+        <local id="fr">[p]Vous propulsez une bulle d'acide. Choisissez une ou deux créatures, lesquelles sont à 1,50 mètre ou moins l'une de l'autre, dans la portée du sort. La cible doit réussir un jet de sauvegarde de Dextérité sans quoi elle subit 1d6 de dégâts d'acide.[/p]
+            [p]Les dégâts de ce sort augmentent de 1d6 lorsque vous atteignez le niveau 5 (2d6), le niveau 11 (3d6) et le niveau 17 (4d6).[/p]</local>
+        <local id="eng">[p]You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.[/p]
+            [p]This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).[/p]</local>
+    </description>
+    <source page="211">PHB</source>
+    <source>Basic Rules</source>
+</spell>

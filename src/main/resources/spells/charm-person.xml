@@ -1,0 +1,22 @@
+<spell>
+    <name>
+        <local id="fr">Charme-personne</local>
+        <local id="eng">Charm person</local>
+    </name>
+    <level>1</level>
+    <type>Enchantment</type>
+    <ctime unit="action" />
+    <range unit="feet"  value="30" />
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="hour" value="1" />
+    <description>
+        <local id="fr">Vous pouvez tenter de charmer un humanoïde que vous pouvez voir à portée. Ce dernier doit effectuer un jet de sauvegarde de Sagesse, avec l'avantage à son jet si vous ou vos compagnons le combattez. En cas d'échec, vous le charmez jusqu'à la fin de la durée du sort ou jusqu'à ce que vous ou vos compagnons cherchiez à lui nuire. La créature charmée vous considère comme un bon ami. Quand le sort prend fin, la créature sait que vous l'avez charmée.</local>
+        <local id="eng">You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</local>
+    </description>
+    <higher-level-description>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez cibler une créature supplémentaire pour chaque niveau d'emplacement supérieur à 1. Les créatures doivent se trouver à 9 mètres maximum les unes des autres lorsque vous les ciblez.</local>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</local>
+    </higher-level-description>
+    <source page="211">221</source>
+    <source>Basic Rules</source>
+</spell>

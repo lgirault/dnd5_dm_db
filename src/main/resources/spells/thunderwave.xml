@@ -1,0 +1,25 @@
+<spell>
+    <name>
+        <local id="fr">Ondes de choc</local>
+        <local id="eng">Thunderwave</local>
+    </name>
+    <level>1</level>
+    <type>evocation</type>
+    <ctime unit="action" />
+    <range unit="self"/>
+    <areaOfEffect type="cube" unit="feet" value="15" />
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="instant" />
+    <description>
+        <local id="fr">[p]Une vague de force de tonnerre émane de vous. Toute créature se trouvant dans un cube de 4,50 mètres prenant origine à partir de vous-même doit faire un jet de sauvegarde de Constitution. En cas d'échec, la créature prend 2d8 de dégât de tonnerre et est repoussée de 3 mètres de vous. En cas de réussite, la créature prend seulement la moitié des dégâts et n'est pas repoussée.[/p]
+            [p]En outre, les objets non fixés qui se trouvent entièrement dans la zone d'effet sont automatiquement repoussés de 3 mètres par l'effet du sort, et le sort émet un coup de tonnerre audible jusqu'à 90 mètres.[/p]</local>
+        <local id="eng">[p]A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.[/p]
+            [p]In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.[/p]</local>
+    </description>
+    <higher-level-description>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</local>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, les dégâts augmentent de 1d8 pour chaque niveau d'emplacement supérieur à 1.</local>
+    </higher-level-description>
+    <source page="282">PHB</source>
+    <source>Basic Rules</source>
+</spell>

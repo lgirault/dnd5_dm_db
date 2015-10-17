@@ -1,0 +1,48 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Berserk</local>
+            <local id="eng">Berserker</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
+        <alignment restrict="c">any</alignment>
+        <ac value="13" >
+                <local id="fr">armure de peau</local>
+                <local id="eng">hide armor</local>
+        </ac>
+        <hp>9d8+27</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="16" dex="12" con="17" int="9" wis="11" cha="9" />
+    <skillMisc>
+        <languages anyLanguage="1" default="Common" />
+        <cr>2</cr>
+        <xp>450</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Insouciant</local>
+                <local id="eng">Reckless</local>
+            </name>
+            <description>
+                <local id="fr">Au début de son tour, un berserk peut obtenir l'avantage à tous ses jets d'attaque avec une arme de mêlée pendant ce tour, mais les attaques contre lui ont l'avantage jusqu'au début de son prochain tour.</local>
+                <local id="eng">At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="weapon" id="greataxe">
+            <hitBonus>+5</hitBonus>
+            <damageBonus>+3</damageBonus>
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Originaires de terres non civilisées, les imprévisibles berserks se réunissent au sein de groupes de guerre et cherchent le conflit partout où ils peuvent en trouver.</local>
+        <local id="eng">Hailing from uncivilized lands, unpredictable berserkers come together in war parties and seek conflict wherever they can find it.</local>
+    </description>
+    <source page="344">MM</source>
+    <source>Basic Rules</source>
+</monster>

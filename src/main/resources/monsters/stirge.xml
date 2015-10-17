@@ -1,0 +1,47 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Strige</local>
+            <local id="eng">Stirge</local>
+        </name>
+        <size>Tiny</size>
+        <type>Beast</type>
+        <alignment>none</alignment>
+        <ac value="14" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>1d4</hp>
+        <speeds>
+            <speed unit="feet" value="10" />
+            <fly unit="feet" value="40" />
+        </speeds>
+    </identity>
+    <abilities str="4" dex="16" con="11" int="2" wis="8" cha="6" />
+    <skillMisc>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <cr>1/8</cr>
+        <xp>25</xp>
+    </skillMisc>
+    <actions>
+        <action type="attack">
+            <name>
+                <local id="fr">Drain de sang</local>
+                <local id="eng">Blood drain</local>
+            </name>
+            <bonus>+5</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d4+3" damageType="Piercing" >
+                <special>
+                    <local id="fr">, et le strige se colle à la cible. Tant qu'il est collé, le strige n'attaque pas. À la place, au début de chaque tour du strige, la cible perd 5 (1d4+3) points de vie du à une perte de sang.
+                        [p]Le strige peut se détacher de lui même en dépensant 1,5m de son mouvement. Il fait cela après avoir drainé 10 point de vie de sang de la cible ou lorsque la cible est morte. Une créature, cible inclus, peut utiliser son action pour détacher la strige.[/p]</local>
+                    <local id="eng">, and the stirge attaches to the target. While attached, the stirge doesn't attack. Instead, at the start of each of the stirge's turns, the target loses 5 (1d4 + 3) hit points due to blood loss.
+                        [p]The stirge can detach itself by spending 5 feet of its movement. It does so after it drains 10 hit points of blood from the target or the target dies. A creature, including the target, can use its action to detach the stirge.[/p]</local>
+                </special>
+            </hit>
+        </action>
+    </actions>
+    <source page="284">MM</source>
+    <source>Basic Rules</source>
+</monster>

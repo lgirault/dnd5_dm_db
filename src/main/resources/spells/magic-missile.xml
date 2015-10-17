@@ -1,0 +1,22 @@
+<spell>
+    <name>
+        <local id="fr">Projectile magique</local>
+        <local id="eng">Magic missile</local>
+    </name>
+    <level>1</level>
+    <type>Evocation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="120" />
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="instant" />
+    <description>
+        <local id="fr">Vous créez trois fléchettes de force magique d'un bleu lumineux. Chaque fléchette atteint une créature de votre choix que vous pouvez voir et dans la limite de portée du sort. Chaque projectile inflige 1d4 + 1 points de dégâts de force à sa cible. Les fléchettes frappent simultanément, et peuvent frapper une ou plusieurs créatures. </local>
+        <local id="eng">You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several. </local>
+    </description>
+    <higher-level-description>
+        <local id="fr">Lorsque le sort est lancé en utilisant un emplacement de sort de niveau 2 ou plus, il crée une fléchette additionnelle pour chaque niveau d'emplacement au-dessus du niveau 1.</local>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</local>
+    </higher-level-description>
+    <source page="257">PHB</source>
+    <source>Basic Rules</source>
+</spell>

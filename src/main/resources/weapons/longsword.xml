@@ -1,0 +1,10 @@
+<weapon family="martial" kind="melee" >
+    <name>
+        <local id="fr">Épée longue</local>
+        <local id="eng">Longsword</local>
+    </name>
+    <cost coin="gold">15</cost>
+    <damage die="1d8" type="slashing"/>
+    <weight unit="pound">3</weight>
+    <property name="versatile" die="1d10"/>
+</weapon>

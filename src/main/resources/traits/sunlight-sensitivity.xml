@@ -1,0 +1,10 @@
+<trait>
+    <name>
+        <local id="fr">Sensibilité au soleil</local>
+        <local id="eng">Sunlight Sensitivity</local>
+    </name>
+    <description>
+        <local id="fr">À la lumière du soleil, {monster} a un désavantage aux jets d'attaque et aux jets de Sagesse (Perception) basés sur la vue.</local>
+        <local id="eng">While in sunlight, {monster} has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</local>
+    </description>
+</trait>

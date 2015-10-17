@@ -1,0 +1,10 @@
+<trait>
+    <name>
+        <local id="fr">Tactique de meute</local>
+        <local id="eng">Pack Tactics</local>
+    </name>
+    <description>
+        <local id="fr">{Monster} a l'avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir.</local>
+        <local id="eng">{Monster} has advantage on an attack roll against a creature if at least one of {monster}'s allies is within 5 feet of the creature and the ally isn't incapacitated</local>
+    </description>
+</trait>

@@ -1,0 +1,84 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Troglodyte</local>
+            <local id="eng">Troglodyte</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>troglodyte</race></typeTags>
+        <alignment>ce</alignment>
+        <ac value="11" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>2d8+4</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="14" dex="10" con="14" int="6" wis="10" cha="6" />
+    <skillMisc>
+        <skills><skill name="Stealth" value="+2"/></skills>
+        <senses><darkvision unit="feet" value="60" />
+        </senses>
+        <languages>
+            <language>Troglodyte</language>
+        </languages>
+        <cr>1/4</cr>
+        <xp>50</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Peau de chaméléon</local>
+                <local id="eng">Chameleon Skin</local>
+            </name>
+            <description>
+                <local id="fr">Le troglodyte a l'avantage sur les jet de Dextérité (Discrétion) fait pour se cacher.</local>
+                <local id="eng">The troglodyte has advantage on Dexterity (Stealth) checks made to hide.</local>
+            </description>
+        </trait>
+        <trait>
+            <name>
+                <local id="fr">Puanteur</local>
+                <local id="eng">Toute créature autre qu'un troglodyte qui commence son tour à moins d'1,5m d'un troglodyte doit réaliser un jet de Constitution de DD 12. Sur un échec la créature est empoisonnée jusqu'au début de son tour suivant. Sur une réussite, la créature est immunisée à la puanteur de tout troglodyte pour 1h.</local>
+            </name>
+            <description>
+                <local id="fr">Stench</local>
+                <local id="eng">Any creature other than a troglodyte that starts its turn within 5 feet of the troglodyte must succeed on a DC 12 Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all troglodytes for 1 hour.</local>
+            </description>
+        </trait>
+        <shared>
+            <local id="fr">Le trogolodyte</local>
+            <local id="eng">The troglodyte</local>
+            <id>sunlight-sensitivity</id>
+        </shared>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">Le troglodyte réalise trois attaques: une avec sa morsure et deux avec ses griffes</local>
+            <local id="eng">The troglodyte makes three attacks: one with its bite and two with its claws.</local>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Morsure</local>
+                <local id="eng">Bite</local>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d4+2" damageType="Piercing" />
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Griffe</local>
+                <local id="eng">Claw</local>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d4+2" damageType="Slashing" />
+        </action>
+    </actions>
+    <source page="290">MM</source>
+    <source>Basic Rules</source>
+</monster>

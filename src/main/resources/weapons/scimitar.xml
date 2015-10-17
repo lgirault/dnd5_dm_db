@@ -1,0 +1,11 @@
+<weapon family="martial" kind="melee" >
+    <name>
+        <local id="fr">Cimeterre</local>
+        <local id="eng">Scimitar</local>
+    </name>
+    <cost coin="gold">25</cost>
+    <damage die="1d6" type="slashing"/>
+    <weight unit="pound">3</weight>
+    <property name="finesse" />
+    <property name="light" />
+</weapon>

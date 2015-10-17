@@ -1,0 +1,13 @@
+<weapon family="simple" kind="melee" >
+    <name>
+        <local id="fr">Massue</local>
+        <local id="eng">Great club</local>
+    </name>
+
+    <cost coin="silver">2</cost>
+
+    <damage die="1d8" type="bludgeoning"/>
+
+    <weight unit="pound">10</weight>
+    <property name="two-handed"/>
+</weapon>

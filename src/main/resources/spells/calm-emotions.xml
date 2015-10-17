@@ -1,0 +1,25 @@
+<spell>
+    <name>
+        <local id="fr">Calmer les Émotions</local>
+        <local id="eng">Calm Emotions</local>
+    </name>
+    <level>2</level>
+    <type>enchantment</type>
+    <ctime unit="action" />
+    <range unit="feet"  value="60" />
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="minute" upTo="true" concentration="true" value="1" />
+    <description>
+        <local id="fr">[p]Vous tentez de supprimer les émotions fortes dans un groupe de personnes. Chaque humanoïde dans une sphère de 6m de rayon centré sur un point de votre choix à portée doit faire un jet de sauvegarde de Charisme; une créature peut choisir de rater ce jet de sauvegarde si elle le souhaite. Si une créature échoue son jet de sauvegarde, choisissez un des deux effets suivants.[/p]
+            [p]Vous pouvez supprimer tout effet causant à la cible d'être charmé ou effrayée. Quand ce sort se termine, tout effet supprimé reprends son court si sa propre durée n'est pas arrivée à son terme entre temps.[/p]
+            [p]Alternativement, vous pouvez rendre une cible indifférente à toute créature de votre choix qui lui est hostile. Cette indifférence se termine si la cible est attaqué ou blessé par un sort ou si elle voit un de ses alliés se faire blesser. Quand le sort se termine, la créature redevient hostile, à moins que le MD n'en décide autrement.[/p]
+            </local>
+    <local id="eng">[p]You attempt to suppress strong emotions in a group of people. Each humanoid in a 20-foot-radius sphere centered on a point you choose within range must make
+        a Charisma saving throw; a creature can choose to fail this saving throw if it wishes. If a creature fails its saving throw, choose one of the following two effects.[/p]
+        [p]You can suppress any effect causing a target to be charmed or frightened. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime.[/p]
+        [p]Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by
+        a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the DM rules otherwise.[/p]</local>
+    </description>
+    <source page="221">PHB</source>
+    <source>Hoard of the Dragon Queen supplement</source>
+</spell>

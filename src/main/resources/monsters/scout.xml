@@ -1,0 +1,62 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Éclaireur</local>
+            <local id="eng">Scout</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
+        <alignment>any</alignment>
+        <ac value="13" >
+            <local id="fr">armure de cuir</local>
+            <local id="eng">leather armor</local>
+        </ac>
+        <hp>3d8+3</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="11" dex="14" con="12" int="11" wis="13" cha="11" />
+    <skillMisc>
+        <skills>
+            <skill name="Nature" value="+4"/>
+            <skill name="Perception" value="+5"/>
+            <skill name="Stealth" value="+6"/>
+            <skill name="Survival" value="+5"/>
+        </skills>
+        <languages anyLanguage="1" default="Common" />
+        <cr>1/2</cr>
+        <xp>100</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Ouïe fine et œuil perçant</local>
+                <local id="eng">Keen Hearing and Sight</local>
+            </name>
+            <description>
+                <local id="fr">L'éclaireur a l'avantage sur les jets de Sagesse (Perception) qui s'appuient sur l'ouïe ou la vue.</local>
+                <local id="eng">The scout has advantage on Wisdom (Perception) checks that rely on hearing or sight.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">L'éclaireur réalise deux attaque de corps à corps ou deux attaques à distance.</local>
+            <local id="eng"> The scout makes two melee attacks or two ranged attacks.</local>
+        </action>
+        <action type="weapon" id="shortsword">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+        <action type="weapon" id="longbow">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Les éclaireurs sont des chasseurs et pisteurs expérimentés qui offrent leur service contre rémunération. La plupart chasse le gibier sauvage, mais quelque uns travaillent comme chasseurs de prime, servent de guides ou fournissent de la reconnaissance militaire.</local>
+        <local id="eng">Scouts are skilled hunters and trackers who offer their services for a fee. Most hunt wild game, but a few work as bounty hunters, serve as guides, or provide military reconnaissance.</local>
+    </description>
+    <source page="349">MM</source>
+    <source>Basic Rules</source>
+</monster>

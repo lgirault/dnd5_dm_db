@@ -1,0 +1,102 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Dragon vert (jeune)</local>
+            <local id="eng">Green dragon (young)</local>
+        </name>
+        <size>Large</size>
+        <type>Dragon</type>
+        <alignment>le</alignment>
+        <ac value="18" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>16d10+48</hp>
+        <speeds>
+            <speed unit="feet" value="40" />
+            <fly unit="feet" value="80" />
+            <swim unit="feet" value="40" />
+        </speeds>
+    </identity>
+    <abilities str="19" dex="12" con="17" int="16" wis="13" cha="15" />
+    <skillMisc>
+        <savingThrows>
+            <save name="dex" value="+4"/>
+            <save name="con" value="+6"/>
+            <save name="wis" value="+4"/>
+            <save name="cha" value="+5"/>
+        </savingThrows>
+        <skills>
+            <skill name="Deception" value="+5"/>
+            <skill name="Perception" value="+7"/>
+            <skill name="Stealth" value="+4"/>
+        </skills>
+        <damageImmunities>
+            <damageType>Poison</damageType>
+        </damageImmunities>
+        <conditionImmunities>
+            <conditionType>Poisoned</conditionType>
+        </conditionImmunities>
+        <senses>
+            <blindsight unit="feet" value="30" />
+            <darkvision unit="feet" value="120" />
+        </senses>
+        <languages>
+            <language>Common</language>
+            <language>Draconic</language>
+        </languages>
+        <cr>8</cr>
+        <xp>3900</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Amphibien</local>
+                <local id="eng">Amphibious</local>
+            </name>
+            <description>
+                <local id="fr">Le dragon peut respirer dans l'air et dans l'eau.</local>
+                <local id="eng">The dragon can breathe air and water.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">Le dragon réalise trois attaques: une morsure et deux coups de griffes.</local>
+            <local id="eng">The dragon makes three attacks: one with its bite and two with its claws.</local>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Morsure</local>
+                <local id="eng">Bite</local>
+            </name>
+            <bonus>+7</bonus>
+            <reach unit="feet" value="10" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="2d10+4" damageType="piercing" />
+            <hit type="damage" die="2d6" damageType="poison" />
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Griffes</local>
+                <local id="eng">Claws</local>
+            </name>
+            <bonus>+7</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="2d6+4" damageType="slashing"/>
+        </action>
+        <action type="special">
+            <name>
+                <local id="fr">Souffle Empoisonné (Recharge 5-6)</local>
+                <local id="eng">Poison Breath (Recharge 5-6)</local>
+            </name>
+            <description>
+                <local id="fr">Le dragon crache un cone de gaz empoisonné de 9m. Chaque créature dans la zone d'effet dooit faire un jet de sauvegarde de Constitution de DD 14, prendre 42 (12d6) dégâts de poison sur un échec et la moitié sur un succès.</local>
+                <local id="eng">The dragon exhales poisonous gas in a 30-foot cone. Each creature in that area must make a DC 14 Constitution saving throw, taking 42 (12d6) poison damage on a failed save, or half as much damage on a successful one.</local>
+            </description>
+        </action>
+    </actions>
+    <source page="94">MM</source>
+    <source>Basic Rules</source>
+</monster>

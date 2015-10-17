@@ -324,8 +324,8 @@ function initInterface(){
 }
 
 window.onload = function(){
-    context.parseSearchString();
     context.setURL();
+    context.parseSearchString();
     initInterface();
     
    

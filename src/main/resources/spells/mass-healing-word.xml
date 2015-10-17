@@ -18,4 +18,5 @@
         <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 4 ou plus, la quantité de points de vie récupérés est augmentée de 1d4 pour chaque niveau d'emplacement supérieur à 3.</local>
     </higher-level-description>
     <source page="258">PHB</source>
+    <source>Basic Rules</source>
 </spell>

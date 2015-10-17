@@ -1,0 +1,14 @@
+<weapon family="simple" kind="melee" >
+    <name>
+        <local id="fr">Bâton</local>
+        <local id="eng">Quarterstaff</local>
+    </name>
+
+    <cost coin="silver">2</cost>
+
+    <damage die="1d6" type="bludgeoning"/>
+
+    <weight unit="pound">4</weight>
+
+    <property name="versatile" die="1d8"/>
+</weapon>

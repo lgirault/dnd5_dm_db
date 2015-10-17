@@ -1,0 +1,73 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Grick</local>
+            <local id="eng">Grick</local>
+        </name>
+        <size>Medium</size>
+        <type>Monstrosity</type>
+        <alignment>n</alignment>
+        <ac value="14" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>6d8</hp>
+        <speeds>
+            <speed unit="feet" value="30" />
+            <climb unit="feet" value="30" />
+        </speeds>
+    </identity>
+    <abilities str="14" dex="14" con="11" int="3" wis="14" cha="5" />
+    <skillMisc>
+        <resistances>
+            <damageType fromNonMagicalWeapon="true" >
+                <damageType>bludgeoning</damageType>
+                <damageType>piercing</damageType>
+                <damageType>slashing</damageType>
+            </damageType>
+        </resistances>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <cr>2</cr>
+        <xp>450</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Camouflage de pierre</local>
+                <local id="eng">Stone Camouflage</local>
+            </name>
+            <description>
+                <local id="fr">Le grick a l'avantage sur les jet de Dextérité (Camouflage) fait pour se cacher en terrain rocailleux.</local>
+                <local id="eng">The grick has advantage on Dexterity (Stealth) checks made to hide in rocky terra in.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">Le grick fait une attaque avec ses tentacules. Si l'attaque touche, le grick réalise une attaque avec son bec sur la même cible.</local>
+            <local id="eng">The grick makes one attack with its tentacles . If that attack hits, the grick can make one beak attack against the same target.</local>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Tentacules</local>
+                <local id="eng">Tentacles</local>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="2d6+2" damageType="slashing"/>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Bec</local>
+                <local id="eng">Beak</local>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d6+2" damageType="piercing"/>
+        </action>
+    </actions>
+   <source page="173">MM</source>
+   <source>Basic Rules</source>
+</monster>

@@ -1,0 +1,52 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Cultiste</local>
+            <local id="eng">Cultist</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
+        <alignment restrict="non-g">any</alignment>
+        <ac value="13" >
+            <local id="fr">armure de cuir</local>
+            <local id="eng">leather armor</local>
+        </ac>
+        <hp>2d8</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="11" dex="12" con="10" int="10" wis="11" cha="10" />
+    <skillMisc>
+        <skills>
+            <skill name="Deception" value="+2"/>
+            <skill name="Religion" value="+2"/>
+        </skills>
+        <languages anyLanguage="1" default="Common" />
+        <cr>1/8</cr>
+        <xp>25</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Dévotion obscure</local>
+                <local id="eng">Dark Devotion</local>
+            </name>
+            <description>
+                <local id="fr">Un cultiste a l'avantage aux jets de sauvegarde pour ne pas être charmé ou effrayé.</local>
+                <local id="eng">The cultist has advantage on saving throws against being charmed or frightened.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="weapon" id="scimitar">
+            <hitBonus>+3</hitBonus>
+            <damageBonus>+1</damageBonus>
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Les cultistes font allégeance à des puissances obscures tels que des princes élémentaires, des seigneurs démons ou des archidiables. La plupart masquent leur loyauté pour éviter d'être ostracisé, emprisonné ou exécuté pour leur croyance. Contrairement au acolyte mauvais, les cultistes montrent souvent des signes de folie dans leurs croyances et leurs pratiques.</local>
+        <local id="eng">Cultists swear allegiance to dark powers such as elemental princes, demon lords, or archevils. Most conceal their loyalties to avoid being ostracized, imprisoned, or executed for their beliefs. Unlike evil acolytes, cultists often show signs of insanity in their beliefs and practices.</local>
+    </description>
+    <source page="345">MM</source>
+    <source>Basic Rules</source>
+</monster>

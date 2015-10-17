@@ -1,0 +1,55 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Gobelin</local>
+            <local id="eng">Goblin</local>
+        </name>
+        <size>Small</size>
+        <type>Humanoid</type>
+        <typeTags><race>goblinoid</race></typeTags>
+        <alignment>ne</alignment>
+        <ac value="15" >
+            <local id="fr">armure de cuir, bouclier</local>
+            <local id="eng">leather armor, shield</local>
+        </ac>
+        <hp>2d6</hp>
+        <speeds><speed unit="feet" value="30"/></speeds>
+    </identity>
+    <abilities str="8" dex="14" con="10" int="10" wis="8" cha="8" />
+    <skillMisc>
+        <skills>
+            <skill name="Stealth" value="+6"/>
+        </skills>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <languages>
+            <language>Common</language>
+            <language>Goblin</language>
+        </languages>
+        <cr>1/4</cr>
+        <xp>50</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Échapée vive</local>
+                <local id="eng">Nimble escape</local>
+            </name>
+            <description>
+                <local id="fr">Le gobelin peut se Désengager ou se Cacher pour une action bonus à chacun de ses tours.</local>
+                <local id="eng">The goblin can take the Disengage or Hide action as a bonus action on each of its turns.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="weapon" id="scimitar">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+        <action type="weapon" id="shortbow">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+    </actions>
+    <source page="166">MM</source>
+    <source>Basic Rules</source>
+</monster>

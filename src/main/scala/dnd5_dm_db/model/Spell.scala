@@ -13,7 +13,7 @@ case class Spell
   durations : Seq[(DnDTime, Concentration)],
   description : Local,
   highLevelDescription : Option[Local],
-  source : Option[Source])
+  source : Seq[Source])
 
 object Spell {
   type Concentration = Boolean

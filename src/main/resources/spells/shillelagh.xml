@@ -1,0 +1,21 @@
+<spell>
+    <name>
+        <local id="fr">Gourdin magique</local>
+        <local id="eng">Shillelagh</local>
+    </name>
+    <level>0</level>
+    <type>transmutation</type>
+    <ctime unit="action" />
+    <range unit="touch"  />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">du gui, une feuille de trèfle et un bâton ou un gourdin</local>
+        <local id="eng">mistletoe, a shamrock leaf, and a club or quarterstaff</local>
+    </components>
+    <duration unit="minute" value="1" />
+    <description>
+        <local id="fr">Le bois du bâton ou du gourdin que vous tenez est altéré par les pouvoirs de la nature. Pour la durée du sort, vous pouvez utiliser votre caractéristique pour lancer vos sorts plutôt que votre Force pour les jets d'attaque au corps à corps et de dégâts avec cette arme, et les dégâts de l'arme deviennent des d8. De plus, l'arme devient une arme magique, si ce n'est pas déjà le cas. Ce sort se termine si vous le lancez de nouveau ou si vous lâchez l'arme enchantée.</local>
+        <local id="eng">The wood of a club or quarterstaff you are holding is imbued with nature's power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon's damage die becomes a d8. The weapon also becomes magical, if it isn't already. The spell ends if you cast it again or if you let go of the weapon. </local>
+    </description>
+    <source page="275">PHB</source>
+    <source>Princes of the Apocalypse supplement</source>
+</spell>

@@ -1,0 +1,52 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Squelette</local>
+            <local id="eng">Skeleton</local>
+        </name>
+        <size>Medium</size>
+        <type>Undead</type>
+        <alignment>le</alignment>
+        <ac value="13" >
+            <local id="fr">chutes d'armure</local>
+            <local id="eng">armor scraps</local>
+        </ac>
+        <hp>2d8+4</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="10" dex="14" con="15" int="6" wis="8" cha="5" />
+    <skillMisc>
+        <vulnerabilities>
+            <damageType>Bludgeoning</damageType>
+        </vulnerabilities>
+        <damageImmunities>
+            <damageType>Poison</damageType>
+        </damageImmunities>
+        <conditionImmunities>
+            <conditionType>Exhaustion</conditionType>
+            <conditionType>Poisoned</conditionType>
+        </conditionImmunities>
+
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <languages>
+            <language special="true">
+                <local id="fr">comprend toutes les langues qu'il connaissait de son vivant mais ne peut pas parler</local>
+                <local id="eng">understands all languages it knew in life but can't speak</local>
+            </language>
+        </languages>
+        <cr>1/4</cr>
+        <xp>50</xp>
+    </skillMisc>
+    <actions>
+        <action type="weapon" id="shortsword">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+        <action type="weapon" id="shortbow">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+    </actions>
+    <source page="272">MM</source>
+    <source>Basic Rules</source>
+</monster>

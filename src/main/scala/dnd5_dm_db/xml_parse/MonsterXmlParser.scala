@@ -106,7 +106,7 @@ object MonsterXmlParser extends MiscXmlParsers {
       actions,
       reactions,
       (monster \ "description").toNodeOption map localFromXml,
-      (monster \ "source" ).toNodeOption map sourceFromXml )
+      (monster \ "source" ).theSeq map sourceFromXml )
   }
 
   def savingThrowFromXml(node : Node) : (Ability, Int) =

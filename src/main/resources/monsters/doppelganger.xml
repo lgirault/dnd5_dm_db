@@ -1,0 +1,94 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Doppelganger</local>
+            <local id="eng">Doppelganger</local>
+        </name>
+        <size>Medium</size>
+        <type>Monstrosity</type>
+        <typeTags><race>shapechanger</race></typeTags>
+        <alignment>n</alignment>
+        <ac value="14" />
+        <hp>8d8+16</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="11" dex="18" con="14" int="11" wis="12" cha="14" />
+    <skillMisc>
+        <skills>
+            <skill name="Deception" value="+6"/>
+            <skill name="Insight" value="+3"/>
+        </skills>
+        <conditionImmunities>
+            <conditionType>Charmed</conditionType>
+        </conditionImmunities>
+        <senses>
+            <darkvision unit="feet" value="60" />
+        </senses>
+        <languages>
+            <language>Common</language>
+        </languages>
+        <cr>3</cr>
+        <xp>700</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Changeur de forme</local>
+                <local id="eng">Shapechanger</local>
+            </name>
+            <description>
+                <local id="fr">Le doppelganger peut utiliser son action pour se transformer en humanoid de Petite ou Moyenne taille qu'il a déja vu, ou pour reprendre sa forme d'origine. Ses statistiques, autre que sa taille son les même dans toutes les formes. Tout équipement qu'il porte ou transporte n'est pas transformé. Il reprend sa forme d'origine en mourrant.</local>
+                <local id="eng">The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form . Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</local>
+            </description>
+        </trait>
+        <trait>
+            <name>
+                <local id="fr">Embuscade</local>
+                <local id="eng">Ambusher</local>
+            </name>
+            <description>
+                <local id="fr">Le doppelganger a l'avantage sur les jet d'attaque contre toute créature qu'il a surpris.</local>
+                <local id="eng">The doppelganger has advantage on attack rolls against any creature it has surprised.</local>
+            </description>
+       </trait>
+        <trait>
+            <name>
+                <local id="fr">Attaque surprise</local>
+                <local id="eng">Surprise Attack</local>
+            </name>
+            <description>
+                <local id="fr">Si le doppelganger suprend un créature et la touche avec une attaque durant le premier round de combat, la cible prend 10 (3d6) dégâts supplémentaires.</local>
+                <local id="eng">If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">Le doppelganger réalise deux attaques de mêlées.</local>
+            <local id="eng">The doppelganger makes two melee attacks.</local>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Plaquage</local>
+                <local id="eng">Slam</local>
+            </name>
+            <bonus>+6</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d6+4" damageType="bludgeoning" />
+        </action>
+
+        <action type="special">
+            <name>
+                <local id="fr">Lecture des pensées</local>
+                <local id="eng">Read Thoughts</local>
+            </name>
+            <description>
+                <local id="fr">Le doppelganger peut magiquement lire les pensés de surface d'une créature à 18m de lui. L'effet peut traverser les obstacles, mais 1m de bois ou de terre, 60 cm de pierre, 5 cm de métal, ou une fine feuille de plomb le bloque. Tant que la cible est à portée, le doppelganger peut continuer à lire ses pensées si il maintient sa concentration (comme pour un sort). Pendant qu'il lit les pensées, le doppelganger a l'avantage pour les jets de Sagesse (Intuition) et Charisme (Tromperie, Intimidation et Persuasion) contre sa cible.</local>
+                <local id="eng">The doppelganger magically reads the surface thoughts of one creature within 60 feet of it. The effect can penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the doppelganger can continue reading its thoughts, as long as the doppelganger's concentration isn't broken (as if concentrating on a spell) . While reading the target's mind, the doppelganger has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target.</local>
+            </description>
+        </action>
+    </actions>
+   <source page="82">MM</source>
+   <source>Basic Rules</source>
+</monster>

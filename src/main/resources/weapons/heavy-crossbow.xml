@@ -1,0 +1,16 @@
+<weapon family="martial" kind="ranged" >
+    <name>
+        <local id="fr">Arbalète lourde</local>
+        <local id="eng">Heavy Crossbow</local>
+    </name>
+    <cost coin="gold">50</cost>
+    <damage die="1d10" type="piercing" />
+    <weight unit="pound">18</weight>
+    <property name="ammunition">
+        <regular unit="feet" value="100" />
+        <max unit="feet" value="400" />
+    </property>
+    <property name="heavy"/>
+    <property name="loading"/>
+    <property name="two-handed"/>
+</weapon>

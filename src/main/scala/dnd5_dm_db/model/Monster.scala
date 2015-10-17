@@ -27,7 +27,7 @@ case class Monster
   actions : Seq[Action],
   reactions : Seq[Action],
   description : Option[Local],
-  source : Option[Source])
+  source : Seq[Source])
 
 
 case class Trait(name : Local, description : Local) {

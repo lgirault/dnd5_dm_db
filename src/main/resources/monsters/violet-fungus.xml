@@ -1,0 +1,57 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Moisissure Violette</local>
+            <local id="eng">Violet Fungus</local>
+        </name>
+        <size>Medium</size>
+        <type>Plant</type>
+        <alignment>none</alignment>
+        <ac value="5" />
+        <hp>4d8</hp>
+        <speeds><speed unit="feet" value="5" /></speeds>
+    </identity>
+    <abilities str="3" dex="1" con="10" int="1" wis="3" cha="1" />
+    <skillMisc>
+        <conditionImmunities>
+            <conditionType>blinded</conditionType>
+            <conditionType>deafened</conditionType>
+            <conditionType>frightened</conditionType>
+        </conditionImmunities>
+        <senses>
+            <blindsight unit="feet" blindBeyond="true" value="30" />
+        </senses>
+        <cr>1/4</cr>
+        <xp>50</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Fausse apparence</local>
+                <local id="eng">False Appearance</local>
+            </name>
+            <description>
+                <local id="fr">Tant que la moisissure violette ne bouge pas, elle est indistingable d'une moisissure ordinaire.</local>
+                <local id="eng">While the violet fungus remains motionless, it is indistinguishable from an ordinary fungus.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">La moisissure violette fait 1d4 attaques Touché Putréfiant</local>
+            <local id="eng">The fungus makes 1d4 Rotting Touch attacks.</local>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Touché Putréfiant</local>
+                <local id="eng">Rotting Touch</local>
+            </name>
+            <bonus>+2</bonus>
+            <reach unit="feet" value="10" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d8" damageType="Necrotic" />
+        </action>
+    </actions>
+    <source page="138">MM</source>
+    <source>Hoard of the Dragon Queen supplement</source>
+</monster>

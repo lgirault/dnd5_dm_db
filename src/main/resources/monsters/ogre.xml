@@ -1,0 +1,55 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Ogre</local>
+            <local id="eng">Ogre</local>
+        </name>
+        <size>Large</size>
+        <type>Giant</type>
+        <alignment>ce</alignment>
+        <ac value="11" >
+            <local id="fr">armure de peaux</local>
+            <local id="eng">hide armor</local>
+        </ac>
+        <hp>7d10+21</hp>
+        <speeds><speed unit="feet" value="40" /></speeds>
+    </identity>
+    <abilities str="19" dex="8" con="16" int="5" wis="7" cha="7" />
+    <skillMisc>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <languages>
+            <language>Common</language>
+            <language>Giant</language>
+        </languages>
+        <cr>2</cr>
+        <xp>450</xp>
+    </skillMisc>
+    <actions>
+        <action type="weapon" id="greatclub">
+            <name>
+                <local id="fr">Massue</local>
+                <local id="eng">Greatclub</local>
+            </name>
+            <bonus>+6</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="2d8+4" damageType="Bludgeoning"/>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Javeline</local>
+                <local id="eng">Javelin</local>
+            </name>
+            <bonus>+6</bonus>
+            <reach unit="feet" value="5" />
+            <range>
+                <regular unit="feet" value="30" />
+                <max unit="feet" value="120" />
+            </range>
+            <numTarget>1</numTarget>
+            <hit type="damage" die="2d6+4" damageType="Piercing" />
+        </action>
+    </actions>
+    <source page="237">MM</source>
+    <source>Basic Rules</source>
+</monster>

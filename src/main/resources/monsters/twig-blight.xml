@@ -1,0 +1,66 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Brindille Bactérienne</local>
+            <local id="eng">Twig Blight</local>
+        </name>
+        <size>Small</size>
+        <type>Plant</type>
+        <alignment>ne</alignment>
+        <ac value="13" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>1d6+1</hp>
+        <speeds><speed unit="feet" value="20" /></speeds>
+    </identity>
+    <abilities str="6" dex="13" con="12" int="4" wis="8" cha="3" />
+    <skillMisc>
+        <skills>
+            <skill name="Stealth" value="+3"/>
+        </skills>
+        <vulnerabilities><damageType>fire</damageType></vulnerabilities>
+        <conditionImmunities>
+            <conditionType>blinded</conditionType>
+            <conditionType>deafened</conditionType>
+        </conditionImmunities>
+        <senses>
+            <blindsight unit="feet" value="60" blindBeyond="true"/>
+        </senses>
+        <languages>
+            <language doNotSpeak="true">Common</language>
+        </languages>
+        <cr>1/8</cr>
+        <xp>25</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Fausse apparence</local>
+                <local id="eng">False Appearance</local>
+            </name>
+            <description>
+                <local id="fr">La brindille ressemble à un arbuste mort. Tant qu'il reste immobile parmis la végétation, il peut se cacher sans avoir besoin d'être hors de vue.</local>
+                <local id="eng">The blight resembles a dead shrub. While it remains motionless among vegetation, it can hide without being out of sight.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="attack">
+            <name>
+                <local id="fr">Griffes</local>
+                <local id="eng">Claws</local>
+            </name>
+            <bonus>+3</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d4+1" damageType="piercing" />
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Cette créature silencieuse ressemble à un petite plante sans feuilles qui marche. Les brindilles bactériennes se cachent en s'enracinant parmi les plantes ordinaires.</local>
+        <local id="eng">This skittering creature resembles a small, leafless, walking plant. Twig blights hide by rooting themselves among ordinary plants.</local>
+    </description>
+    <source page="63">LMOP</source>
+    <source>Basic Rules</source>
+</monster>

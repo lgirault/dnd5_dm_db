@@ -19,4 +19,5 @@
             [p]If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.[/p]</local>
     </description>
     <source page="255">PHB</source>
+    <source>Basic Rules</source>
 </spell>

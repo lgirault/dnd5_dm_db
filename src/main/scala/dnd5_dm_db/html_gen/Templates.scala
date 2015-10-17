@@ -75,7 +75,12 @@ object Templates {
       </div>""".stripMargin +
       html_footer
 
-  def sourceToHtml(ssource : Option[Source]) ( implicit lang : Lang) : String =
-    s"""<div class="source">${lang.source} : ${ssource.getOrElse(lang.unknown)}</div>"""
+  def sourceToHtml(sources : Seq[Source]) ( implicit lang : Lang) : String = {
+      val sourceStr =
+        if(sources.isEmpty) lang.unknown
+        else sources mkString ", "
+
+    s"""<div class="source">${lang.source}(s) : $sourceStr</div>"""
+  }
 
 }

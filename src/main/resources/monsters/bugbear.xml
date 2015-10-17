@@ -1,0 +1,84 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Gobelours</local>
+            <local id="eng">Bugbear</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>goblinoid</race></typeTags>
+        <alignment>ce</alignment>
+        <ac value="16" >
+            <local id="fr">armure de peau, bouclier</local>
+            <local id="eng">hide armor, shield</local>
+        </ac>
+        <hp>5d8+5</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="15" dex="14" con="13" int="8" wis="11" cha="9" />
+    <skillMisc>
+        <skills>
+            <skill name="Stealth" value="+6"/>
+            <skill name="Survival" value="+2"/>
+        </skills>
+        <senses>
+            <darkvision unit="feet" value="60" />
+        </senses>
+        <languages>
+            <language>Common</language>
+            <language>Goblin</language>
+        </languages>
+        <cr>1</cr>
+        <xp>200</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Brute</local>
+                <local id="eng">Brute</local>
+            </name>
+            <description>
+                <local id="fr">Une arme de mêlée inflige un dé de dégât supplémentaire lorsque le gobelours tape avec (inclus dans l'attaque).</local>
+                <local id="eng">A melee weapon deals one extra die of its damage when the bugbear hits with it (included in the attack).</local>
+            </description>
+        </trait>
+        <shared>
+            <local id="fr">Le gobelours</local>
+            <local id="eng">The bugbear</local>
+            <id>surprise-attack</id>
+        </shared>
+    </traits>
+    <actions>
+        <action type="attack">
+            <name>
+                <local id="fr">Morgenstern</local>
+                <local id="eng">Morningstar</local>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="2d8+2" damageType="Piercing" />
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Javeline</local>
+                <local id="eng">Javelin</local>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet" value="5" />
+            <range>
+                <regular unit="feet" value="30" />
+                <max unit="feet" value="120" />
+            </range>
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d6+2" damageType="Piercing">
+                <special>
+                    <local id="fr"> (2d6+2 en mêlée).</local>
+                    <local id="eng"> (2d6+2 in melee).</local>
+                </special>
+            </hit>
+        </action>
+    </actions>
+    <source page="33">MM</source>
+    <source>Basic Rules</source>
+</monster>

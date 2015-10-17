@@ -35,7 +35,7 @@ object SpellXmlParser extends FromXml[Spell]
       spell \ "duration" map (n => (timeFromXml(n), optionBooleanAttribute(n, "concentration"))),
       localFromXml(spell \ "description" )  ,
       (spell \ "higher-level-description" ).toNodeOption map localFromXml,
-      (spell \ "source").toNodeOption map sourceFromXml
+      (spell \ "source").theSeq map sourceFromXml
     )
   }
 

@@ -1,0 +1,13 @@
+<weapon family="simple" kind="melee" >
+    <name>
+        <local id="fr">Gourdin</local>
+        <local id="eng">Club</local>
+    </name>
+
+    <cost coin="silver">1</cost>
+
+    <damage die="1d4" type="bludgeoning"/>
+
+    <weight unit="pound">2</weight>
+    <property name="light"/>
+</weapon>

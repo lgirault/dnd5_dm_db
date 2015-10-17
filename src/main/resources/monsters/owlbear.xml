@@ -1,0 +1,68 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Hibours</local>
+            <local id="eng">Owlbear</local>
+        </name>
+        <size>Large</size>
+        <type>Monstrosity</type>
+        <alignment>none</alignment>
+        <ac value="13" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>7d10+21</hp>
+        <speeds><speed unit="feet" value="40"/></speeds>
+    </identity>
+    <abilities str="20" dex="12" con="17" int="3" wis="12" cha="7" />
+    <skillMisc>
+        <skills>
+            <skill name="Athletics" value="+6"/>
+            <skill name="Intimidation" value="+3"/>
+            <skill name="Perception" value="+3"/>
+        </skills>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <cr>3</cr>
+        <xp>700</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Œuil perçant et odorat développé</local>
+                <local id="eng">Keen sight and Smell</local>
+            </name>
+            <description>
+                <local id="fr">L'hibours a l'avantage sur les jets de Sagesse (Perception) qui s'appuient sur la vue ou l'odorat.</local>
+                <local id="eng">The owlbear has advantage on Wisdom (Perception) checks that rely on sight or smell.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">L'hibours réalise deux attaques : une avec son bec et une avec ses griffes.</local>
+            <local id="eng">The owl bear makes two attacks: one with its beak and one with its claws.</local>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Bec</local>
+                <local id="eng">Beak</local>
+            </name>
+            <bonus>+7</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d10+5" damageType="Piercing"/>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Griffes</local>
+                <local id="eng">Claws</local>
+            </name>
+            <bonus>+7</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="2d8+5" damageType="Slashing" />
+        </action>
+    </actions>
+    <source page="249">MM</source>
+    <source>Basic Rules</source>
+</monster>

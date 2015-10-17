@@ -1,0 +1,28 @@
+<spell>
+    <name>
+        <local id="fr">Gardiens Spirituels</local>
+        <local id="eng">Spirit Guardians</local>
+    </name>
+    <level>3</level>
+    <type>conjuration</type>
+    <ctime unit="bonusAction" />
+    <range unit="self"/>
+    <areaOfEffect type="sphere" unit="feet" value="15" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">un symbole religieux</local>
+        <local id="eng">a holy symbol</local>
+    </components>
+    <duration unit="minute" value="1" />
+    <description>
+        <local id="fr">[p]Vous appelez les esprits pour vous protéger. Ils volètent jusqu'à 4,5m autour de vous pour la durée du sort. Si vous êtes bon ou neutre, leur forme spectral est angélique ou féérique (votre choix). Si vous êtes mauvais, ils apparaissent démoniaque.[/p]
+            [p]Quand vous lancez ce sort, vous désigner n'importe quel nombre de créatures à vu qui ne seront pas affectées. Une créature affectée a sa vitesse divisée par deux dans la zone, et qund une créature entre pour la première fois durant un tour ou démarre son tour dans la zone, elle doit faire un jet de sauvegarde de Sagesse. Sur un échec, la créature prends 3d8 dégâts rayonnants (si vous êtes bon ou neutre) et 3d8 dégâts nécrotique (si vous êtes mauvais). Sur une sauvegarde réussie, la créature ne subit que la moitié des dégâts.[/p]</local>
+        <local id="eng">[p]You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.[/p]
+            [p]When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature’s speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a Wisdom saving throw. On a failed save, the creature takes 3d8 radiant damage (if you are good or neutral) or 3d8 necrotic damage (if you are evil). On a successful save, the creature takes half as much damage.[/p]</local>
+    </description>
+    <higher-level-description>
+        <local id="eng">When you cast this spell using a spell slot of 4th level or higher, the damage in creases by 1d8 for each slot level above 3rd.</local>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 4 ou plus, les dégâts augmentent de 1d8 pour chaque niveau d'emplacement supérieur à 3.</local>
+    </higher-level-description>
+    <source page="278">PHB</source>
+    <source>Basic Rules</source>
+</spell>

@@ -1,0 +1,10 @@
+<trait>
+    <name>
+        <local id="fr">Attaque surprise</local>
+        <local id="eng">Surprise Attack</local>
+    </name>
+    <description>
+        <local id="fr">Si {monster} surprend une créature et touche pendant le premier round du combat, la cible prend 7 (2d6) dégâts supplémentaire.</local>
+        <local id="eng">If {monster} surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.</local>
+    </description>
+</trait>

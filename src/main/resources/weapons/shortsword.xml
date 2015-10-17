@@ -1,0 +1,11 @@
+<weapon family="martial" kind="melee" >
+    <name>
+        <local id="fr">Épée courte</local>
+        <local id="eng">Shortsword</local>
+    </name>
+    <cost coin="gold">10</cost>
+    <damage die="1d6" type="piercing"/>
+    <weight unit="pound">2</weight>
+    <property name="finesse" />
+    <property name="light" />
+</weapon>

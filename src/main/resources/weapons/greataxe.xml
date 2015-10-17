@@ -1,0 +1,11 @@
+<weapon family="martial" kind="melee" >
+    <name>
+        <local id="fr">Hache à deux mains</local>
+        <local id="eng">Greataxe</local>
+    </name>
+    <cost coin="gold">30</cost>
+    <damage die="1d12" type="slashing" />
+    <weight unit="pound">7</weight>
+    <property name="heavy" />
+    <property name="two-handed" />
+</weapon>

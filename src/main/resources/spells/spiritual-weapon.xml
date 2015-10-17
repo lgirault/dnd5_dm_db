@@ -1,0 +1,26 @@
+<spell>
+    <name>
+        <local id="fr">Arme Spirituelle</local>
+        <local id="eng">Spirit Weapon</local>
+    </name>
+    <level>2</level>
+    <type>evocation</type>
+    <ctime unit="bonusAction" />
+    <range unit="feet"  value="60" />
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="minute" value="1" />
+    <description>
+        <local id="fr">[p]Vous créez une arme spectrale flotante à portée qui reste pour la durée du sort ou jusqu'à ce que vous lanciez le sort à nouveau. Quand vous lancez le sort, vous pouvez faire une attaque de sort au corps à corps contre une créature à moins de 1,5m de l'arme. Sur une touche, la cible prends des dégâts de force égaux à 1d8 + votr modificateur de caractéristique de lanceur de sort.[/p]
+            [p]Comme action bonus, vous pouvez déplacer l'arme jusq'à 6m et refaire une attaque contre une créature à moins de 1,5m de cette dernière.[/p]
+            [p]L'arme peut prendre la forme de votre choix. Les Clercs dont la divinité est associé à une arme particulière (comme St. Cuthbert connu pour sa masse d'arme et Thor pour son marteau) font apparaitre une arme de ce type.[/p]</local>
+        <local id="eng">[p]You create a floating, spectral weapon within range that lasts for the duration or until you cast this spell again. When you cast the spell, you can make a melee spell attack against a creature within 5 feet of the weapon. On a hit, the target takes force damage equal to 1d8 + your spellcasting ability modifier.[/p]
+            [p]As a bonus action on your turn, you can move the weapon up to 20 feet and repeat the attack against a creature within 5 feet of it.[/p]
+            [p]The weapon can take whatever form you choose. Clerics of deities who are associated with a particular weapon (as St. Cuthbert is known for his mace and Thor for his hammer) make this spell’s effect resemble that weapon.[/p]</local>
+    </description>
+    <higher-level-description>
+        <local id="eng">When you cast this spell using a spell slot of 3rd level or higher, the damage in creases by 1d8 for every two slot levels above the 2nd.</local>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 3 ou plus, les dégâts augmentent de 1d8 pour chaque deux niveaux d'emplacement supérieur à 2.</local>
+    </higher-level-description>
+    <source page="278">PHB</source>
+    <source>Basic Rules</source>
+</spell>

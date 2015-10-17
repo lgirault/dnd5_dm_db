@@ -1,0 +1,22 @@
+<spell>
+    <name>
+        <local id="fr">Flame</local>
+        <local id="eng">Produce flame</local>
+    </name>
+    <level>0</level>
+    <type>conjuration</type>
+    <ctime unit="action" />
+    <range unit="self"/>
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="minute" value="10" />
+    <description>
+        <local id="fr">[p]Une flamme vacillante apparaît dans votre main. La flamme y reste pour la durée du sort et n'endommage pas votre équipement, ni ne vous blesse. La flamme diffuse une lumière vive dans un rayon de 3 mètres et une lumière faible dans un rayon supplémentaire de 3 mètres. Le sort prend fin si vous l'annulez par une action ou si vous le lancez de nouveau.[/p]
+            [p]Vous pouvez également attaquer avec la flamme, mettant ainsi un terme au sort. Lorsque vous incantez ce sort, ou en utilisant une action lors d'un tour suivant, vous pouvez lancer la flamme sur une créature située à 9 mètres de vous maximum. Faites une attaque de sort à distance. En cas de réussite, la cible subit 1d8 dégâts de feu.[/p]
+            [p]Les dégâts de ce sort augmentent de 1d8 lorsque vous atteignez le niveau 5 (2d8), le niveau 11 (3d8) et le niveau 17 (4d8).[/p]</local>
+        <local id="eng">[p]A flickering flame appears in your hand. The flame remains there for the duration and harms neither you nor your equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.[/p]
+            [p]You can also attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell attack. On a hit, the target takes 1d8 fire damage.[/p]
+            [p]This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).[/p]</local>
+    </description>
+    <source page="269">PHB</source>
+    <source>Princes of the Apocalypse supplement</source>
+</spell>

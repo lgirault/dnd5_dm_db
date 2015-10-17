@@ -1,0 +1,39 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Garde</local>
+            <local id="eng">Guard</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
+        <alignment >any</alignment>
+        <ac value="16" >
+            <local id="fr">chemise de maille, bouclier</local>
+            <local id="eng">chain shirt, shield</local>
+        </ac>
+        <hp>2d8+2</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="13" dex="12" con="12" int="10" wis="11" cha="10" />
+    <skillMisc>
+        <skills>
+            <skill name="Perception" value="+2"/>
+        </skills>
+        <languages anyLanguage="1" default="Common"/>
+        <cr>1/8</cr>
+        <xp>25</xp>
+    </skillMisc>
+    <actions>
+        <action type="weapon" id="spear">
+            <hitBonus>+3</hitBonus>
+            <damageBonus>+1</damageBonus>
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Les gardes incluent des membres du guet d'une ville, les sentinelles d'une citadelle ou d'une ville fortifié ou encore les gardes du corps de marchands et de nobles.</local>
+        <local id="eng">Guards include members of a city watch, sentries in a citadel or fortified town, and the bodyguards of merchants and nobles.</local>
+    </description>
+    <source page="347">MM</source>
+    <source>Basic Rules</source>
+</monster>

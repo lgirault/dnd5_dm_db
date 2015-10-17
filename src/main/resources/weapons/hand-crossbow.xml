@@ -1,0 +1,15 @@
+<weapon family="martial" kind="ranged" >
+    <name>
+        <local id="fr">Arbalète à main</local>
+        <local id="eng">Hand Crossbow</local>
+    </name>
+    <cost coin="gold">75</cost>
+    <damage die="1d6" type="piercing" />
+    <weight unit="pound">3</weight>
+    <property name="ammunition">
+        <regular unit="feet" value="30" />
+        <max unit="feet" value="120" />
+    </property>
+    <property name="light"/>
+    <property name="loading"/>
+</weapon>

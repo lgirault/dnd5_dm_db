@@ -1,0 +1,61 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Zombie</local>
+            <local id="eng">Zombie</local>
+        </name>
+        <size>Medium</size>
+        <type>Undead</type>
+        <alignment>ne</alignment>
+        <ac value="8" />
+        <hp>3d8+9</hp>
+        <speeds><speed unit="feet" value="20" /></speeds>
+    </identity>
+    <abilities str="13" dex="6" con="16" int="3" wis="6" cha="5" />
+    <skillMisc>
+        <savingThrows>
+            <save name="wis" value="+0"/>
+        </savingThrows>
+        <damageImmunities>
+            <damageType>Poison</damageType>
+        </damageImmunities>
+        <conditionImmunities>
+            <conditionType>Poisoned</conditionType>
+        </conditionImmunities>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <languages>
+            <language special="true">
+                <local id="fr">comprend les langues qu'il connaissait de son vivant mais ne peut pas parler</local>
+                <local id="eng">understands the languages it knew in life but can't speak</local>
+            </language>
+        </languages>
+        <cr>1/4</cr>
+        <xp>50</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Courage des morts-vivants</local>
+                <local id="eng">Undead Fortitude</local>
+            </name>
+            <description>
+                <local id="fr">Si les points de vie du zombie sont réduit à 0, il doit faire un jet de sauvegarde de Constitution d'un DD de 5 + les dommages subits, à moins que les dégâts ne soient radiants ou proviennent d'un coût critique.. Sur un succès, le zombie tombe à 1 point de vie à la place.</local>
+                <local id="eng">If damage reduces the zombie to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 hit point in stead.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="attack">
+            <name>
+                <local id="fr">Plaquage</local>
+                <local id="eng">Slam</local>
+            </name>
+            <bonus>+3</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d6+1" damageType="bludgeoning" />
+        </action>
+    </actions>
+    <source page="316">MM</source>
+    <source>Basic Rules</source>
+</monster>

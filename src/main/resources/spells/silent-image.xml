@@ -1,0 +1,25 @@
+<spell>
+    <name>
+        <local id="fr">Image silencieuse</local>
+        <local id="eng">Silent image</local>
+    </name>
+    <level>1</level>
+    <type>illusion</type>
+    <ctime unit="action" />
+    <range unit="feet"  value="60" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">un peu de laine de mouton</local>
+        <local id="eng">a bit of fleece</local>
+    </components>
+    <duration unit="minute" upTo="true" concentration="true" value="10" />
+    <description>
+        <local id="fr">[p]Vous créez l'image d'un objet, d'une créature ou d'un autre phénomène visible dont les dimensions n'excèdent pas un cube 4,50 mètres de côtés. L'image apparaît à un endroit choisi à l'intérieur de la portée du sort et perdure pendant toute la durée du sort. L'image est purement visuelle ; ce qui implique qu'elle n'est pas accompagnée par un son, une odeur ou d'autres effets sensoriels.[/p]
+            [p]Vous pouvez utiliser votre action pour déplacer l'image à n'importe quel endroit dans la portée du sort. Comme l'image change de lieu, vous pouvez modifier son apparence afin que ses mouvements apparaissent fluides et naturels dans l'image. Par exemple, si vous créez l'image d'une créature et vous la déplacez, vous pouvez modifier l'image de sorte que la créature semble réellement marcher.[/p]
+            [p]Une interaction physique avec l'image révèle qu'il s'agit d'une illusion, parce que les choses peuvent passer au travers. Une créature qui utilise son action pour examiner l'image peut déterminer qu'il s'agit en fait d'une illusion en réussissant un jet d'Intelligence (Investigation) contre votre DD du jet de sauvegarde de ce sort. Si une créature voit l'illusion pour ce qu'elle est, la créature peut voir à travers l'image.[/p]</local>
+        <local id="eng">[p]You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot cube. The image appears at a spot within range and lasts for the duration. The image is purely visual; it isn't accompanied by sound, smell, or other sensory effects.[/p]
+            [p]You can use your action to cause the image to move to any spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking.[/p]
+            [p]Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image.[/p]</local>
+    </description>
+    <source page="276">PHB</source>
+    <source>Basic Rules</source>
+</spell>

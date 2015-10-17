@@ -1,0 +1,52 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Hobgobelin</local>
+            <local id="eng">Hobgoblin</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>goblinoid</race></typeTags>
+        <alignment>le</alignment>
+        <ac value="18" >
+            <local id="fr">cotte de mailles, bouclier</local>
+            <local id="eng">chain mail, shield</local>
+        </ac>
+        <hp>2d8+2</hp>
+        <speeds><speed unit="feet" value="30"/></speeds>
+    </identity>
+    <abilities str="13" dex="12" con="12" int="10" wis="10" cha="9" />
+    <skillMisc>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <languages>
+            <language>Common</language>
+            <language>Goblin</language>
+        </languages>
+        <cr>1/2</cr>
+        <xp>100</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Avantage Martial</local>
+                <local id="eng">Martial Advantage</local>
+            </name>
+            <description>
+                <local id="fr">Une fois par tour, le hobgobelin peut infliger 7 (2d6) dégâts supplémentaire à une créature qu'il touche avec une attaque de mêlée si cette créature est à moins d'1,5m d'un allié du hobgobelin qui n'est pas incapable d'agir.</local>
+                <local id="eng">Once per turn, the hobgoblin can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 feet of an ally of the hobgoblin that isn't incapacitated.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="weapon" id="longsword">
+            <hitBonus>+3</hitBonus>
+            <damageBonus>+1</damageBonus>
+        </action>
+        <action type="weapon" id="longbow">
+            <hitBonus>+3</hitBonus>
+            <damageBonus>+1</damageBonus>
+        </action>
+    </actions>
+    <source page="186">MM</source>
+    <source>Basic Rules</source>
+</monster>

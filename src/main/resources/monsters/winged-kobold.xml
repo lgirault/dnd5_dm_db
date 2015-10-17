@@ -1,0 +1,56 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Kobold Ailé</local>
+            <local id="eng">Winged Kobold</local>
+        </name>
+        <size>Small</size>
+        <type>Humanoid</type>
+        <typeTags><race>kobold</race></typeTags>
+        <alignment>le</alignment>
+        <ac value="13" />
+        <hp>3d6-3</hp>
+        <speeds>
+            <speed unit="feet" value="30" />
+            <fly unit="feet" value="30" />
+        </speeds>
+    </identity>
+    <abilities str="7" dex="16" con="9" int="8" wis="7" cha="8" />
+    <skillMisc>
+        <senses><darkvision unit="feet" value="60" /></senses>
+        <languages>
+            <language>Common</language>
+            <language>Draconic</language>
+        </languages>
+        <cr>1/4</cr>
+        <xp>50</xp>
+    </skillMisc>
+    <traits>
+        <shared>
+            <local id="fr">Le kobold</local>
+            <local id="eng">The kobold</local>
+            <id>pack-tactics</id>
+            <id>sunlight-sensitivity</id>
+        </shared>
+    </traits>
+    <actions>
+        <action type="weapon" id="dagger">
+            <hitBonus>+5</hitBonus>
+            <damageBonus>+3</damageBonus>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Pierre laché</local>
+                <local id="eng">Dropped Rock</local>
+            </name>
+            <bonus>+5</bonus>
+            <rangeSpecial>
+                 <local id="fr">une cible directement sous le kobold</local>
+                 <local id="eng">one target directly below the kobold</local>
+            </rangeSpecial>
+            <hit type="damage" die="1d4+2" damageType="Bludgeoning" />
+        </action>
+    </actions>
+    <source page="195">MM</source>
+    <source>Hoard of the Dragon Queen supplement</source>
+</monster>

@@ -1,0 +1,32 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Personne du peuple</local>
+            <local id="eng">Commoner</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
+        <alignment>any</alignment>
+        <ac value="10" />
+        <hp>1d8</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="10" dex="10" con="10" int="10" wis="10" cha="10" />
+    <skillMisc>
+        <languages anyLanguage="1" default="Common" />
+        <cr>0</cr>
+        <xp>10</xp>
+    </skillMisc>
+    <actions>
+        <action type="weapon" id="club">
+            <hitBonus>+5</hitBonus>
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Les gens du peuple incluent les paysans, les serfs, les serviteurs, les pèlerin, les marchands, les artisans et les hermites.</local>
+        <local id="eng">Commoners include peasants, serfs, slaves, servants, pilgrims, merchants, artisans, and hermits.</local>
+    </description>
+    <source page="345">MM</source>
+    <source>Basic Rules</source>
+</monster>

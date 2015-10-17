@@ -1,0 +1,14 @@
+<weapon family="simple" kind="ranged" >
+    <name>
+        <local id="fr">Arc court</local>
+        <local id="eng">Shortbow</local>
+    </name>
+    <cost coin="gold">25</cost>
+    <damage die="1d6" type="piercing" />
+    <weight unit="pound">2</weight>
+    <property name="ammunition">
+        <regular unit="feet" value="80" />
+        <max unit="feet" value="320" />
+    </property>
+    <property name="two-handed"/>
+</weapon>

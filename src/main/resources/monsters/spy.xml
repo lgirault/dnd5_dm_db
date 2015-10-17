@@ -1,0 +1,72 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Espion</local>
+            <local id="eng">Spy</local>
+        </name>
+        <size>Medium</size>
+        <type>Humanoid</type>
+        <typeTags><race>any</race></typeTags>
+        <alignment>any</alignment>
+        <ac value="12" />
+        <hp>6d8</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="11" dex="15" con="10" int="12" wis="14" cha="16" />
+    <skillMisc>
+        <skills>
+            <skill name="Deception" value="+5"/>
+            <skill name="Insight" value="+4"/>
+            <skill name="Investigation" value="+5"/>
+            <skill name="Perception" value="+6"/>
+            <skill name="Persuasion" value="+5"/>
+            <skill name="SleightOfHand" value="+4"/>
+            <skill name="Stealth" value="+4"/>
+        </skills>
+        <languages anyLanguage="2" />
+        <cr>1</cr>
+        <xp>200</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Action rusée</local>
+                <local id="eng">Cunning Action</local>
+            </name>
+            <description>
+                <local id="fr">À chacun de ses tour, l'espion peut utiliser une action bonus pour faire un Sprint, un Désengagement ou se Cacher.</local>
+                <local id="eng">On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action.</local>
+            </description>
+        </trait>
+        <trait>
+            <name>
+                <local id="fr">Attaque silencieuse (1/Tour)</local>
+                <local id="eng">Sneak Attack (1/Turn)</local>
+            </name>
+            <description>
+                <local id="fr">L'esption inflige 7 (2d6) dégâts supplémentaire quand il touche une cible avec une attaque armée et qu'il a l'avantage sur son jet d'attaque, ou lorsque la cible est à moins d'1m50 d'un allié de l'espion capable d'agir et que l'espion n'a pas de désavangate sur son jet d'attaque. </local>
+                <local id="eng">The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is  within 5 feet of an ally of the spy that isn't incapacitated and the spy does n't have disadvantage on the attack roll..</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">L'éclaireur réalise deux attaque de corps à corps.</local>
+            <local id="eng"> The scout makes two melee attacks.</local>
+        </action>
+        <action type="weapon" id="shortsword">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+        <action type="weapon" id="hand-crossbow">
+            <hitBonus>+4</hitBonus>
+            <damageBonus>+2</damageBonus>
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Régents, nobles, marchands, maîtres de guilde et autre riches individus utilisent des espions pour gagner l'avantage dans un monde de politique sans pitier. Un espion est entrainé à récupérer des informations secrètement. Les espions loyaux préfèreraient mourir que de divulguer des informations pouvant compromettre leur employeur.</local>
+        <local id="eng">Rulers, nobles, merchants, guild masters, and other wealthy individuals use spies to gain the upper hand in a world of cutthroat politics. A spy is trained to secretly gather information. Loyal spies would rather die than divulge information that could compromise them or their employers.</local>
+    </description>
+    <source page="349">MM</source>
+    <source>Basic Rules</source>
+</monster>

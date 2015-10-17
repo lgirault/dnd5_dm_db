@@ -1,0 +1,98 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Arraignée Géante</local>
+            <local id="eng">Giant Spider</local>
+        </name>
+        <size>Large</size>
+        <type>Beast</type>
+        <alignment>none</alignment>
+        <ac value="14" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>4d10+4</hp>
+        <speeds>
+            <speed unit="feet" value="30" />
+            <climb unit="feet" value="30" />
+        </speeds>
+    </identity>
+    <abilities str="14" dex="16" con="12" int="2" wis="11" cha="4" />
+    <skillMisc>
+        <skills>
+            <skill name="Stealth" value="+7"/>
+        </skills>
+        <senses>
+            <blindsight unit="feet" value="10" />
+            <darkvision unit="feet" value="60" />
+        </senses>
+        <cr>1</cr>
+        <xp>200</xp>
+    </skillMisc>
+    <traits>
+        <shared>
+            <local id="fr">L'arraignée</local>
+            <local id="eng">The spider</local>
+            <id>spider-climb</id>
+        </shared>
+        <trait>
+            <name>
+                <local id="fr">Sens de la toile</local>
+                <local id="eng">Web Sense</local>
+            </name>
+            <description>
+                <local id="fr">Au contact avec une toile, l'arraignée connait la position exact de tout autre créature en contact avec cette même toile.</local>
+                <local id="eng">While in contact with a web, the spider knows the exact location of any other creature in contact with the same web.</local>
+            </description>
+        </trait>
+        <trait>
+            <name>
+                <local id="fr">Marcheuse sur toile</local>
+                <local id="eng">Web Walker</local>
+            </name>
+            <description>
+                <local id="fr">L'arraignée ignore toutes restrictions de mouvement causé par quelque sorte de toile.</local>
+                <local id="eng">The spider ignores movement restrictions caused by webbing of any sort.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="attack">
+            <name>
+                <local id="fr">Morsure</local>
+                <local id="eng">Bite</local>
+            </name>
+            <bonus>+5</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d8+3" damageType="Piercing" >
+                <special>
+                    <local id="fr">, et la cible doit faire un jet de sauvegarde de Constitution de DD 11, prendre 9 (2d8) dégâts de poison sur un échec, la moitié sur une réussite. Si le poison réduit les points de vie de la cible à 0, la cible est stable mais empoisonnée pour 1 heure, et paralysée tant qu'elle est empoisonnée de cette façon.</local>
+                    <local id="eng">, and the target must make a DC 11 Constitution saving throw, taking 9 (2d8) poison damage on a failed save, or half as much damage on a successful one. If the poison reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, and paralyzed while poisoned in this way.</local>
+                </special>
+            </hit>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Toile (Recharge 5-6)</local>
+                <local id="eng">Web (Recharge 5-6)</local>
+            </name>
+            <bonus>+5</bonus>
+            <range>
+                <regular unit="feet" value="30" />
+                <max unit="feet" value="60" />
+            </range>
+            <numTarget>1</numTarget>
+            <hit type="special">
+                <local id="fr">La cible est entravé par la toile. Pour une action, la cible entravé peut faire un jet de Force de DD 12, craquant la toile sur un succès. La toile peut aussi être attaquée et détruite (CA 10; PV 5; vulnérable aux dégâts de feu, immunisé aux dégâts contondants, de poison et psychiques).</local>
+                <local id="eng">The target is restrained by webbing. As an action, the restrained target can make a DC 12 Strength check, bursting the webbing on a success. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerable to fire damage; immune to bludgeoning, poison, and psychic damage).</local>
+            </hit>
+        </action>
+    </actions>
+    <description>
+        <local id="fr">Habituellement trouvé en sous-sol, le repère d'une arraignée géante est souvent orné de toiles maintenant des victimes sans défenses.</local>
+        <local id="eng">Usually found underground, the lair of a giant spider is often festooned with webs holding helpless victims.</local>
+    </description>
+    <source page="58">LMOP</source>
+    <source>Basic Rules</source>
+</monster>

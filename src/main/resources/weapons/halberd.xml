@@ -1,0 +1,12 @@
+<weapon family="martial" kind="melee" >
+    <name>
+        <local id="fr">Halebarde</local>
+        <local id="eng">Halberd</local>
+    </name>
+    <cost coin="gold">20</cost>
+    <damage die="1d10" type="slashing" />
+    <weight unit="pound">6</weight>
+    <property name="heavy" />
+    <property name="reach" />
+    <property name="two-handed" />
+</weapon>

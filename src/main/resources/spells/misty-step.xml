@@ -1,0 +1,18 @@
+<spell>
+    <name>
+        <local id="fr">Foulée brumeuse</local>
+        <local id="eng">Misty step</local>
+    </name>
+    <level>2</level>
+    <type>Conjuration</type>
+    <ctime unit="bonusAction" />
+    <range unit="self"/>
+    <components verbose="true" somatic="false" material="false"/>
+    <duration unit="instant"/>
+    <description>
+        <local id="fr">Une brume argentée vous enveloppe puis vous vous téléportez jusqu'à 9 mètres dans un espace inoccupé que vous pouvez voir.</local>
+        <local id="eng">Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see. </local>
+    </description>
+    <source page="260">PHB</source>
+    <source>Basic Rules</source>
+</spell>

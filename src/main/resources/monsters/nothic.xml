@@ -1,0 +1,82 @@
+<monster>
+    <identity>
+        <name>
+            <local id="fr">Nothic</local>
+            <local id="eng">Nothic</local>
+        </name>
+        <size>Medium</size>
+        <type>Aberration</type>
+        <alignment>ne</alignment>
+        <ac value="15" >
+            <local id="fr">armure naturelle</local>
+            <local id="eng">natural armor</local>
+        </ac>
+        <hp>6d8+18</hp>
+        <speeds><speed unit="feet" value="30" /></speeds>
+    </identity>
+    <abilities str="14" dex="16" con="16" int="13" wis="10" cha="8" />
+    <skillMisc>
+        <skills>
+            <skill name="Arcana" value="+3"/>
+            <skill name="Insight" value="+4"/>
+            <skill name="Perception" value="+2"/>
+            <skill name="Stealth" value="+5"/>
+        </skills>
+        <senses><truesight unit="feet" value="120" /></senses>
+        <languages>
+            <language>Undercommon</language>
+        </languages>
+        <cr>2</cr>
+        <xp>450</xp>
+    </skillMisc>
+    <traits>
+        <trait>
+            <name>
+                <local id="fr">Vue perçante</local>
+                <local id="eng">Keen Sight</local>
+            </name>
+            <description>
+                <local id="fr">Le nothic a l'avantage sur les jet de Sagesse (Perception) qui repose sur la vue.</local>
+                <local id="eng">The nothic has advantage on Wisdom (Perception) checks that rely on sight.</local>
+            </description>
+        </trait>
+    </traits>
+    <actions>
+        <action type="multiattack">
+            <local id="fr">Le nothic réalise deux attaques de griffe.</local>
+            <local id="eng">The nothic makes two claw attacks.</local>
+        </action>
+        <action type="attack">
+            <name>
+                <local id="fr">Griffe</local>
+                <local id="eng">Claw</local>
+            </name>
+            <bonus>+4</bonus>
+            <reach unit="feet" value="5" />
+            <numTarget>1</numTarget>
+            <hit type="damage" die="1d6+3" damageType="Slashing" />
+        </action>
+        <action type="special">
+            <name>
+                <local id="fr">Regard putréfiant</local>
+                <local id="eng">Rotting Gaze</local>
+            </name>
+            <description>
+                <local id="fr">Le nothic cible une créature qu'il peut voir à moins de 9m (30 pieds) de lui. La cible doit réussir un jet de sauvegarde de Constitution sur DD 12 contre cette magie our prendre 10 (3d6) dégâts nécrotiques.</local>
+                <local id="eng">The nothic targets one creature it can see within 30 feet of it. The target must succeed on a DC 12 Constitution saving throw against this magic or take 10 (3d6) necrotic damage.</local>
+            </description>
+        </action>
+        <action type="special">
+            <name>
+                <local id="fr">Intuition étrange</local>
+                <local id="eng">Weird Insight</local>
+            </name>
+            <description>
+                <local id="fr">Le nothic cible une créature qu'il peut voir à moins de 9m (30 pieds) de lui. La cible doit réussir un jet opposé de Charisme (Tromperie) contre Sagesse (Intuition) pour le nothic. Si le nothic gagne, il apprend magiquement un fait ou un secret sur la cible. La cible gagne automatiquement si elle est immunisée aux charmes.</local>
+                <local id="eng">The nothic targets one creature it can see within 30 feet of it. The target must contest its Charisma (Deception) check against the nothic's Wisdom (Ins ight) check. If the nothic wins, it magically learns one fact or secret about the target. The target automatically wins if it is immune to being charmed.</local>
+            </description>
+        </action>
+    </actions>
+    <source page="236">MM</source>
+    <source>Basic Rules</source>
+</monster>

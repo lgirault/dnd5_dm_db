@@ -1,0 +1,31 @@
+<spell>
+    <name>
+        <local id="fr">Manipulation de l'eau</local>
+        <local id="eng">Shape water</local>
+    </name>
+    <level>0</level>
+    <type>transmutation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="30" />
+    <components verbose="false" somatic="true" material="false"/>
+    <duration unit="instant" />
+    <duration unit="hour" value="1" />https://s3.amazonaws.com/files.d20.io/images/12817449/t6rGyj9n4NUJs4uLkeQQ1A/thumb.jpg?1444144923
+    <description>
+        <local id="fr">Choisissez un cube d'eau visible de 1,50 mètre d'arête dans la portée du sort. Vous pouvez alors le manipuler d'une des façons suivantes :
+            [ul][li]Vous déplacez instantanément ou modifiez le sens du courant selon vos directives jusqu'à 1,50 mètre dans n'importe quelle direction. Ce mouvement n'a pas assez de force pour causer des dégâts.[/li]
+            [li]Vous pouvez faire apparaitre des formes simples dans l'eau et les animer selon vos instructions. Ce changement dure 1 heure.[/li]
+            [li]Vous modifiez la couleur ou l'opacité de l'eau. L'eau doit être transformée de façon homogène. Ce changement dure 1 heure.[/li]
+            [li]Vous gelez l'eau, à condition qu'elle ne contienne aucune créature. L'eau dégèle au bout de 1 heure[/li][/ul]
+            Si vous lancez ce sort plusieurs fois, vous ne pouvez avoir que deux de ces effets non-instantanés actifs à la fois, et vous pouvez en dissiper un en une action.
+        </local>
+        <local id="eng">
+            You choose an area of water that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:
+            [ul][li]You instantaneously move or otherwise change the flow of the water as you direct, up to 5 feet in any direction. This movement doesn't have enough force to cause damage.[/li]
+            [li]You cause the water to form into simple shapes and animate at your direction. This change lasts for 1 hour.[/li]
+            [li]You change the water's color or opacity. The water must be changed in the same way throughout. This change lasts for 1 hour.[/li]
+            [li]You freeze the water, provided that there are no creatures in it. The water unfreezes in 1 hour.[/li][/ul]
+            If you cast this spell multiple times, you can have no more than two of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.
+        </local>
+    </description>
+    <source page="21">Elemental Evil Player´s Companion</source>
+</spell>

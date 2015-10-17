@@ -1,0 +1,18 @@
+<weapon family="simple" kind="melee" >
+    <name>
+        <local id="fr">Lance</local>
+        <local id="eng">Spear</local>
+    </name>
+
+    <cost coin="gold">1</cost>
+
+    <damage die="1d6" type="piercing"/>
+
+    <weight unit="pound">2</weight>
+
+    <property name="thrown">
+        <regular unit="feet" value="20" />
+        <max unit="feet" value="60" />
+    </property>
+    <property name="versatile" die="1d8"/>
+</weapon>

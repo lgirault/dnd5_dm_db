@@ -1,0 +1,17 @@
+<weapon family="simple" kind="melee" >
+    <name>
+        <local id="fr">Dague</local>
+        <local id="eng">Dagger</local>
+    </name>
+    <cost coin="gold">2</cost>
+
+    <damage die="1d4" type="piercing"/>
+
+    <weight unit="pound">2</weight>
+    <property name="finesse"/>
+    <property name="light"/>
+    <property name="thrown">
+        <regular unit="feet" value="30"/>
+        <max unit="feet" value="120"/>
+    </property>
+</weapon>

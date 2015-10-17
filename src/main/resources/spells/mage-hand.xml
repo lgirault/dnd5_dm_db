@@ -1,0 +1,22 @@
+<spell>
+    <name>
+        <local id="fr">Manipulation à distance</local>
+        <local id="eng">Mage Hand</local>
+    </name>
+    <level>1</level>
+    <type>Conjuration</type>
+    <ctime unit="action" />
+    <range unit="feet" value="30" />
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="minute" value="1" />
+    <description>
+        <local id="fr">[p]Une main spectrale apparaît à un point précis choisi à portée. La main expire à la fin de la durée du sort ou si elle est révoquée au prix d'une action. La main disparaît si elle se retrouve à plus de 9 m du lanceur de sorts ou si ce sort est jeté une nouvelle fois.[/p]
+[p]Le lanceur de sorts peut utiliser son action pour contrôler la main. La main peut manipuler un objet, ouvrir une porte ou un conteneur non verrouillé, ranger ou récupérer un objet d'un conteneur ouvert, ou bien verser le contenu d'une fiole. La main peut être déplacée jusqu'à 9 m à chaque fois que vous l'utilisez.[/p]
+[p]La main ne peut attaquer, activer des objets magiques ou transporter plus de 5 kg.[/p]</local>
+        <local id="eng">[p]A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.[/p]
+[p]You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.[/p]
+[p]The hand can't attack, activate magic items, or carry more than 10 pounds.[/p]</local>
+    </description>
+    <source page="256">PHB</source>
+    <source>Basic Rules</source>
+</spell>

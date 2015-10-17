@@ -1,0 +1,11 @@
+<weapon family="martial" kind="melee" >
+    <name>
+        <local id="fr">Épée à deux mains</local>
+        <local id="eng">Greatsword</local>
+    </name>
+    <cost coin="gold">50</cost>
+    <damage die="2d6" type="slashing" />
+    <weight unit="pound">6</weight>
+    <property name="heavy" />
+    <property name="two-handed" />
+</weapon>
