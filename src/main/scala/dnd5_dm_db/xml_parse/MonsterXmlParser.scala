@@ -3,7 +3,7 @@ package dnd5_dm_db.xml_parse
 import dnd5_dm_db.FromXml
 import dnd5_dm_db.model._
 
-import scala.xml.Node
+import scala.xml.{NodeSeq, Node}
 import Utils._
 import LocalXmlParser._
 
@@ -18,10 +18,8 @@ object MonsterXmlParser extends MiscXmlParsers {
 
   }
 
-  def monsterTypeFromXml(identity : Node) : MonsterType =
-    MonsterType.fromString(identity \ "type",
-      (identity \ "typeTags" \ "race").toNodeOption map (_.text))
-
+  def typeTagsFrowmXml( ns : NodeSeq) : Seq[TypeTag] =
+    (ns \ "race").theSeq map (r => Race.fromString(r.text))
 
   def monsterFromXml
   ( monster : Node,
@@ -31,7 +29,6 @@ object MonsterXmlParser extends MiscXmlParsers {
     val identity : Node = monster \ "identity"
     val abilities = abilitiesFromXml(monster \ "abilities")
     val skillMisc : Node = monster \ "skillMisc"
-
 
 
     val damageVulnerabilities = skillMisc \ "vulnerabilities" \ "damageType"  map {
@@ -86,7 +83,8 @@ object MonsterXmlParser extends MiscXmlParsers {
     Monster(
       localFromXml(identity \ "name"),
       Size.fromString(identity \ "size"),
-      monsterTypeFromXml(identity),
+      MonsterType.fromString(identity \ "type"),
+      typeTagsFrowmXml(identity \ "typeTags"),
       Alignment fromXml (identity\"alignment").toNode,
       singleAttribute(ac, "value").toInt,
       acDesc,

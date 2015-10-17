@@ -29,10 +29,24 @@ trait MonsterText {
     case Ooze => "Gelée"
     case Plant => "Plante"
     case Undead => "Mort-Vivant"
-    case AnyRace(t) => monsterType(t) + " (race quelconque)"
-    case TaggedType(t, r) => s"${monsterType(t)} ($r)"
   }
-  val monsterTypeAndSize : (Size, MonsterType) => String = {
-    case (s, mt) => monsterType(mt)+ s" de taille ${size(s)}"
+
+  val monsterRace : Race => String = {
+    case Human => "humain"
+    case Goblinoid => "goblinoïde"
+    case Kobold => "kobold"
+    case Orc => "orc"
+    case HalfDragon => "demi-dragon"
+    case Shapechanger => "changeur de forme"
+    case Troglodyte => "troglodyte"
+    case AnyRace => "quelconque"
+  }
+  val monsterTypeAndSize : (Size, MonsterType, Seq[TypeTag]) => String = {
+    case (s, mt, tts) => monsterType(mt) + (
+        if(tts.isEmpty) ""
+        else tts map {
+          case r : Race => monsterRace(r)
+        } mkString (" (", ", ", ")")
+      ) + s" de taille ${size(s)}"
   }
 }

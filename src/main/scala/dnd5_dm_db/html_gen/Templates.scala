@@ -10,6 +10,11 @@ trait Named {
 
 object Templates {
 
+  val monsters = "monsters"
+  val spells = "spells"
+  val traits = "traits"
+  val weapons = "weapons"
+
   type NameExtractor[A] = A => Local
 
   def html_header(title : String, headTags : List[String]) : String =
@@ -36,31 +41,37 @@ object Templates {
     m => m.name
 
 
-  def keyNameDivs[A](c : String, kseq : Seq[(Name, LangId, A)], typ : String)
+  def genMenu[A](typ : String, kseq : Seq[(Name, LangId, A)])
                 (implicit lang : Lang, extract : NameExtractor[A]) : String =
-    s"""<div id="${c}_index" >""" +
+    s"""<div id="${typ}_index" class="menu">""" +
       kseq.sortBy(t => extract(t._3).value).map{case (n, l, elt) =>
         s"""<div><a class="menuLink" href="?$typ=$l/$n">${extract(elt).value}</a></div>"""
       }.mkString("\n") +
     "</div>"
 
+  def menuLocaleLink(lg : Lang) : String =
+      s"""<a class="menuLang" href="?menu=${lg.id}">${lg.id}</a>"""
+
 
   def genIndex[A,B]
-   ( spells : Seq[(Name, LangId, A)],
-     monsters : Seq[(Name, LangId, B)] )
-   (implicit lang : Lang, extractA : NameExtractor[A], extractB : NameExtractor[B]): String =
+   ( spellsSeq : Seq[(Name, LangId, A)],
+     monstersSeq : Seq[(Name, LangId, B)] )
+   (implicit lg : Lang, extractA : NameExtractor[A], extractB : NameExtractor[B]): String =
     html_header("DnD5 - DM DataBase",
       List("""<link href="css/style.css" rel="stylesheet" type="text/css" />""",
+        """<script type="text/javascript" src="js/prelude.js"></script>""",
+        """<script type="text/javascript" src="js/utils.js"></script>""",
         """<script type="text/javascript" src="js/main.js"></script>"""))+
      s"""<div id="left_frame" class="frame" >
          |<div>
-         |   <button id="toggle_button"> ${lang.monsters} / ${lang.spells} </button>
+         |   <button id="toggle_button"> ${lg.monsters} / ${lg.spells} </button>
+         |   ${lang.locales map menuLocaleLink mkString "|" }
          |</div>""".stripMargin +
-        keyNameDivs("spells", spells, "spells") +
-        keyNameDivs("monsters", monsters, "monsters") +
+//        genMenu(spells, spellsSeq) +
+//        genMenu(monsters, monstersSeq) +
     s"""</div><div id="right_frame" class="frame" >
-      |   <div id="monsters_screen"><h1>${lang.monsters}<button class="clearScreen">${lang.clear}</button></h1></div>
-      |   <div id="spells_screen"><h1>${lang.spells}<button class="clearScreen">${lang.clear}</button></h1></div>
+      |   <div id="monsters_screen"><h1>${lg.monsters}<button class="clearScreen">${lg.clear}</button></h1></div>
+      |   <div id="spells_screen"><h1>${lg.spells}<button class="clearScreen">${lg.clear}</button></h1></div>
       </div>""".stripMargin +
       html_footer
 

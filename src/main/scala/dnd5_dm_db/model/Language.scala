@@ -10,7 +10,7 @@ object Language {
     case "gnomish" => Gnomish
     case "goblin" => Goblin
     case "halfling" => Halfling
-    case "orc" => Orc
+    case "orc" => OrcLang
 
     case "abyssal" => Abyssal
     case "celestial" => CelestialLang
@@ -21,7 +21,7 @@ object Language {
     case "sylvan" => Sylvan
     case "undercommon" => Undercommon
 
-    case "troglodyte" => Troglodyte
+    case "troglodyte" => TroglodyteLang
 
     case _ => error(s"unknown language $str")
   }
@@ -36,7 +36,7 @@ case object GiantLang extends Language
 case object Gnomish extends Language
 case object Goblin extends Language
 case object Halfling extends Language
-case object Orc extends Language
+case object OrcLang extends Language
 
 case object Abyssal extends Language
 case object CelestialLang extends Language
@@ -47,7 +47,7 @@ case object Primordial extends Language
 case object Sylvan extends Language
 case object Undercommon extends Language
 
-case object Troglodyte extends Language
+case object TroglodyteLang extends Language
 //Todo handle case of any X language
 //exemple with spy and any 2 language
 case class AnyLanguage(num : Int, default : Option[Language]) extends Language

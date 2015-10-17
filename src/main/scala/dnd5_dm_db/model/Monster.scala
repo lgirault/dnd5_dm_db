@@ -5,6 +5,7 @@ case class Monster
 ( name : Local,
   size : Size,
   typ : MonsterType,
+  typeTags: Seq[TypeTag],
   alignment: Alignment,
   armorClass : Int,
   armorDesc : Option[Local],
@@ -29,4 +30,22 @@ case class Monster
   source : Option[Source])
 
 
+case class Trait(name : Local, description : Local) {
+  def withMonsterName(monster : Local) : Trait =
+    copy(description = description.replaceAllLiterally("{Monster}", monster))
+}
+
+case class SpellCasting
+( casterLevel : Int,
+  clazz : DnDClass,
+  ability : Ability,
+  saveDifficultyClass : Int,
+  attackBonus : Int,
+  spells : Seq[SpellList]
+  )
+
+case class SpellList
+( level : Int,
+  slots : Option[Int],
+  spells : Seq[Spell])
 

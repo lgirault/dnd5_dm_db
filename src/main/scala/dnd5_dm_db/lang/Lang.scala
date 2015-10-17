@@ -28,7 +28,10 @@ abstract class Lang
   val size : Size => String
 
   val monsterType : MonsterType => String
-  val monsterTypeAndSize : (Size, MonsterType) => String
+  val monsterRace : Race => String
+
+  val monsterTypeAndSize : (Size, MonsterType, Seq[TypeTag]) => String
+
 
   val alignment : Alignment => String
 

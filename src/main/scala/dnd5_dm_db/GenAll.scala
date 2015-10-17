@@ -7,17 +7,13 @@ import dnd5_dm_db.lang.{Fr, Lang}
 import dnd5_dm_db.model._
 import dnd5_dm_db.xml_parse._
 import sbt.{PathFinder, IO}
+import Templates._
 
 object GenAll {
 
-  val root = "/home/lorilan/projects/dnd5_dm_db/"
-  val resources = root + "src/main/resources/"
-  val out = root + "out/"
 
-  val monsters = "monsters"
-  val spells = "spells"
-  val traits = "traits"
-  val weapons = "weapons"
+
+
 
   implicit def stringToFile(path : String) : File = new File(path)
 
@@ -70,7 +66,7 @@ object GenAll {
 
     genPages(frMonsterSeq, monsters)(MonsterHtmlGen, Fr)
 
-    import Templates._
+
     IO.write(index, genIndex(frSpellSeq, frMonsterSeq))
   }
 }

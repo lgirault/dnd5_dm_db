@@ -31,9 +31,9 @@ object SpellHtmlGen extends ToHtml[Spell]{
     val duration = if(duration0.length == 1) duration0.head
     else duration0 mkString ("", s" ${lang.or} ", s" (${lang.seeBelow})")
 
-    s"""<div class="$clazz">
+    s"""<div${sid map (id => s""" id="spells_$id" """ ) getOrElse " "} class="$clazz">
        |   <div class="dragbar"><div></div></div>
-       |    ${sid map (Templates.tradDiv("spell", _, s.name, lang)) getOrElse ""}
+       |    ${sid map (Templates.tradDiv(Templates.spells, _, s.name, lang)) getOrElse ""}
        |     <div class="name">${s.name.value}</div>
        |     <div class="toHide">
        |     <div class="level">

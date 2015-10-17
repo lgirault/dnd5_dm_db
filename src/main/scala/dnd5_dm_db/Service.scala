@@ -29,7 +29,7 @@ class MyServiceActor(val root : String) extends Actor with MyService {
   // this actor only runs our route, but you could add
   // other things here, like request stream processing
   // or timeout handling
-  def receive = runRoute( myRoute ~ getMonster ~ getSpell ~ getFileRoute )
+  def receive = runRoute( myRoute ~ getMonster ~ getSpell ~ getFileRoute ~ menuRoute)
 
 }
 
@@ -39,14 +39,15 @@ trait MyService extends HttpService {
 
   val root : String
   val pathFinder : PathFinder = PathFinder(new File(root))
-  import GenAll.{monsters, resources, spells, traits, weapons}
+
+  import Templates._
 
   val myRoute : Route =
     path("") {
       get {
         respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
           complete {
-          requestUri
+          //requestUri
             implicit val lang = Fr
             val monsterFilesFinder : PathFinder = pathFinder / monsters ** "*.xml"
             val spellFilesFinder : PathFinder = pathFinder / spells ** "*.xml"
@@ -59,6 +60,33 @@ trait MyService extends HttpService {
       }
     }
 
+  def menuRoute : Route =
+    path(Segment / "menu.html") {
+      langSegment =>
+        get {
+          respondWithMediaType(`text/html`) {
+            complete {
+              try {
+                implicit  val lang = langFromString(langSegment)
+                val monsterFilesFinder : PathFinder = pathFinder / monsters ** "*.xml"
+                val spellFilesFinder : PathFinder = pathFinder / spells ** "*.xml"
+
+                val monsterSeq = ParseSeq(monsterFilesFinder)(MonsterNameXmlParser, lang)
+                val spellSeq = ParseSeq(spellFilesFinder)(NameXmlParser, lang)
+
+                html_header("menu", List()) +
+                  genMenu(spells, spellSeq) +
+                  genMenu(monsters, monsterSeq) +
+                  html_footer
+
+              } catch {
+                case _ : NoSuchElementException =>
+                  "unknown lang"
+              }
+            }
+          }
+        }
+    }
 
   def makeXmlRoute[A](prefix : String, fromXml: FromXml[A], toHtml : ToHtml[A]) : Route =
     pathPrefix(prefix / Segment){
@@ -70,8 +98,8 @@ trait MyService extends HttpService {
                   complete {
                     try {
                       val lang = langFromString(langSegment)
-                      val id = idSegment.replaceAllLiterally(".html", ".xml")
-                      val node = XML.loadFile(s"$resources/$prefix/$id")
+                      val id = idSegment stripSuffix ".html"
+                      val node = XML.loadFile(s"$resources/$prefix/$id.xml")
                       toHtml.toHtml(id, fromXml.fromXml(node))(lang)
 
                     } catch {

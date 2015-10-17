@@ -51,12 +51,12 @@ object MonsterHtmlGen extends ToHtml[Monster]{
     val actionsStr = subSection("ACTIONS", m.actions)(Action.toHtml)
     val reActionsStr = subSection("REACTIONS", m.reactions)(Action.toHtml)
 
-    s"""<div class="bloc">
+    s"""<div id="monsters_$id" class="bloc">
        |   <div class="dragbar"><div></div></div>
-       |   ${Templates.tradDiv("monster", id, m.name, lang)}
+       |   ${Templates.tradDiv(Templates.monsters, id, m.name, lang)}
        |   <div class="name">${m.name.value}</div>
        |   <div class="type sansSerif">
-       |        <em>${lang.monsterTypeAndSize(m.size, m.typ)}, ${lang.alignment(m.alignment)}</em>
+       |        <em>${lang.monsterTypeAndSize(m.size, m.typ, m.typeTags)}, ${lang.alignment(m.alignment)}</em>
        |     </div>
        |    $sepMonster
        |    <div class="red">
@@ -77,7 +77,7 @@ object MonsterHtmlGen extends ToHtml[Monster]{
        |    <div><b>${lang.challengeRanking}</b> ${m.challengeRanking} (${m.xp} ${lang.xp})</div>
        |    </div><!-- /red -->
        |    $sepMonster
-       |    ${m.traits map Trait.toHtml mkString ""}
+       |    ${m.traits map traitToHtml mkString ""}
        |    ${m.spellCasting.map{spellCastingToHtml(m.name.value, _)}.getOrElse("")}
        |    $actionsStr
        |    $reActionsStr
@@ -122,6 +122,9 @@ object MonsterHtmlGen extends ToHtml[Monster]{
        |    $value (${Die.bonus_str(Ability.modifier(value))})
        |</div>""".stripMargin
   }
+
+  def traitToHtml(t : Trait)(implicit lang: Lang): String =
+    s"<div><b>${t.name.value}:</b> ${t.description.value}</div>"
 
 
 }

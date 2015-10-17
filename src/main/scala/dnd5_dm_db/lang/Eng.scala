@@ -77,6 +77,7 @@ object Eng
 
     case _ : MultiAttack => "Multiattack"
     case sa : SpecialAction => sa.name.value(this)
+    case wa : WeaponAction => actionName(wa.toAttackAction(this))
   }
   val toHit : String = "to hit"
   val target : Int => String = "target" + fr.plural(_)

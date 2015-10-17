@@ -16,33 +16,50 @@ case object Monstrosity extends MonsterType
 case object Ooze extends MonsterType
 case object Plant extends MonsterType
 case object Undead extends MonsterType
-case class AnyRace(typ : MonsterType) extends MonsterType
-case class TaggedType(typ : MonsterType, tags : Seq[String]) extends MonsterType
 
 object MonsterType {
+  def fromString(str : String) : MonsterType = str.toLowerCase match {
+      case "aberration" => Aberration
+      case "beast" => Beast
+      case "celestial" => CelestialType
+      case "construct" => Construct
+      case "dragon" => Dragon
+      case "elemental" => Elemental
+      case "fey" => Fey
+      case "fiend" => Fiend
+      case "giant" => GiantType
+      case "humanoid" => Humanoid
+      case "monstrosity" => Monstrosity
+      case "ooze" => Ooze
+      case "plant" => Plant
+      case "undead" => Undead
+      case _ => error(s"unknown monster type $str")
+    }
+}
 
-  def fromString(tstr : String, sr : Option[String])  : MonsterType = {
-    val t = tstr match {
-      case "Aberration" => Aberration
-      case "Beast" => Beast
-      case "Celestial" => CelestialType
-      case "Construct" => Construct
-      case "Dragon" => Dragon
-      case "Elemental" => Elemental
-      case "Fey" => Fey
-      case "Fiend" => Fiend
-      case "Giant" => GiantType
-      case "Humanoid" => Humanoid
-      case "Monstrosity" => Monstrosity
-      case "Ooze" => Ooze
-      case "Plant" => Plant
-      case "Undead" => Undead
-      case _ => error(s"unknown monster type $tstr")
-    }
-    sr match {
-      case None => t
-      case Some("any") => AnyRace(t)
-      case Some(r) => TaggedType(t, Seq(r))
-    }
+sealed abstract class TypeTag
+
+sealed abstract class Race extends TypeTag
+case object Human extends Race
+case object Goblinoid extends Race
+case object Kobold extends Race
+case object Orc extends Race
+case object HalfDragon extends Race
+case object Shapechanger extends Race
+case object Troglodyte extends Race
+
+case object AnyRace extends Race
+
+object Race {
+  def fromString(str : String) :  Race = str.toLowerCase match {
+    case "human" => Human
+    case "goblinoid" => Goblinoid
+    case "kobold" => Kobold
+    case "orc" => Orc
+    case "half-dragon" => HalfDragon
+    case "shapechanger" => Shapechanger
+    case "troglodyte" => Troglodyte
+    case "any" => AnyRace
+    case _ => error(s"unknown race $str")
   }
 }

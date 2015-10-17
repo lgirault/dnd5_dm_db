@@ -1,27 +1,5 @@
 
-NodeList.prototype.forEach = Array.prototype.forEach
-HTMLCollection.prototype.forEach = Array.prototype.forEach
 
-Element.prototype.remove = function() {
-        this.parentElement.removeChild(this);
-}
-
-NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-   for(var i = this.length - 1; i >= 0; i--) {
-        if(this[i] && this[i].parentElement) {
-            this[i].parentElement.removeChild(this[i]);
-        }
-   }
-}
-
-Element.prototype.prependChild = function(newChild) {
-        this.insertBefore(newChild, this.firstChild)
-}
-
-
-Array.prototype.contains = function (elt){
-    return this.indexOf(elt)!=-1;
-}
 
 var UNDEFINED = "undefined";
 var SCREEN = "screen";
@@ -29,32 +7,7 @@ var MONSTERS = 'monsters';
 var SPELLS= 'spells';
 var MONSTERS_SCREEN = "monsters_screen";
 var SPELLS_SCREEN = "spells_screen";
-
-function loadXMLDoc(fileName, onReady)
-{
-    var xmlhttp;
-    if (window.XMLHttpRequest){
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp=new XMLHttpRequest();
-    }
-    else{// code for IE6, IE5
-      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState==4 && xmlhttp.status==200){
-        onReady(xmlhttp.responseText)
-      }
-    }
-    xmlhttp.open("GET",fileName,true);
-    xmlhttp.send();
-}
-
-function toggleBlockDisplay(node){
-    if(node.style.display == "none")
-        node.style.display = "block";
-    else
-        node.style.display = "none";
-}
+var MENU = "menu";
 
 function hideInnerBlockSpells(){
     var spells = document.querySelectorAll(".innerBlock"); //nodeList
@@ -65,7 +18,7 @@ function hideInnerBlockSpells(){
 
        desc.style.display = "none";
        name.onclick = function(){
-        toggleBlockDisplay(desc);
+        Utils.toggleBlockDisplay(desc);
         normalizeBlockDim(MONSTERS_SCREEN);
         return false;
        }
@@ -84,7 +37,7 @@ function normalizeBlockDim(screen_id){
         for(var i=firstOfLine; i<index; i++){
             var b = blocks[i];
             b.style.height = height+"px";
-            b.style.width = context.getColumnWidth()+"px";
+            b.style.width = context.columnWidth[screen_id]+"px";
             var ds = b.querySelectorAll(".dragbar");
             ds.forEach(function(d){
                 //d.style.height = height+"px";
@@ -113,20 +66,37 @@ function normalizeBlockDim(screen_id){
         prevOffset = b.offsetTop;
     }
     setDimUntil(blocks.length);
-   
-    
+}
+function appendBlocAsNode(containerId, htmlText){
+  var htmlDom = Utils.htmlTextToDom(htmlText);
 
+ var links = htmlDom.querySelectorAll(".bloc a");
+  links.forEach(function(l){
+     asynchronizeLink(l);
+  });
+
+  var blocs = htmlDom.querySelectorAll(".bloc");
+
+  blocs.forEach(function(b){
+      var selt = document.getElementById(b.id);
+      if(selt == null) 
+        document.getElementById(containerId).appendChild(b);
+      else
+        selt.replace(b);
+  });
+
+   
 }
 
 
 function appendMonsterBlock(text){
-    document.getElementById(MONSTERS_SCREEN).innerHTML += text;
+    appendBlocAsNode(MONSTERS_SCREEN, text);
     hideInnerBlockSpells();
     normalizeBlockDim(MONSTERS_SCREEN);
 }
 
 function appendSpellBlock(text){
-    document.getElementById(SPELLS_SCREEN).innerHTML += text;
+    appendBlocAsNode(SPELLS_SCREEN, text);
     normalizeBlockDim(SPELLS_SCREEN);
 }
 
@@ -160,13 +130,11 @@ function setUpGhostBarEvent(dragbar_div_element){
                    document.onmousemove = null;
                    document.onmouseup = null;
 
-                context.setColumnWidth(blocWidth + (e.pageX - xInit));
                 var blocks = document.querySelectorAll("#"+context.screen+"_screen .bloc");
                 blocks.forEach(function(b){
-                        b.style.width = context.getColumnWidth()+"px";
                         b.style.height = "auto";
                 });
-                normalizeBlockDim(context.screen+"_screen");
+                context.setColumnWidth(context.screen+"_screen", blocWidth + (e.pageX - xInit));
         };
     };
 }
@@ -188,22 +156,23 @@ function LangEntry(lang, name){
 }
 
 function Context(){
-
-    this.screen = UNDEFINED;
+    var thisContext = this;
+    
+    this.screen = MONSTERS;
 
     this.address = window.location.origin + window.location.pathname;
 
     this.parseSearchString = function (){
         var searchString = window.location.search;
-            var query = searchString.substring(1);
-            var keyVals = query.split('&');
-            for(var i = 0; i < keyVals.length; i++){
-                if(keyVals[i].length > 0)
-                   this.parseAndLoadQuery(keyVals[i]);
-            }
+        var query = searchString.substring(1);
+        var keyVals = query.split('&');
+        for(var i = 0; i < keyVals.length; i++){
+            if(keyVals[i].length > 0)
+               this.parseAndLoadQuery(keyVals[i]);
+        }
 
     }
-    this.elements = {monsters : new Array(), spells : new Array()};
+    this.elements = {monsters : {}, spells : {}};
     
     this.appendBlock = {monsters : appendMonsterBlock, spells : appendSpellBlock};
     
@@ -211,58 +180,98 @@ function Context(){
         var keyVal = query.split('=');
         var key = decodeURIComponent(keyVal[0]);
 
-        if(key == SCREEN){
+        if(key == SCREEN)
             this.setScreen(keyVal[1]);
-        }
+        else if(key == MENU)
+            this.loadMenu(keyVal[1]);
+        else if(key == "monstersColumnWidth")
+            this.setColumnWidth(MONSTERS_SCREEN, keyVal[1]);
+        else if(key == "spellsColumnWidth")
+            this.setColumnWidth(SPELLS_SCREEN, keyVal[1]);
         else {
-            this.loadQuery(key, keyVal[1]);
+            var langItem= keyVal[1].split('/');
+            this.loadQuery(key, langItem[0], langItem[1]);
         }
     }
-    var thisContext = this;
+    
+    this.clearScreen = function(){
+        var blocs = document.querySelectorAll("#"+context.screen+"_screen .bloc"); 
+        blocs.forEach(function(b){ b.remove(); });
+        this.elements[this.screen]= {};
+        this.setURL();    
+    }
+    
+    this.menuLang = "eng";
+
     this.setURL = function (){
         
         var str = "?screen="+this.screen;
-        
+        str += "&menu="+this.menuLang;
+        str += "&monstersColumnWidth="+this.columnWidth[MONSTERS_SCREEN];
+        str += "&spellsColumnWidth="+this.columnWidth[SPELLS_SCREEN];
+
         var addTypeUrl = function(type){
-            for(var i =0; i< thisContext.elements[type].length; i++){
-                str += "&" + type + "=" + thisContext.elements[type][i];
-            }
+           thisContext.elements[type].forEach(function(id, lang){
+                str += "&" + type + "=" + lang + "/" + id;
+            });
         }
         addTypeUrl(MONSTERS);             
         addTypeUrl(SPELLS);             
         
         // !!! do not use  window.location.search = XXX; it reload the page !
-         history.pushState({}, "", this.address + str);
+        history.pushState({}, "", this.address + str);
 
     }
 
-    this.loadQuery = function(type, query){
-        var relativeAddress = type + "/" + query + ".html"
+    this.loadQuery = function(type, lang, id){
+        var relativeAddress = type + "/" + lang + "/" + id + ".html"
         
-        if(!this.elements[type].contains(query)){
-            this.elements[type].push(query);
-            loadXMLDoc(this.address + relativeAddress, this.appendBlock[type]);
+        if(!Utils.isDefined(this.elements[type][id])){
+           this.elements[type][id] = "";
+        }
+        if(this.elements[type][id] != lang){
+             this.elements[type][id] = lang;
+             Utils.GET(this.address + relativeAddress, this.appendBlock[type]);
         }
     }
 
-    this.columnWidth = {monsters : 200, spells : 200};
     
-    this.getColumnWidth = function(){
-        return this.columnWidth[this.screen];
+    this.loadMenu = function(lang){
+        Utils.GET(lang+"/menu.html", function(text){
+           var menuDom = Utils.htmlTextToDom(text); 
+           var left_frame = document.getElementById("left_frame");
+           
+           var appendOrReplace = function(name){
+               var curIndex = document.getElementById(name+"_index")
+               var newIndex = menuDom.querySelectorAll("#"+name+"_index")[0];
+               if(curIndex==null)
+                   left_frame.appendChild(newIndex);
+               else
+                   curIndex.replace(newIndex);
+           };
+           
+           appendOrReplace(SPELLS);
+           appendOrReplace(MONSTERS);
+           Utils.hide(otherScreen(thisContext.screen) + "_index");
+           initMenuLinks();
+        });
     }
 
-    this.setColumnWidth = function(newWidth){
-        this.columnWidth[this.screen] = newWidth;    
+    this.columnWidth = {monsters_screen : 200, spells_screen : 200};
+
+    this.setColumnWidth = function(key, newWidth){
+        this.columnWidth[key] = newWidth;
+        normalizeBlockDim(key);    
     }
     
 
     this.setScreen = function (name){
         var other = otherScreen(name);
         this.screen = name;
-        hide(other + "_screen");
-        hide(other + "_index");
-        show(name + "_screen");
-        show(name + "_index");
+        Utils.hide(other + "_screen");
+        Utils.hide(other + "_index");
+        Utils.show(name + "_screen");
+        Utils.show(name + "_index");
     }
 
     this.toggleScreen = function() {
@@ -271,25 +280,39 @@ function Context(){
     }
 }
 
-function hide(toHideId) {
-    document.getElementById(toHideId).style.display = "none";
-}
-function show(toShowId){
-    document.getElementById(toShowId).style.display = "block";
-}
-
 
 var context = new Context();
+
+function asynchronizeLink(link){
+    link.onclick = function(e) {
+       var url = e.target.href.split('?');
+       context.parseAndLoadQuery(url[1]);
+       context.setURL();
+       return false;
+    };
+}
 
 function initMenuLinks(){
     var menuLinks = document.querySelectorAll(".menuLink"); //nodeList
     menuLinks.forEach(function(menuLink){
-        menuLink.onclick = function(e) {
-            var url = e.target.href.split('?');
-            context.parseAndLoadQuery(url[1]);
-            context.setURL();
+        asynchronizeLink(menuLink);
+    });
+
+}
+
+function initInterface(){
+    var menuLang = document.querySelectorAll(".menuLang");
+    menuLang.forEach(function(menuLink){
+        asynchronizeLink(menuLink);
+    });
+
+    var buttons = document.querySelectorAll(".clearScreen");    
+
+    buttons.forEach(function(b){
+        b.onclick = function(e) {
+            context.clearScreen();
             return false;
-        };
+        };   
     });
 
     var toggleButton = document.getElementById("toggle_button");
@@ -301,17 +324,9 @@ function initMenuLinks(){
 }
 
 window.onload = function(){
-    initMenuLinks();
     context.parseSearchString();
-    if(context.screen == UNDEFINED)
-        context.setScreen(MONSTERS);
-
-    var buttons = document.querySelectorAll(".clearScreen");    
-
-    buttons.forEach(function(b){
-        b.onclick = function(e){
-            console.log("TODO !");
-            return false;
-        };   
-    });
+    context.setURL();
+    initInterface();
+    
+   
 };

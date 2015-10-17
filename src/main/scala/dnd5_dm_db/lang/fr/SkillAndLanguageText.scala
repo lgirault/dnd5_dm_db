@@ -43,7 +43,7 @@ trait SkillAndLanguageText {
     case Gnomish => "Gnome"
     case Goblin => "Gobelin"
     case Halfling => "Halfelin"
-    case Orc => "Orc"
+    case OrcLang => "Orc"
 
     case Abyssal => "Abyssal"
     case CelestialLang => "Célestial"
@@ -53,7 +53,7 @@ trait SkillAndLanguageText {
     case Primordial => "Primordial"
     case Sylvan => "Sylvain"
     case Undercommon => "Commun des profondeurs"
-    case Troglodyte => "Troglodyte"
+    case TroglodyteLang => "Troglodyte"
   }
 
 }
