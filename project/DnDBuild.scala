@@ -30,7 +30,8 @@ object DnDBuild extends Build {
 
 
   def varDecl(varName : String) = sys.env get "SHELL" match {
-    case None => sys.error("env var SHELL not defined")
+    case None => // let's assume we're working with windows
+      s"SET $varName = "
     case Some(name) if name endsWith "fish" =>
       s"set $varName "
     case _ =>
