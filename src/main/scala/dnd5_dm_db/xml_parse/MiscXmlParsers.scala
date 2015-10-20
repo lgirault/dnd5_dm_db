@@ -2,8 +2,8 @@ package dnd5_dm_db.xml_parse
 
 import java.io.File
 
-import dnd5_dm_db.{NLSeq, FromXml}
-import dnd5_dm_db.lang.{Lang, langFromString}
+import dnd5_dm_db.{Name, FromXml}
+import dnd5_dm_db.lang.langFromString
 import dnd5_dm_db.model._
 import Utils._
 import sbt.PathFinder
@@ -15,13 +15,13 @@ object ParseSeq {
 
   def apply[A]
   ( fileFinder : PathFinder)
-  (implicit builder : FromXml[A], lang : Lang)
-  : NLSeq[A] =
+  (implicit builder : FromXml[A])
+  : Seq[(Name, A)] =
     fileFinder.getPaths map { path =>
       try {
         val f = XML.loadFile(path)
         val name = new File(path).getName stripSuffix ".xml"
-        (name, lang.id, builder.fromXml(f))
+        (name, builder.fromXml(f))
       } catch {
         case e : Exception =>
           println(path)

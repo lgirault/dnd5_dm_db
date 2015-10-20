@@ -28,6 +28,16 @@ object DnDBuild extends Build {
   val classPathFileName = settingKey[String]("Location of generated classpath script")
   val printClassPathFile = taskKey[File]("create a file containing the fullclass path")
 
+
+  def varDecl(varName : String) = sys.env get "SHELL" match {
+    case None => sys.error("env var SHELL not defined")
+    case Some(name) if name endsWith "fish" =>
+      s"set $varName "
+    case _ =>
+      varName+"="
+  }
+
+
   val akkaV = "2.3.9" //"2.4-M3"
   val sprayV = "1.3.3"
   val scalaTestV = "2.2.1"
@@ -66,7 +76,7 @@ object DnDBuild extends Build {
 
           val writter = new FileWriter(f)
           val fcp = (fullClasspath in Compile).value.map(_.data.absolutePath)
-          writter.write(fcp.mkString("set CLASSPATH ", ":", ""))
+          writter.write(fcp.mkString(varDecl("CLASSPATH"), ":", ""))
           writter.close()
           f
         }

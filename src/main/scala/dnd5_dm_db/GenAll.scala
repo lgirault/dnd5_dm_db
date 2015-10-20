@@ -12,23 +12,21 @@ import Templates._
 object GenAll {
 
 
-
-
-
   implicit def stringToFile(path : String) : File = new File(path)
 
-  implicit val language = Fr
+  implicit val monsterGen = MonsterHtmlGen
+  implicit val spellGen = SpellHtmlGen
 
 
-  def nlSeqToMap[A](nls : NLSeq[A]) : Map[String, A] =
-    nls map { case (k, p, s) => (k, s) } toMap
+  import Settings.{genAllOutDir => out}
+  val resources = new File(Settings.resourcesDir)
 
   def genPages[A]
-  ( keySeq : Seq[(Name, LangId, A)], typ : String)
+  ( keySeq : Seq[(Name, A)], typ : String)
   ( implicit builder : ToHtml[A], lang : Lang) =
   keySeq.foreach {
-    case (n, l, s) =>
-      IO.write(new File(s"$out/$typ/$l/$n.html"), builder.toHtml(n, s))
+    case (n, s) =>
+      IO.write(new File(s"$out/$typ/${lang.id}/$n.html"), builder.toHtml(n, s))
   }
 
   def main(args : Array[String]): Unit = {
@@ -42,31 +40,41 @@ object GenAll {
     val traitsFileFinder : PathFinder = PathFinder(resources ) / traits ** "*.xml"
     val weaponsFileFinder : PathFinder = PathFinder(resources ) / weapons ** "*.xml"
 
-    val frTraitSeq = ParseSeq(traitsFileFinder)(TraitXmlParser, Fr)
-    val frWeaponsSeq = ParseSeq(weaponsFileFinder)(WeaponXmlParser, Fr)
-    val frSpellSeq = ParseSeq(spellFilesFinder)(SpellXmlParser, Fr)
+    val traitSeq = ParseSeq(traitsFileFinder)(TraitXmlParser)
+    val weaponsSeq = ParseSeq(weaponsFileFinder)(WeaponXmlParser)
+    val spellSeq = ParseSeq(spellFilesFinder)(SpellXmlParser)
 
-    val spellsMap : Map[String, Spell] = nlSeqToMap(frSpellSeq)
-    val traitsMap : Map[String, Trait] = nlSeqToMap(frTraitSeq)
-    val weaponsMap : Map[String, Weapon] = nlSeqToMap(frWeaponsSeq)
-
-    val frMonsterSeq =
-      ParseSeq(monsterFilesFinder)(MonsterXmlParser.fromXml(spellsMap, traitsMap, weaponsMap), Fr)
+    val spellsMap : Map[String, Spell] = spellSeq.toMap
+    val traitsMap : Map[String, Trait] = traitSeq.toMap
+    val weaponsMap : Map[String, Weapon] = weaponsSeq.toMap
 
     IO.createDirectories(List(spellOutDir, monsterOutDir))
     IO.copyDirectory(resources + "css/", out + "css/")
     IO.copyDirectory(resources + "js/", out + "js/")
     IO.copyDirectory(resources + "images/", out + "images/")
-    val index : File = out + "index.html"
-
-    index.createNewFile()
-
-    genPages(frSpellSeq, spells)(SpellHtmlGen, Fr)
 
 
-    genPages(frMonsterSeq, monsters)(MonsterHtmlGen, Fr)
 
 
-    IO.write(index, genIndex(frSpellSeq, frMonsterSeq))
+    lang.locales.foreach { l =>
+      val dir: File = out + l.id
+      dir.mkdir()
+      val menu : File = dir + "/menu.html"
+      val index : File = dir + "/index.html"
+      index.createNewFile()
+      implicit val language = l
+      IO.write(index, genIndex(l))
+
+      val monsterSeq =
+        ParseSeq(monsterFilesFinder)(MonsterXmlParser.fromXml(spellsMap, traitsMap, weaponsMap))
+
+      IO.write(menu, genMenu(Templates.spells, spellSeq))
+      IO.write(menu, genMenu(Templates.monsters, monsterSeq), append = true)
+
+      genPages(spellSeq, spells)
+      genPages(monsterSeq, monsters)
+
+    }
+
   }
 }

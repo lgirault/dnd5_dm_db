@@ -4,7 +4,7 @@ import java.io.{FileNotFoundException, File}
 
 import akka.actor.{Actor, Props}
 import dnd5_dm_db.html_gen.{Templates, SpellHtmlGen, MonsterHtmlGen}
-import dnd5_dm_db.lang.{Fr, langFromString}
+import dnd5_dm_db.lang.{Eng, Fr, langFromString}
 import dnd5_dm_db.model._
 import dnd5_dm_db.xml_parse._
 import sbt.PathFinder
@@ -13,15 +13,16 @@ import spray.routing._
 
 import scala.xml.XML
 
-object MyServiceActor {
+object ServiceActor {
   def props( root : String) =
-    Props(new MyServiceActor( root))
+    Props(new ServiceActor( root))
 }
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
-class MyServiceActor(val root : String) extends Actor with MyService {
+class ServiceActor(val root : String) extends Actor with Dnd5DMDBService {
 
+  println(root)
   // the HttpService trait defines only one abstract member, which
   // connects the services environment to the enclosing actor or test
   def actorRefFactory = context
@@ -29,36 +30,40 @@ class MyServiceActor(val root : String) extends Actor with MyService {
   // this actor only runs our route, but you could add
   // other things here, like request stream processing
   // or timeout handling
-  def receive = runRoute( myRoute ~ getMonster ~ getSpell ~ getFileRoute ~ menuRoute)
+  def receive = runRoute( defaultRoute ~ indexRoute ~ getMonster ~ getSpell ~ getFileRoute ~ menuRoute)
 
 }
 
 
 // this trait defines our service behavior independently from the service actor
-trait MyService extends HttpService {
+trait Dnd5DMDBService extends HttpService {
 
   val root : String
   val pathFinder : PathFinder = PathFinder(new File(root))
 
   import Templates._
 
-  val myRoute : Route =
-    path("") {
-      get {
-        respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
-          complete {
-          //requestUri
-            implicit val lang = Fr
-            val monsterFilesFinder : PathFinder = pathFinder / monsters ** "*.xml"
-            val spellFilesFinder : PathFinder = pathFinder / spells ** "*.xml"
+  import Settings.{resourcesDir => resources}
 
-            val frMonsterSeq = ParseSeq(monsterFilesFinder)(MonsterNameXmlParser, Fr)
-            val frSpellSeq = ParseSeq(spellFilesFinder)(NameXmlParser, Fr)
-            Templates.genIndex(frSpellSeq, frMonsterSeq)
+  val langIndexRoute : String => Route = {
+    langSegment =>
+      get {
+        respondWithMediaType(`text/html`) {
+          complete {
+            try {
+              val lang = langFromString(langSegment)
+              Templates.genIndex(lang)
+            } catch {
+              case _ : NoSuchElementException =>
+                "unknown lang"
+            }
           }
         }
       }
-    }
+  }
+  val defaultRoute : Route = path("") (langIndexRoute("eng"))
+
+  val indexRoute = path(Segment) (langIndexRoute)
 
   def menuRoute : Route =
     path(Segment / "menu.html") {
@@ -68,11 +73,12 @@ trait MyService extends HttpService {
             complete {
               try {
                 implicit  val lang = langFromString(langSegment)
+
                 val monsterFilesFinder : PathFinder = pathFinder / monsters ** "*.xml"
                 val spellFilesFinder : PathFinder = pathFinder / spells ** "*.xml"
 
-                val monsterSeq = ParseSeq(monsterFilesFinder)(MonsterNameXmlParser, lang)
-                val spellSeq = ParseSeq(spellFilesFinder)(NameXmlParser, lang)
+                val monsterSeq = ParseSeq(monsterFilesFinder)(MonsterNameXmlParser)
+                val spellSeq = ParseSeq(spellFilesFinder)(NameXmlParser)
 
                 html_header("menu", List()) +
                   genMenu(spells, spellSeq) +

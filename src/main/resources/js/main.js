@@ -203,6 +203,13 @@ function Context(){
     
     this.menuLang = "eng";
 
+    this.initURL = function (){
+        var searchString = window.location.search;
+        if(searchString.length == 0){
+            this.setURL();
+        }
+    }
+
     this.setURL = function (){
         
         var str = "?screen="+this.screen;
@@ -224,14 +231,14 @@ function Context(){
     }
 
     this.loadQuery = function(type, lang, id){
-        var relativeAddress = type + "/" + lang + "/" + id + ".html"
+        var relativeAddress = "/" + type + "/" + lang + "/" + id + ".html"
         
         if(!Utils.isDefined(this.elements[type][id])){
            this.elements[type][id] = "";
         }
         if(this.elements[type][id] != lang){
              this.elements[type][id] = lang;
-             Utils.GET(this.address + relativeAddress, this.appendBlock[type]);
+             Utils.GET(this.host + relativeAddress, this.appendBlock[type]);
         }
     }
 
@@ -287,7 +294,7 @@ function asynchronizeLink(link){
     link.onclick = function(e) {
        var url = e.target.href.split('?');
        context.parseAndLoadQuery(url[1]);
-       context.setURL();
+       context.initURL();
        return false;
     };
 }
@@ -324,9 +331,7 @@ function initInterface(){
 }
 
 window.onload = function(){
-    context.setURL();
+    context.initURL();
     context.parseSearchString();
     initInterface();
-    
-   
 };
