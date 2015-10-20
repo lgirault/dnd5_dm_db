@@ -31,7 +31,7 @@ object DnDBuild extends Build {
 
   def varDecl(varName : String) = sys.env get "SHELL" match {
     case None => // let's assume we're working with windows
-      s"SET $varName = "
+      s"SET $varName="
     case Some(name) if name endsWith "fish" =>
       s"set $varName "
     case _ =>
@@ -71,7 +71,7 @@ object DnDBuild extends Build {
           ),
         scalacOptions ++= myScalacOptions,
 
-        classPathFileName := "CLASSPATH",
+        classPathFileName := "CLASSPATH.bat",
         printClassPathFile := {
           val f = baseDirectory.value / "target" / classPathFileName.value
 

@@ -1,7 +1,7 @@
 function dnd5dmdb
     set project_root /home/lorilan/projects/dnd5_dm_db
 
-    source $project_root/target/CLASSPATH
+    source $project_root/target/CLASSPATH.bat
 
     set -x dnd5_dm_db_resources_dir $project_root/src/main/resources
 
