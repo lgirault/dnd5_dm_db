@@ -29,6 +29,8 @@ object Settings {
       val key = arr(0)
       val value = arr(1)
 
+      println(s"parsing option $key with value $value")
+
       key match {
         case "port" =>
           _port = value.toInt

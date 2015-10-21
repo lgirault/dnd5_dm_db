@@ -4,7 +4,6 @@ package model
 import dnd5_dm_db.xml_parse.Utils
 import Utils._
 import AlignmentRestriction.OrderOrMoral
-import dnd5_dm_db.lang.Lang
 import scala.xml.Node
 
 sealed abstract class Alignment

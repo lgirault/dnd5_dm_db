@@ -2,6 +2,7 @@
 import java.io.FileWriter
 
 import sbt._, Keys._
+import com.typesafe.sbt.packager.archetypes.JavaAppPackaging
 
 object DnDBuild extends Build {
 
@@ -30,8 +31,9 @@ object DnDBuild extends Build {
 
 
   def varDecl(varName : String) = sys.env get "SHELL" match {
-    case None => // let's assume we're working with windows
-      s"SET $varName="
+    case None => sys.error("env var SHELL does not exists")
+      // let's assume we're working with windows
+      //s"SET $varName=" //then cp separator is ; but even then it's not working toto ...
     case Some(name) if name endsWith "fish" =>
       s"set $varName "
     case _ =>
@@ -44,12 +46,17 @@ object DnDBuild extends Build {
   val scalaTestV = "2.2.1"
 
   lazy val root = (project in file(".")
+
+      enablePlugins JavaAppPackaging
+
       settings Seq[Setting[_]] (
         organization := "",
         name := "dnd5-dm-db",
-        version := "no-version",
+        version := "0.1-alph",
         scalaVersion := "2.11.6", //"2.11.7",
         sbtVersion := "0.13.9",
+
+        mainClass in Compile := Some("dnd5_dm_db.Server"),
 
         resolvers += Resolver.url("typesafe-ivy-repo",
           url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns),

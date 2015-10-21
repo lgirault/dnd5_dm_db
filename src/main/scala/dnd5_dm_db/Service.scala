@@ -2,14 +2,16 @@ package dnd5_dm_db
 
 import java.io.{FileNotFoundException, File}
 
-import akka.actor.{Actor, Props}
+import akka.actor.{ActorRef, Actor, Props}
 import dnd5_dm_db.html_gen.{Templates, SpellHtmlGen, MonsterHtmlGen}
-import dnd5_dm_db.lang.{Eng, Fr, langFromString}
+import dnd5_dm_db.lang.langFromString
 import dnd5_dm_db.model._
 import dnd5_dm_db.xml_parse._
 import sbt.PathFinder
+import spray.http.{Uri, HttpRequest}
 import spray.http.MediaTypes._
 import spray.routing._
+import Templates._
 
 import scala.xml.XML
 
@@ -20,9 +22,10 @@ object ServiceActor {
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
-class ServiceActor(val root : String) extends Actor with Dnd5DMDBService {
+class ServiceActor(val resources : String) extends Actor with Dnd5DMDBService {
 
-  println(root)
+  println("Resources root directory is : " +resources)
+
   // the HttpService trait defines only one abstract member, which
   // connects the services environment to the enclosing actor or test
   def actorRefFactory = context
@@ -30,7 +33,12 @@ class ServiceActor(val root : String) extends Actor with Dnd5DMDBService {
   // this actor only runs our route, but you could add
   // other things here, like request stream processing
   // or timeout handling
-  def receive = runRoute( defaultRoute ~ indexRoute ~ getMonster ~ getSpell ~ getFileRoute ~ menuRoute)
+  def receive = runRoute( defaultRoute ~ indexRoute ~ getMonster ~ getSpell ~ getFileRoute ~ menuRoute /*~ {
+    case RequestContext(request: HttpRequest, responder: ActorRef, unmatchedPath: Uri.Path) =>
+      println(request)
+      println("unmatched : " + unmatchedPath)
+      ()
+  }*/)
 
 }
 
@@ -38,12 +46,8 @@ class ServiceActor(val root : String) extends Actor with Dnd5DMDBService {
 // this trait defines our service behavior independently from the service actor
 trait Dnd5DMDBService extends HttpService {
 
-  val root : String
-  val pathFinder : PathFinder = PathFinder(new File(root))
-
-  import Templates._
-
-  import Settings.{resourcesDir => resources}
+  val resources : String
+  val pathFinder : PathFinder = PathFinder(new File(resources))
 
   val langIndexRoute : String => Route = {
     langSegment =>

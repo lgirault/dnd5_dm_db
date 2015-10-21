@@ -238,7 +238,7 @@ function Context(){
         }
         if(this.elements[type][id] != lang){
              this.elements[type][id] = lang;
-             Utils.GET(this.host + relativeAddress, this.appendBlock[type]);
+             Utils.GET(relativeAddress, this.appendBlock[type]);
         }
     }
 
@@ -294,7 +294,7 @@ function asynchronizeLink(link){
     link.onclick = function(e) {
        var url = e.target.href.split('?');
        context.parseAndLoadQuery(url[1]);
-       context.initURL();
+       context.setURL();
        return false;
     };
 }
