@@ -67,7 +67,12 @@ object Templates {
          |  </div>
          |</div>
          |<div id="right_frame" class="frame" >
-         |  <button class="clearScreen">${lg.clear}</button>
+         |  <div>
+         |    <button id="createScreen">${lg.createScreen}</button>
+         |    <button id="clearScreen">${lg.clearScreen}</button>
+         |    <button id="deleteScreen">${lg.deleteScreen}</button>
+         |  </div>
+         |  <div id="pannelList"></div>
          |</div>""".stripMargin +
       html_footer
 

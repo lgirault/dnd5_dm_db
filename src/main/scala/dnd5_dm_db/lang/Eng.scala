@@ -175,7 +175,10 @@ object Eng
   }
 
 
-  val clear : String = "Clear"
+  val clearScreen : String = "Clear"
+  val createScreen : String = "New"
+  val deleteScreen : String = "Delete"
+
 
   val damageVulnerabilites : String = "Damage vulnerabilites"
   val damageImmunities : String = "Damage immunities"

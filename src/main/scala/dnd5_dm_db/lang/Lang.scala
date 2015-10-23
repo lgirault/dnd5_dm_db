@@ -83,7 +83,10 @@ abstract class Lang
   val slots : Option[Int] => String
   val spellLvl : Int => String
 
-  val clear : String
+  val clearScreen : String
+  val createScreen : String
+  val deleteScreen : String
+
 
   val damageVulnerabilites : String
   val damageImmunities : String

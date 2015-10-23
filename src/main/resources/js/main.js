@@ -50,6 +50,7 @@ function appendSpellBlock(screen, text){
     screen.normalizeBlockDim();
 }
 
+var AppendBlock = {monsters : appendMonsterBlock, spells : appendSpellBlock};
 
 function Bloc(type, lang, id){
     var thisBloc = this;
@@ -61,10 +62,8 @@ function Bloc(type, lang, id){
        return "/" + this.type + "/" + this.lang + "/" + this.id + ".html"   
     }
 
-    this.append = {monsters : appendMonsterBlock, spells : appendSpellBlock}[type];
-
     this.load = function(screen){
-        Utils.GET(thisBloc.relativeAddress(), thisBloc.append.bind(null, screen));
+        Utils.GET(thisBloc.relativeAddress(), AppendBlock[thisBloc.type].bind(null, screen));
         return false;
     }
 }
@@ -77,21 +76,21 @@ function Screen(screen_id){
     var thisScreen = this;
     this.id = screen_id;
     this.columnWidth = 200;
-    
+    this.elements = {};
+    this.root = null;
+
     this.setColumnWidth = function(newWidth){
         thisScreen.columnWidth = newWidth;
         thisScreen.normalizeBlockDim();    
     }
-    
-
-    this.root = null;
-    
+        
+    this.remove = function(){
+        thisScreen.root.remove();
+    }
     this.create = function(container){
         thisScreen.root = document.createElement("div");
         
-        var title = document.createElement("h1");
-        title.appendChild(document.createTextNode(thisScreen.id));
-        thisScreen.root.appendChild(title);
+
         container.appendChild(thisScreen.root);
         
         thisScreen.elements.forEach(function(k,b){
@@ -105,7 +104,7 @@ function Screen(screen_id){
         thisScreen.elements = {};
     }
 
-    this.elements = {};
+    
     
     this.loadQuery = function(type, lang, id){
         
@@ -113,12 +112,14 @@ function Screen(screen_id){
         if(Utils.isDefined(b) && b.lang != lang){
            b.lang = lang;
            b.load(thisScreen);
+           thisScreen.store();
         }
            
         if(!Utils.isDefined(b)) {
            b = new Bloc(type, lang, id);
            thisScreen.elements[id] = b;
            b.load(thisScreen);
+           thisScreen.store();
         }
 
         return false;
@@ -170,27 +171,27 @@ function Screen(screen_id){
 
         dragbar_div_element.onmousedown = function(e){
 
-           e.preventDefault();
+            e.preventDefault();
 
-           var ghostbar = document.createElement("div");
-           ghostbar.id = "ghostbar";
+            var ghostbar = document.createElement("div");
+            ghostbar.id = "ghostbar";
 
-           var t = dragbar_div_element.offsetTop;
-           var h = document.getElementById("right_frame").clientHeight - t ;
-           ghostbar.style.height = h+"px";
-           ghostbar.style.top = t+"px";
-           ghostbar.style.left = (e.pageX-2) +"px";
+            var t = dragbar_div_element.offsetTop;
+            var h = document.getElementById("right_frame").clientHeight - t ;
+            ghostbar.style.height = h+"px";
+            ghostbar.style.top = t+"px";
+            ghostbar.style.left = (e.pageX-2) +"px";
 
-           var blocWidth = dragbar_div_element.parentElement.clientWidth;
-           var xInit = e.pageX;
+            var blocWidth = dragbar_div_element.parentElement.clientWidth;
+            var xInit = e.pageX;
 
-           document.body.appendChild(ghostbar);
+            document.body.appendChild(ghostbar);
 
-           document.onmousemove = function(e){
-              ghostbar.style.left = (e.pageX-2)+"px";
-           };
+            document.onmousemove = function(e){
+                ghostbar.style.left = (e.pageX-2)+"px";
+            };
 
-        document.onmouseup = function(e){
+            document.onmouseup = function(e){
                 document.getElementById("ghostbar").remove();
                 document.onmousemove = null;
                 document.onmouseup = null;
@@ -200,18 +201,110 @@ function Screen(screen_id){
                         b.style.height = "auto";
                 });
                 thisScreen.setColumnWidth(blocWidth + (e.pageX - xInit));
+            };
         };
-    };
-}
-
+    }
+    this.store = function(){
+        localStorage.setItem(thisScreen.id, thisScreen.jsonString());
+    }
+    this.deleteFromStorage=function(){
+        localStorage.removeItem(thisScreen.id);
+    }
 }
 
 function Context(){
     var thisContext = this;
     
     this.screen = null;
-
     
+    this.newScreenId = 0;
+    this.screenList = [];
+    
+    this.setScreen = function(s){
+        if(thisContext.screen != null){
+           thisContext.screen.store(); 
+           thisContext.screen.remove();
+        }
+
+        thisContext.screen = s;
+
+        s.create(document.getElementById("right_frame"));
+        thisContext.displayScreenList();
+    }
+
+    this.deleteScreen = function(){
+        thisContext.deleteScreenWithId(thisContext.screen.id);
+    }
+
+    this.deleteScreenWithId = function(screenId){
+        var index = thisContext.screenList.indexOf(screenId);
+        thisContext.screenList.remove(screenId);
+        
+        var deleteDisplayedScreen = screenId == thisContext.screen.id;
+        thisContext.storeScreenList();
+        
+        if(deleteDisplayedScreen){
+           if(thisContext.screenList.length == 0)
+               thisContext.createScreen();
+           else {
+               var newShown = index - 1;
+               if(newShown < 0)
+                newShown = 0;
+               thisContext.loadScreen(thisContext.screenList[newShown]); 
+           }
+        }
+    }
+
+    this.createScreen = function(){
+        var screenName = "Screen"+ thisContext.newScreenId;
+        thisContext.newScreenId++;
+
+        if(thisContext.screenList.contains(screenName))
+            return thisContext.createScreen();
+        
+         var s = new Screen(screenName);
+         thisContext.setScreen(s);
+
+         thisContext.screenList.push(s.id);
+         thisContext.storeScreenList();
+         s.store();
+
+    }
+    this.loadScreen = function(screenId){
+        var jsonScreen = JSON.parse(localStorage.getItem(screenId));
+        var s = Object.cast(jsonScreen, Screen);
+        s.elements.forEach(function(bid, jsonBloc){
+            s.elements[bid]=Object.cast(jsonBloc, Bloc);
+        });
+        thisContext.setScreen(s);
+    }
+    
+
+    this.displayScreenList = function(){
+       var createTitleNode = function(title){
+            var titleNode = document.createElement("h1");
+            titleNode.appendChild(document.createTextNode(title));
+            //thisScreen.root.appendChild(titleNode);
+            return titleNode;
+        }
+
+        var pannelList = document.getElementById("pannelList");
+        pannelList.childNodes.remove();
+        thisContext.screenList.forEach(function(sid){
+            pannelList.appendChild(createTitleNode(sid));
+        });
+
+    }
+
+    this.loadScreenList = function(){
+        var storedScreenList = localStorage.getItem("screenList");
+        if(storedScreenList!= null)
+            thisContext.screenList = JSON.parse(storedScreenList);
+    }
+    this.storeScreenList = function(){
+        localStorage.setItem("screenList", JSON.stringify(thisContext.screenList));
+    }
+
     this.address = window.location.origin + window.location.pathname;
 
     this.parseAndLoadQuery= function (query) {
@@ -220,7 +313,8 @@ function Context(){
 
         var langItem= keyVal[1].split('/');
         thisContext.screen.loadQuery(key, langItem[0], langItem[1]);
-        
+        console.log(thisContext.screen.jsonString());
+           
     }
     
     this.clearScreen = function(){
@@ -292,15 +386,14 @@ function initInterface(){
         asynchronizeLink(menuLink, context.loadMenu);
     });
 
-    var buttons = document.querySelectorAll(".clearScreen");    
+    var onClickForId = function(id, f){
+        document.getElementById(id).onclick = function(e){f()};   
+    }
 
-    buttons.forEach(function(b){
-        b.onclick = function(e) {
-            context.clearScreen();
-            return false;
-        };   
-    });
-
+    onClickForId("clearScreen", context.clearScreen);   
+    onClickForId("createScreen", context.createScreen);
+    onClickForId("deleteScreen", context.deleteScreen);
+    
     var menu_choosers = document.querySelectorAll(".menu_chooser");
     
     menu_choosers.forEach(function(mc){
@@ -311,12 +404,16 @@ function initInterface(){
         };
     });
 
+    context.loadScreenList();
+    if(context.screenList.length == 0)
+        context.createScreen();
+    else    
+        context.loadScreen(context.screenList[0]);
+    context.displayScreenList();
 }
 
 window.onload = function(){
 
     context.loadMenu("eng");
-    context.screen = new Screen("FirstScreen");
-    context.screen.create(document.getElementById("right_frame"));
     initInterface();
 };

@@ -9,6 +9,17 @@ Object.prototype.forEach = function(f){
         }
     }    
 }
+Object.prototype.jsonString = function(){
+    return JSON.stringify(this);
+}
+
+Object.cast = function(rawObj, constructor){
+    var obj = new constructor();
+    for(var i in rawObj)
+        obj[i] = rawObj[i];
+    return obj;
+}
+
 
 Element.prototype.remove = function() {
         this.parentElement.removeChild(this);
@@ -31,4 +42,10 @@ Element.prototype.replace = function(newElt){
 
 Array.prototype.contains = function (elt){
     return this.indexOf(elt)!=-1;
+}
+Array.prototype.remove = function(elt){
+    var index = this.indexOf(elt);
+    if(index!=-1){
+        this.splice(index, 1);
+    }
 }
