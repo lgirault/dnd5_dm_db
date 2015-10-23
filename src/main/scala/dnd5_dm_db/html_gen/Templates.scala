@@ -56,6 +56,7 @@ object Templates {
   def genIndex[A,B](lg : Lang): String =
     html_header("DnD5 - DM DataBase",
       List("""<link type="text/css" href="/css/style.css" rel="stylesheet" />""",
+        """<link type="text/css" href="/css/roundTabs.css" rel="stylesheet" />""",
         """<script type="text/javascript" src="/js/prelude.js"></script>""",
         """<script type="text/javascript" src="/js/utils.js"></script>""",
         """<script type="text/javascript" src="/js/main.js"></script>"""))+
@@ -71,6 +72,7 @@ object Templates {
          |    <button id="createScreen">${lg.createScreen}</button>
          |    <button id="clearScreen">${lg.clearScreen}</button>
          |    <button id="deleteScreen">${lg.deleteScreen}</button>
+         |    <button id="renameScreen">${lg.renameScreen}</button>
          |  </div>
          |  <div id="pannelList"></div>
          |</div>""".stripMargin +

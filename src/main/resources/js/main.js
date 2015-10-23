@@ -1,4 +1,7 @@
 
+var Keyboard = {
+    enter : 13
+}
 
 var SPELLS = "spells"
 var MONSTERS = "monsters"
@@ -67,10 +70,6 @@ function Bloc(type, lang, id){
         return false;
     }
 }
-
-// var MonsterBloc = Bloc.bind(null, MONSTERS)
-// var SpellBloc = Bloc.bind(null, SPELLS)
-
 
 function Screen(screen_id){
     var thisScreen = this;
@@ -232,6 +231,17 @@ function Context(){
         thisContext.displayScreenList();
     }
 
+    this.setScreenName = function(name){
+        var oldName = thisContext.screen.id;
+        localStorage.removeItem(oldName);
+        thisContext.screen.id = name;
+        var index = thisContext.screenList.indexOf(oldName);
+        thisContext.screenList[index] = name;
+        thisContext.displayScreenList(); 
+        thisContext.storeScreenList();
+        thisContext.screen.store(); 
+    }
+
     this.deleteScreen = function(){
         thisContext.deleteScreenWithId(thisContext.screen.id);
     }
@@ -263,10 +273,10 @@ function Context(){
             return thisContext.createScreen();
         
          var s = new Screen(screenName);
-         thisContext.setScreen(s);
-
          thisContext.screenList.push(s.id);
          thisContext.storeScreenList();
+
+         thisContext.setScreen(s);
          s.store();
 
     }
@@ -282,16 +292,30 @@ function Context(){
 
     this.displayScreenList = function(){
        var createTitleNode = function(title){
-            var titleNode = document.createElement("h1");
-            titleNode.appendChild(document.createTextNode(title));
+            var titleNode = document.createElement("div");
+            var aNode = document.createElement("a");
+            
+            //aNode.href="?"+title;
+            aNode.onclick = function(e){
+               thisContext.loadScreen(title);
+               return false;  
+            };
+
+            aNode.appendChild(document.createTextNode(title));
+            titleNode.appendChild(aNode);
             //thisScreen.root.appendChild(titleNode);
+            
             return titleNode;
         }
 
         var pannelList = document.getElementById("pannelList");
         pannelList.childNodes.remove();
         thisContext.screenList.forEach(function(sid){
-            pannelList.appendChild(createTitleNode(sid));
+            var tnode = createTitleNode(sid);
+            pannelList.appendChild(tnode);
+            if(thisContext.screen.id == sid){
+                   tnode.className="selected";
+            }
         });
 
     }
@@ -393,7 +417,21 @@ function initInterface(){
     onClickForId("clearScreen", context.clearScreen);   
     onClickForId("createScreen", context.createScreen);
     onClickForId("deleteScreen", context.deleteScreen);
-    
+    onClickForId("renameScreen", function(){
+       var selected = document.querySelectorAll("#pannelList .selected a"); 
+       var input = document.createElement("input");
+       input.type="text";
+       input.value=selected[0].text;
+       input.style.width = (selected[0].offsetWidth+20)+"px";
+       selected[0].replace(input);
+       input.onkeypress = function(e){
+         if(e.keyCode == Keyboard.enter){
+            context.setScreenName(input.value);  
+            return false;
+         }
+       };
+    });
+
     var menu_choosers = document.querySelectorAll(".menu_chooser");
     
     menu_choosers.forEach(function(mc){
@@ -409,7 +447,7 @@ function initInterface(){
         context.createScreen();
     else    
         context.loadScreen(context.screenList[0]);
-    context.displayScreenList();
+   
 }
 
 window.onload = function(){

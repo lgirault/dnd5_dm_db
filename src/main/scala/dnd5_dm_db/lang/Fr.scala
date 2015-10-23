@@ -173,6 +173,7 @@ object Fr
   val clearScreen : String = "Tout effacer"
   val createScreen : String = "Nouvel Écran"
   val deleteScreen : String = "Supprimer"
+  val renameScreen : String = "Renommer"
 
   val damageVulnerabilites : String = "Vulnérable aux dégâts"
   val damageImmunities : String = "Immunisé aux dégâts"

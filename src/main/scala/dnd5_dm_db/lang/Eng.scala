@@ -178,7 +178,7 @@ object Eng
   val clearScreen : String = "Clear"
   val createScreen : String = "New"
   val deleteScreen : String = "Delete"
-
+  val renameScreen : String = "Rename"
 
   val damageVulnerabilites : String = "Damage vulnerabilites"
   val damageImmunities : String = "Damage immunities"

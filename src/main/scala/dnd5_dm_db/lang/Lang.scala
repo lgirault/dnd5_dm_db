@@ -86,6 +86,7 @@ abstract class Lang
   val clearScreen : String
   val createScreen : String
   val deleteScreen : String
+  val renameScreen : String
 
 
   val damageVulnerabilites : String
