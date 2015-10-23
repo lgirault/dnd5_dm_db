@@ -42,9 +42,9 @@ object MonsterXmlParser extends MiscXmlParsers {
     val damageResistances =  skillMisc \ "resistances" \ "damageType" map damageFromXml
 
     val traits = {
-      val ts =  monster \ "src/universal/conf/traits" \ "trait" map TraitXmlParser.fromXml
+      val ts =  monster \ "traits" \ "trait" map TraitXmlParser.fromXml
 
-      val sShared = (monster \ "src/universal/conf/traits" \ "shared").toNodeOption
+      val sShared = (monster \ "traits" \ "shared").toNodeOption
 
       val sts = sShared map {
         shared =>
@@ -129,7 +129,7 @@ object MonsterXmlParser extends MiscXmlParsers {
       Ability.fromString(node \ "ability"),
       ( node \ "dc").text.toInt,
       (node \ "attackBonus").text.toInt,
-      node \ "src/universal/conf/spells" \ "spellList" map spellListFromXml(spellsRetriever))
+      node \ "spells" \ "spellList" map spellListFromXml(spellsRetriever))
   }
 
 

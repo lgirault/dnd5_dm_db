@@ -1,16 +1,10 @@
 
 
+var SPELLS = "spells"
+var MONSTERS = "monsters"
 
-var UNDEFINED = "undefined";
-var SCREEN = "screen";
-var MONSTERS = 'monsters';
-var SPELLS= 'spells';
-var MONSTERS_SCREEN = "monsters_screen";
-var SPELLS_SCREEN = "spells_screen";
-var MENU = "menu";
-
-function hideInnerBlockSpells(){
-    var spells = document.querySelectorAll(".innerBlock"); //nodeList
+function hideInnerBlockSpells(screen){
+    var spells = screen.root.querySelectorAll(".innerBlock"); //nodeList
 
     spells.forEach(function(innerBlock){
        var name = innerBlock.querySelector(".name");
@@ -19,91 +13,162 @@ function hideInnerBlockSpells(){
        desc.style.display = "none";
        name.onclick = function(){
         Utils.toggleBlockDisplay(desc);
-        normalizeBlockDim(MONSTERS_SCREEN);
+        screen.normalizeBlockDim();
         return false;
        }
     });
 }
 
 
-function normalizeBlockDim(screen_id){
-    var blocks = document.querySelectorAll("#"+screen_id+" .bloc"); //nodeList
-    if(blocks.length == 0)
-        return;
-        
-    var height = blocks[0].clientHeight;
-    var firstOfLine = 0;
-    var setDimUntil = function(index){
-        for(var i=firstOfLine; i<index; i++){
-            var b = blocks[i];
-            b.style.height = height+"px";
-            b.style.width = context.columnWidth[screen_id]+"px";
-            var ds = b.querySelectorAll(".dragbar");
-            ds.forEach(function(d){
-                //d.style.height = height+"px";
-                setUpGhostBarEvent(d);
-            });
-        }
-    }
-    
-    var prevOffset = blocks[0].prevOffset;
-    for(var i=1; i < blocks.length; i++){
-
-        var b = blocks[i];
-        var h = b.clientHeight;
-        
-        var newLine = b.offsetTop != prevOffset;
-        if(newLine){
-            setDimUntil(i);
-            firstOfLine = i;
-            height = 0;
-        }
-
-        if(h > height){
-           height = h;
-        }
-
-        prevOffset = b.offsetTop;
-    }
-    setDimUntil(blocks.length);
-}
-function appendBlocAsNode(containerId, htmlText){
+function appendBlocAsNode(container, htmlText){
   var htmlDom = Utils.htmlTextToDom(htmlText);
 
- var links = htmlDom.querySelectorAll(".bloc a");
-  links.forEach(function(l){
-     asynchronizeLink(l);
-  });
+  var links = htmlDom.querySelectorAll(".bloc a");
+      links.forEach(function(l){
+         asynchronizeLink(l, context.parseAndLoadQuery);
+      });
 
   var blocs = htmlDom.querySelectorAll(".bloc");
 
   blocs.forEach(function(b){
-      var selt = document.getElementById(b.id);
-      if(selt == null) 
-        document.getElementById(containerId).appendChild(b);
-      else
+     var selt = document.getElementById(b.id);
+     if(selt == null) 
+        container.appendChild(b);
+     else
         selt.replace(b);
   });
+}
 
-   
+function appendMonsterBlock(screen, text){
+    appendBlocAsNode(screen.root, text);
+    hideInnerBlockSpells(screen);
+    screen.normalizeBlockDim();
+}
+
+function appendSpellBlock(screen, text){
+    appendBlocAsNode(screen.root, text);
+    screen.normalizeBlockDim();
 }
 
 
-function appendMonsterBlock(text){
-    appendBlocAsNode(MONSTERS_SCREEN, text);
-    hideInnerBlockSpells();
-    normalizeBlockDim(MONSTERS_SCREEN);
+function Bloc(type, lang, id){
+    var thisBloc = this;
+    this.id = id;
+    this.lang = lang;
+    this.type = type;
+
+    this.relativeAddress = function(){
+       return "/" + this.type + "/" + this.lang + "/" + this.id + ".html"   
+    }
+
+    this.append = {monsters : appendMonsterBlock, spells : appendSpellBlock}[type];
+
+    this.load = function(screen){
+        Utils.GET(thisBloc.relativeAddress(), thisBloc.append.bind(null, screen));
+        return false;
+    }
 }
 
-function appendSpellBlock(text){
-    appendBlocAsNode(SPELLS_SCREEN, text);
-    normalizeBlockDim(SPELLS_SCREEN);
-}
+// var MonsterBloc = Bloc.bind(null, MONSTERS)
+// var SpellBloc = Bloc.bind(null, SPELLS)
 
 
-function setUpGhostBarEvent(dragbar_div_element){
+function Screen(screen_id){
+    var thisScreen = this;
+    this.id = screen_id;
+    this.columnWidth = 200;
+    
+    this.setColumnWidth = function(newWidth){
+        thisScreen.columnWidth = newWidth;
+        thisScreen.normalizeBlockDim();    
+    }
+    
 
-    dragbar_div_element.onmousedown = function(e){
+    this.root = null;
+    
+    this.create = function(container){
+        thisScreen.root = document.createElement("div");
+        
+        var title = document.createElement("h1");
+        title.appendChild(document.createTextNode(thisScreen.id));
+        thisScreen.root.appendChild(title);
+        container.appendChild(thisScreen.root);
+        
+        thisScreen.elements.forEach(function(k,b){
+            b.load(thisScreen);
+        });
+    }
+    
+    this.clear = function(){
+        var blocs = thisScreen.root.querySelectorAll(".bloc");
+        blocs.forEach(function(b){ b.remove(); });
+        thisScreen.elements = {};
+    }
+
+    this.elements = {};
+    
+    this.loadQuery = function(type, lang, id){
+        
+        var b = thisScreen.elements[id];
+        if(Utils.isDefined(b) && b.lang != lang){
+           b.lang = lang;
+           b.load(thisScreen);
+        }
+           
+        if(!Utils.isDefined(b)) {
+           b = new Bloc(type, lang, id);
+           thisScreen.elements[id] = b;
+           b.load(thisScreen);
+        }
+
+        return false;
+    }
+
+    this.normalizeBlockDim = function (){
+        var blocks = thisScreen.root.querySelectorAll(".bloc"); //nodeList
+        if(blocks.length == 0)
+            return;
+
+        var height = blocks[0].clientHeight;
+        var firstOfLine = 0;
+        var setDimUntil = function(index){
+            for(var i=firstOfLine; i<index; i++){
+                var b = blocks[i];
+                b.style.height = height+"px";
+                b.style.width = thisScreen.columnWidth+"px";
+                var ds = b.querySelectorAll(".dragbar");
+                ds.forEach(function(d){
+                    //d.style.height = height+"px";
+                    thisScreen.setUpGhostBarEvent(d);
+                });
+            }
+        }
+
+        var prevOffset = blocks[0].prevOffset;
+        for(var i=1; i < blocks.length; i++){
+
+            var b = blocks[i];
+            var h = b.clientHeight;
+
+            var newLine = b.offsetTop != prevOffset;
+            if(newLine){
+                setDimUntil(i);
+                firstOfLine = i;
+                height = 0;
+            }
+
+            if(h > height){
+               height = h;
+            }
+
+            prevOffset = b.offsetTop;
+        }
+        setDimUntil(blocks.length);
+    }
+
+    this.setUpGhostBarEvent = function(dragbar_div_element){
+
+        dragbar_div_element.onmousedown = function(e){
 
            e.preventDefault();
 
@@ -126,175 +191,89 @@ function setUpGhostBarEvent(dragbar_div_element){
            };
 
         document.onmouseup = function(e){
-                   document.getElementById("ghostbar").remove();
-                   document.onmousemove = null;
-                   document.onmouseup = null;
+                document.getElementById("ghostbar").remove();
+                document.onmousemove = null;
+                document.onmouseup = null;
 
-                var blocks = document.querySelectorAll("#"+context.screen+"_screen .bloc");
+                var blocks = thisScreen.root.querySelectorAll(".bloc");
                 blocks.forEach(function(b){
                         b.style.height = "auto";
                 });
-                context.setColumnWidth(context.screen+"_screen", blocWidth + (e.pageX - xInit));
+                thisScreen.setColumnWidth(blocWidth + (e.pageX - xInit));
         };
     };
 }
 
-
-
-function otherScreen(name){
-    if(name == SPELLS)
-        return MONSTERS;
-    else if( name == MONSTERS)
-        return SPELLS;
-    else
-        return UNDEFINED;
-}
-
-function LangEntry(lang, name){
-    this.lang = lang;
-    this.name = name;
 }
 
 function Context(){
     var thisContext = this;
     
-    this.screen = MONSTERS;
+    this.screen = null;
 
+    
     this.address = window.location.origin + window.location.pathname;
 
-    this.parseSearchString = function (){
-        var searchString = window.location.search;
-        var query = searchString.substring(1);
-        var keyVals = query.split('&');
-        for(var i = 0; i < keyVals.length; i++){
-            if(keyVals[i].length > 0)
-               this.parseAndLoadQuery(keyVals[i]);
-        }
-
-    }
-    this.elements = {monsters : {}, spells : {}};
-    
-    this.appendBlock = {monsters : appendMonsterBlock, spells : appendSpellBlock};
-    
     this.parseAndLoadQuery= function (query) {
         var keyVal = query.split('=');
         var key = decodeURIComponent(keyVal[0]);
 
-        if(key == SCREEN)
-            this.setScreen(keyVal[1]);
-        else if(key == MENU)
-            this.loadMenu(keyVal[1]);
-        else if(key == "monstersColumnWidth")
-            this.setColumnWidth(MONSTERS_SCREEN, keyVal[1]);
-        else if(key == "spellsColumnWidth")
-            this.setColumnWidth(SPELLS_SCREEN, keyVal[1]);
-        else {
-            var langItem= keyVal[1].split('/');
-            this.loadQuery(key, langItem[0], langItem[1]);
-        }
+        var langItem= keyVal[1].split('/');
+        thisContext.screen.loadQuery(key, langItem[0], langItem[1]);
+        
     }
     
     this.clearScreen = function(){
-        var blocs = document.querySelectorAll("#"+context.screen+"_screen .bloc"); 
-        blocs.forEach(function(b){ b.remove(); });
-        this.elements[this.screen]= {};
-        this.setURL();    
+        thisContext.screen.clear();   
     }
     
     this.menuLang = "eng";
 
-    this.initURL = function (){
-        var searchString = window.location.search;
-        if(searchString.length == 0){
-            this.setURL();
-        }
-    }
-
-    this.setURL = function (){
-        
-        var str = "?screen="+this.screen;
-        str += "&menu="+this.menuLang;
-        str += "&monstersColumnWidth="+this.columnWidth[MONSTERS_SCREEN];
-        str += "&spellsColumnWidth="+this.columnWidth[SPELLS_SCREEN];
-
-        var addTypeUrl = function(type){
-           thisContext.elements[type].forEach(function(id, lang){
-                str += "&" + type + "=" + lang + "/" + id;
-            });
-        }
-        addTypeUrl(MONSTERS);             
-        addTypeUrl(SPELLS);             
-        
-        // !!! do not use  window.location.search = XXX; it reload the page !
-        history.pushState({}, "", this.address + str);
-
-    }
-
-    this.loadQuery = function(type, lang, id){
-        var relativeAddress = "/" + type + "/" + lang + "/" + id + ".html"
-        
-        if(!Utils.isDefined(this.elements[type][id])){
-           this.elements[type][id] = "";
-        }
-        if(this.elements[type][id] != lang){
-             this.elements[type][id] = lang;
-             Utils.GET(relativeAddress, this.appendBlock[type]);
-        }
-    }
-
-    
     this.loadMenu = function(lang){
         Utils.GET(lang+"/menu.html", function(text){
            var menuDom = Utils.htmlTextToDom(text); 
            var left_frame = document.getElementById("left_frame");
            
            var appendOrReplace = function(name){
-               var curIndex = document.getElementById(name+"_index")
-               var newIndex = menuDom.querySelectorAll("#"+name+"_index")[0];
-               if(curIndex==null)
-                   left_frame.appendChild(newIndex);
+               var curMenu = document.getElementById(name+"_menu")
+               var newMenu = menuDom.querySelectorAll("#"+name+"_menu")[0];
+               if(curMenu==null)
+                   left_frame.appendChild(newMenu);
                else
-                   curIndex.replace(newIndex);
+                   curMenu.replace(newMenu);
            };
            
            appendOrReplace(SPELLS);
            appendOrReplace(MONSTERS);
-           Utils.hide(otherScreen(thisContext.screen) + "_index");
+           context.setMenu("monsters_menu");
            initMenuLinks();
         });
     }
 
-    this.columnWidth = {monsters_screen : 200, spells_screen : 200};
-
-    this.setColumnWidth = function(key, newWidth){
-        this.columnWidth[key] = newWidth;
-        normalizeBlockDim(key);    
-    }
     
+    this.setMenu = function (menu_id){
+        var menus = document.querySelectorAll(".menu");
 
-    this.setScreen = function (name){
-        var other = otherScreen(name);
-        this.screen = name;
-        Utils.hide(other + "_screen");
-        Utils.hide(other + "_index");
-        Utils.show(name + "_screen");
-        Utils.show(name + "_index");
+        menus.forEach(function(menu){
+            if(menu.id == menu_id)
+                Utils.show(menu); 
+            else
+                Utils.hide(menu);        
+        
+            return false;
+        });
     }
 
-    this.toggleScreen = function() {
-        this.setScreen(otherScreen(this.screen));
-        this.setURL();
-    }
 }
 
 
 var context = new Context();
 
-function asynchronizeLink(link){
+function asynchronizeLink(link, funOnClick){
     link.onclick = function(e) {
        var url = e.target.href.split('?');
-       context.parseAndLoadQuery(url[1]);
-       context.setURL();
+       funOnClick(url[1]);
+       //context.setURL();
        return false;
     };
 }
@@ -302,7 +281,7 @@ function asynchronizeLink(link){
 function initMenuLinks(){
     var menuLinks = document.querySelectorAll(".menuLink"); //nodeList
     menuLinks.forEach(function(menuLink){
-        asynchronizeLink(menuLink);
+        asynchronizeLink(menuLink, context.parseAndLoadQuery);
     });
 
 }
@@ -310,7 +289,7 @@ function initMenuLinks(){
 function initInterface(){
     var menuLang = document.querySelectorAll(".menuLang");
     menuLang.forEach(function(menuLink){
-        asynchronizeLink(menuLink);
+        asynchronizeLink(menuLink, context.loadMenu);
     });
 
     var buttons = document.querySelectorAll(".clearScreen");    
@@ -322,16 +301,22 @@ function initInterface(){
         };   
     });
 
-    var toggleButton = document.getElementById("toggle_button");
+    var menu_choosers = document.querySelectorAll(".menu_chooser");
+    
+    menu_choosers.forEach(function(mc){
+        mc.onclick = function(e) {
+            var url = e.target.href.split('?');
+            context.setMenu(url[1]);
+            return false;
+        };
+    });
 
-    toggleButton.onclick = function(e) {
-        context.toggleScreen();
-        return false;
-    };
 }
 
 window.onload = function(){
-    context.initURL();
-    context.parseSearchString();
+
+    context.loadMenu("eng");
+    context.screen = new Screen("FirstScreen");
+    context.screen.create(document.getElementById("right_frame"));
     initInterface();
 };

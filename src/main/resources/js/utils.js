@@ -19,16 +19,24 @@ var Utils = {
         xmlhttp.send();
     },
 
-    hide : function (toHideId) {
-        var toHide = document.getElementById(toHideId);
-        if(toHide != null)
-            toHide.style.display = "none";
+    hide : function(toHide){
+        toHide.style.display = "none";
     },
 
-    show : function (toShowId){
+    hideEltWithId : function (toHideId) {
+        var toHide = document.getElementById(toHideId);
+        if(toHide != null)
+            hide(toHide);
+    },
+
+    show : function(toShow){
+        toShow.style.display = "block";
+    },
+    
+    showEltWithId : function (toShowId){
         var toShow = document.getElementById(toShowId);
         if(toShow != null)
-            toShow.style.display = "block";
+            show(toShow);
     },
 
     toggleBlockDisplay : function (node){

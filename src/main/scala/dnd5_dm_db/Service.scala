@@ -111,7 +111,6 @@ trait Dnd5DMDBService extends HttpService {
                       val id = idSegment stripSuffix ".html"
                       val node = XML.loadFile(s"$resources/$prefix/$id.xml")
                       toHtml.toHtml(id, fromXml.fromXml(node))(lang)
-
                     } catch {
                       case e : FileNotFoundException =>
                         e.getMessage

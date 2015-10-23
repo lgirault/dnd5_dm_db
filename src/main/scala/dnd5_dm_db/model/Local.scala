@@ -5,7 +5,7 @@ import dnd5_dm_db.lang.Lang
 
 case class Local(map : Map[Lang, String]) {
 
-  override def toString : String = sys.error("use value for toString")
+  //override def toString : String = sys.error("use value for toString")
 
   def value(implicit lang : Lang) : String = map(lang)
 
