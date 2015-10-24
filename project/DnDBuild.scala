@@ -45,6 +45,8 @@ object DnDBuild extends Build {
   val sprayV = "1.3.3"
   val scalaTestV = "2.2.1"
 
+  import JavaAppPackaging.autoImport.batScriptExtraDefines
+
   lazy val root = (project in file(".")
 
       enablePlugins JavaAppPackaging
@@ -52,7 +54,7 @@ object DnDBuild extends Build {
       settings Seq[Setting[_]] (
         organization := "",
         name := "dnd5-dm-db",
-        version := "0.2-alph",
+        version := "0.21-alph",
         scalaVersion := "2.11.7",
         sbtVersion := "0.13.9",
 
@@ -62,7 +64,7 @@ object DnDBuild extends Build {
           url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns),
 
         libraryDependencies ++= Seq(
-            "org.scala-lang"          % "scala-reflect" % "2.11.6",
+            "org.scala-lang"          % "scala-reflect" % "2.11.7",
 
 //            "org.scalaz"              %% "scalaz-core" % "7.2.0-M2",
             "org.scalatest"           %% "scalatest"                % scalaTestV,
@@ -88,8 +90,9 @@ object DnDBuild extends Build {
           writter.write(fcp.mkString(varDecl("CLASSPATH"), ":", ""))
           writter.close()
           f
-        }
+        },
 
+        batScriptExtraDefines += """set _APT_ARGS=!_APT_ARGS! resourcesDir=%DND5_DM_DB_HOME%"""
 
       )
     )

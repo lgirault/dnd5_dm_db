@@ -49,6 +49,9 @@ object Settings {
 
 object Server extends App {
 
+//  println("server args : ")
+//  args foreach println
+
   Settings.init(args)
 
   // we need an ActorSystem to host our application in
