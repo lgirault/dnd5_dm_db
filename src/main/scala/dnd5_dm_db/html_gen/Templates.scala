@@ -52,19 +52,23 @@ object Templates {
   def menuLocaleLink(lg : Lang) : String =
       s"""<a class="menuLang" href="?${lg.id}">${lg.id}</a>"""
 
+  def cssInclude(href : String) : String =
+    s"""<link type="text/css" href="$href" rel="stylesheet" />"""
+
+  def jsInclude(src : String) : String =
+    s"""<script type="text/javascript" src="$src"></script>"""
 
   def genIndex[A,B](lg : Lang): String =
     html_header("DnD5 - DM DataBase",
-      List("""<link type="text/css" href="/css/style.css" rel="stylesheet" />""",
-        """<link type="text/css" href="/css/roundTabs.css" rel="stylesheet" />""",
-        """<script type="text/javascript" src="/js/prelude.js"></script>""",
-        """<script type="text/javascript" src="/js/utils.js"></script>""",
-        """<script type="text/javascript" src="/js/main.js"></script>"""))+
+      List(cssInclude("/css/style.css"), cssInclude("/css/roundTabs.css"),
+        jsInclude("/js/prelude.js"), jsInclude("/js/string_score.js"),
+        jsInclude("/js/utils.js"), jsInclude("/js/main.js")))+
       s"""<div id="left_frame" class="frame" >
          |  <div>
          |   <a class="menu_chooser" href="?${monsters}_menu">${lg.monsters}</a>
          |   <a class="menu_chooser" href="?${spells}_menu">${lg.spells}</a>
          |   ${lang.locales map menuLocaleLink mkString "|" }
+         |   <input id="search" type="text"/>
          |  </div>
          |</div>
          |<div id="right_frame" class="frame" >

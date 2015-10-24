@@ -382,6 +382,22 @@ function Context(){
         });
     }
 
+    this.search = function(str){
+        var items = document.querySelectorAll(".menuLink");
+        if(str.length == 0)
+            items.forEach(function(a){
+                Utils.show(a);   
+            });
+        else
+            items.forEach(function(a){
+                var score = str.score(a.text, 1);
+                if(score >= 0.5)
+                    Utils.show(a);   
+                else
+                    Utils.hide(a);   
+            });
+    }
+
 }
 
 
@@ -441,6 +457,21 @@ function initInterface(){
             return false;
         };
     });
+
+    var searchInput = document.getElementById("search");
+//     searchInput.onkeypress = function(e){
+//         console.log(e);
+//     };
+    searchInput.oninput = function(e){
+        context.search(e.srcElement.value);
+        //console.log(e);
+    };
+//     searchInput.focusin = function(e){
+//        context.searching = true;  
+//     };
+//     searchInput.focusout = function(e){
+//        context.searching = true;  
+//     };
 
     context.loadScreenList();
     if(context.screenList.length == 0)

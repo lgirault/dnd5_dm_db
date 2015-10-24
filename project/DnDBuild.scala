@@ -52,8 +52,8 @@ object DnDBuild extends Build {
       settings Seq[Setting[_]] (
         organization := "",
         name := "dnd5-dm-db",
-        version := "0.1-alph",
-        scalaVersion := "2.11.6", //"2.11.7",
+        version := "0.2-alph",
+        scalaVersion := "2.11.7",
         sbtVersion := "0.13.9",
 
         mainClass in Compile := Some("dnd5_dm_db.Server"),
@@ -62,7 +62,8 @@ object DnDBuild extends Build {
           url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns),
 
         libraryDependencies ++= Seq(
-//            "org.scala-lang"          % "scala-reflect" % "2.11.7",
+            "org.scala-lang"          % "scala-reflect" % "2.11.6",
+
 //            "org.scalaz"              %% "scalaz-core" % "7.2.0-M2",
             "org.scalatest"           %% "scalatest"                % scalaTestV,
             "org.scala-lang.modules"  %% "scala-parser-combinators" % "1.0.4",
