@@ -92,7 +92,7 @@ object DnDBuild extends Build {
           f
         },
 
-        batScriptExtraDefines += """set _APT_ARGS=!_APT_ARGS! resourcesDir=%DND5_DM_DB_HOME%"""
+        batScriptExtraDefines += """set _APP_ARGS=!_APP_ARGS! resourcesDir=%DND5_DM_DB_HOME%"""
 
       )
     )
