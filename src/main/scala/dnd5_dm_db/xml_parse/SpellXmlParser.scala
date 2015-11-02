@@ -27,7 +27,7 @@ object SpellXmlParser extends FromXml[Spell]
   def fromXml(spell: Node): Spell = {
     Spell( localFromXml(spell \ "name")  ,
       (spell \ "level").text.toInt ,
-      MagicSchool.fromString(spell \ "type"),
+      magicSchool.fromXml(spell),
       timeFromXml(spell \ "ctime"),
       lengthFromXml(spell \ "range"),
       (spell \ "areaOfEffect").toNodeOption map areaOfEffectFromXml,
@@ -39,4 +39,8 @@ object SpellXmlParser extends FromXml[Spell]
     )
   }
 
+  val magicSchool : FromXml[MagicSchool] = new FromXml[MagicSchool] {
+    override def fromXml(n: Node): MagicSchool =
+      MagicSchool.fromString(n \ "type")
+  }
 }

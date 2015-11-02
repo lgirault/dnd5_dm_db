@@ -33,7 +33,7 @@ object SpellHtmlGen extends ToHtml[Spell]{
 
     s"""<div${sid map (id => s""" id="spells_$id" """ ) getOrElse " "} class="$clazz">
        |   <div class="dragbar"><div></div></div>
-       |    ${sid map (Templates.tradDiv(Templates.spells, _, s.name, lang)) getOrElse ""}
+       |    ${sid map (Templates.tradDiv(Constant.spells, _, s.name, lang)) getOrElse ""}
        |     <div class="name">${s.name.value}</div>
        |     <div class="toHide">
        |     <div class="level">

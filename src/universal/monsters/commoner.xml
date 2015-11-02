@@ -15,8 +15,7 @@
     <abilities str="10" dex="10" con="10" int="10" wis="10" cha="10" />
     <skillMisc>
         <languages anyLanguage="1" default="Common" />
-        <cr>0</cr>
-        <xp>10</xp>
+        <cr xp="10">0</cr>
     </skillMisc>
     <actions>
         <action type="weapon" id="club">

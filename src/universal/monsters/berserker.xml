@@ -19,7 +19,6 @@
     <skillMisc>
         <languages anyLanguage="1" default="Common" />
         <cr>2</cr>
-        <xp>450</xp>
     </skillMisc>
     <traits>
         <trait>

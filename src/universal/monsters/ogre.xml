@@ -22,7 +22,6 @@
             <language>Giant</language>
         </languages>
         <cr>2</cr>
-        <xp>450</xp>
     </skillMisc>
     <actions>
         <action type="weapon" id="greatclub">

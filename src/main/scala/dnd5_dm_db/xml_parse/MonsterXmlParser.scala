@@ -99,8 +99,7 @@ object MonsterXmlParser extends MiscXmlParsers {
       damageResistances,
       passivePerception +: senses,
       (skillMisc\"languages").toNodeOption map languageFromXml getOrElse Seq(), // language
-      ChallengeRanking.fromString(skillMisc \ "cr"),
-      (skillMisc \ "xp").text.toInt,
+      challengeRanking.fromXml(monster),
       traits,
       spellCasting map spellCastingFromXml(spellsRetriever),
       actions,
@@ -108,6 +107,20 @@ object MonsterXmlParser extends MiscXmlParsers {
       (monster \ "description").toNodeOption map localFromXml,
       (monster \ "source" ).theSeq map sourceFromXml )
   }
+
+  val challengeRanking = new FromXml[ChallengeRanking] {
+    def fromXml(node : Node) : ChallengeRanking = {
+      val crNode : Node = node \ "skillMisc" \ "cr"
+      val cr0 = ChallengeRanking.fromString(crNode)
+      singleOptionAttribute(crNode, "xp") match {
+        case None => cr0
+        case Some(xp) => XPCustomCR(cr0, xp.toInt)
+      }
+    }
+  }
+
+
+
 
   def savingThrowFromXml(node : Node) : (Ability, Int) =
     (Ability.fromString(singleAttribute(node, "name")),

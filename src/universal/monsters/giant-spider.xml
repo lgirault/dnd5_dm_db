@@ -27,7 +27,6 @@
             <darkvision unit="feet" value="60" />
         </senses>
         <cr>1</cr>
-        <xp>200</xp>
     </skillMisc>
     <traits>
         <shared>

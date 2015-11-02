@@ -21,7 +21,6 @@
     <skillMisc>
         <senses><darkvision unit="feet" value="60" /></senses>
         <cr>1/8</cr>
-        <xp>25</xp>
     </skillMisc>
     <actions>
         <action type="attack">

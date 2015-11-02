@@ -22,7 +22,6 @@
             <blindsight unit="feet" blindBeyond="true" value="30" />
         </senses>
         <cr>1/4</cr>
-        <xp>50</xp>
     </skillMisc>
     <traits>
         <trait>

@@ -20,6 +20,8 @@ object Eng
 
   val monsters : String = "Monsters"
 
+  val indexes : String = "Indexes"
+
   val range: String = "Range"
 
   val level: String = "level"

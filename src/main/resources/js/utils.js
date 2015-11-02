@@ -26,7 +26,7 @@ var Utils = {
     hideEltWithId : function (toHideId) {
         var toHide = document.getElementById(toHideId);
         if(toHide != null)
-            hide(toHide);
+            Utils.hide(toHide);
     },
 
     show : function(toShow){
@@ -36,7 +36,7 @@ var Utils = {
     showEltWithId : function (toShowId){
         var toShow = document.getElementById(toShowId);
         if(toShow != null)
-            show(toShow);
+            Utils.show(toShow);
     },
 
     toggleBlockDisplay : function (node){

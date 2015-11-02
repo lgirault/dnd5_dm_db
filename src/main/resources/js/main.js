@@ -22,6 +22,16 @@ function hideInnerBlockSpells(screen){
     });
 }
 
+function setIndex(htmlText){
+    var htmlDom = Utils.htmlTextToDom(htmlText);
+    var index_wrapper = document.getElementById("index_wrapper");
+    index_wrapper.children.remove();
+    htmlDom.querySelectorAll("#indexBloc").forEach(function(n){
+        index_wrapper.appendChild(n);
+    });
+    Utils.show(index_wrapper);
+    document.querySelectorAll(".menu").forEach(Utils.hide);
+}
 
 function appendBlocAsNode(container, htmlText){
   var htmlDom = Utils.htmlTextToDom(htmlText);
@@ -334,10 +344,15 @@ function Context(){
     this.parseAndLoadQuery= function (query) {
         var keyVal = query.split('=');
         var key = decodeURIComponent(keyVal[0]);
-
         var langItem= keyVal[1].split('/');
-        thisContext.screen.loadQuery(key, langItem[0], langItem[1]);
-        console.log(thisContext.screen.jsonString());
+        
+        if(key == "indexes"){
+            var indexAddr = "/" + key + "/" + langItem[0] + "/" + langItem[1] + ".html";
+            Utils.GET(indexAddr, setIndex);
+        }
+        else
+            thisContext.screen.loadQuery(key, langItem[0], langItem[1]);
+        //console.log(thisContext.screen.jsonString());
            
     }
     
@@ -353,16 +368,18 @@ function Context(){
            var left_frame = document.getElementById("left_frame");
            
            var appendOrReplace = function(name){
-               var curMenu = document.getElementById(name+"_menu")
-               var newMenu = menuDom.querySelectorAll("#"+name+"_menu")[0];
+               var curMenu = document.getElementById(name)
+               var newMenu = menuDom.querySelectorAll("#"+name)[0];
                if(curMenu==null)
                    left_frame.appendChild(newMenu);
                else
                    curMenu.replace(newMenu);
            };
            
-           appendOrReplace(SPELLS);
-           appendOrReplace(MONSTERS);
+           appendOrReplace(SPELLS+"_menu");
+           appendOrReplace(MONSTERS+"_menu");
+           appendOrReplace(SPELLS+"_indexes");
+           appendOrReplace(MONSTERS+"_indexes");
            context.setMenu("monsters_menu");
            initMenuLinks();
         });
@@ -371,7 +388,7 @@ function Context(){
     
     this.setMenu = function (menu_id){
         var menus = document.querySelectorAll(".menu");
-
+        Utils.hideEltWithId("index_wrapper");
         menus.forEach(function(menu){
             if(menu.id == menu_id)
                 Utils.show(menu); 
@@ -459,19 +476,11 @@ function initInterface(){
     });
 
     var searchInput = document.getElementById("search");
-//     searchInput.onkeypress = function(e){
-//         console.log(e);
-//     };
+
     searchInput.oninput = function(e){
         context.search(e.srcElement.value);
-        //console.log(e);
     };
-//     searchInput.focusin = function(e){
-//        context.searching = true;  
-//     };
-//     searchInput.focusout = function(e){
-//        context.searching = true;  
-//     };
+
 
     context.loadScreenList();
     if(context.screenList.length == 0)

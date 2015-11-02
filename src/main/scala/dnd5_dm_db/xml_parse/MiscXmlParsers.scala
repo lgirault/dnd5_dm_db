@@ -2,7 +2,7 @@ package dnd5_dm_db.xml_parse
 
 import java.io.File
 
-import dnd5_dm_db.{Name, FromXml}
+import dnd5_dm_db.{ItemId, FromXml}
 import dnd5_dm_db.lang.langFromString
 import dnd5_dm_db.model._
 import Utils._
@@ -16,7 +16,7 @@ object ParseSeq {
   def apply[A]
   ( fileFinder : PathFinder)
   (implicit builder : FromXml[A])
-  : Seq[(Name, A)] =
+  : Seq[(ItemId, A)] =
     fileFinder.getPaths map { path =>
       try {
         val f = XML.loadFile(path)
@@ -39,6 +39,7 @@ object NameXmlParser extends FromXml[Local]{
   def fromXml(node : Node) : Local =
     LocalXmlParser.localFromXml(node \ "name")
 }
+
 
 object LocalXmlParser {
 

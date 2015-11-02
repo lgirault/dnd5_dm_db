@@ -3,10 +3,11 @@ package dnd5_dm_db
 import java.io.File
 
 import dnd5_dm_db.html_gen.{Templates, MonsterHtmlGen, SpellHtmlGen}
-import dnd5_dm_db.lang.{Fr, Lang}
+import dnd5_dm_db.lang.Lang
 import dnd5_dm_db.model._
 import dnd5_dm_db.xml_parse._
 import sbt.{PathFinder, IO}
+import Constant._
 import Templates._
 
 object GenAll {
@@ -22,7 +23,7 @@ object GenAll {
   val resources = new File(Settings.resourcesDir)
 
   def genPages[A]
-  ( keySeq : Seq[(Name, A)], typ : String)
+  ( keySeq : Seq[(ItemId, A)], typ : String)
   ( implicit builder : ToHtml[A], lang : Lang) =
   keySeq.foreach {
     case (n, s) =>
@@ -54,8 +55,6 @@ object GenAll {
     IO.copyDirectory(resources + "images/", out + "images/")
 
 
-
-
     lang.locales.foreach { l =>
       val dir: File = out + l.id
       dir.mkdir()
@@ -68,8 +67,8 @@ object GenAll {
       val monsterSeq =
         ParseSeq(monsterFilesFinder)(MonsterXmlParser.fromXml(spellsMap, traitsMap, weaponsMap))
 
-      IO.write(menu, genMenu(Templates.spells, spellSeq))
-      IO.write(menu, genMenu(Templates.monsters, monsterSeq), append = true)
+      IO.write(menu, genMenu(spells, spells+"_menu", spellSeq))
+      IO.write(menu, genMenu(monsters, monsters+"_menu", monsterSeq), append = true)
 
       genPages(spellSeq, spells)
       genPages(monsterSeq, monsters)

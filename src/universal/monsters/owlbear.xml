@@ -23,7 +23,6 @@
         </skills>
         <senses><darkvision unit="feet" value="60" /></senses>
         <cr>3</cr>
-        <xp>700</xp>
     </skillMisc>
     <traits>
         <trait>

@@ -1,6 +1,8 @@
 package dnd5_dm_db
 package model
 
+object Monster extends IndexType
+
 case class Monster
 ( name : Local,
   size : Size,
@@ -21,7 +23,6 @@ case class Monster
   sensList : Seq[Sens],
   languages : Seq[Language],
   challengeRanking : ChallengeRanking,
-  xp : Int,
   traits : Seq[Trait],
   spellCasting: Option[SpellCasting],
   actions : Seq[Action],

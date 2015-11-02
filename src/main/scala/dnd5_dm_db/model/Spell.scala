@@ -15,7 +15,7 @@ case class Spell
   highLevelDescription : Option[Local],
   source : Seq[Source])
 
-object Spell {
+object Spell extends IndexType{
   type Concentration = Boolean
 }
 

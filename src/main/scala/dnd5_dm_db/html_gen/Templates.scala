@@ -10,10 +10,6 @@ trait Named {
 
 object Templates {
 
-  val monsters = "monsters"
-  val spells = "spells"
-  val traits = "traits"
-  val weapons = "weapons"
 
   type NameExtractor[A] = A => Local
 
@@ -41,9 +37,9 @@ object Templates {
     m => m.name
 
 
-  def genMenu[A](typ : String, kseq : Seq[(Name, A)])
+  def genMenu[A](typ : String, menuId : String, kseq : Seq[(ItemId, A)])
                 (implicit lang : Lang, extract : NameExtractor[A]) : String =
-    s"""<div id="${typ}_menu" class="menu">""" +
+    s"""<div id="$menuId" class="menu">""" +
       kseq.sortBy(t => extract(t._2).value).map{case (n, elt) =>
         s"""<div><a class="menuLink" href="?$typ=${lang.id}/$n">${extract(elt).value}</a></div>"""
       }.mkString("\n") +
@@ -65,11 +61,14 @@ object Templates {
         jsInclude("/js/utils.js"), jsInclude("/js/main.js")))+
       s"""<div id="left_frame" class="frame" >
          |  <div>
-         |   <a class="menu_chooser" href="?${monsters}_menu">${lg.monsters}</a>
-         |   <a class="menu_chooser" href="?${spells}_menu">${lg.spells}</a>
-         |   ${lang.locales map menuLocaleLink mkString "|" }
+         |   <a class="menu_chooser" href="?${Constant.monsters}_menu">${lg.monsters}</a>
+         |   <a class="menu_chooser" href="?${Constant.monsters}_indexes">(${lg.indexes})</a>
+         |   <a class="menu_chooser" href="?${Constant.spells}_menu">${lg.spells}</a>
+         |   <a class="menu_chooser" href="?${Constant.spells}_indexes">(${lg.indexes})</a>
+   ${lang.locales map menuLocaleLink mkString "|" }
          |   <input id="search" type="text"/>
          |  </div>
+         |  <div id="index_wrapper"></div>
          |</div>
          |<div id="right_frame" class="frame" >
          |  <div>

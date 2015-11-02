@@ -13,6 +13,9 @@ abstract class Lang
 
   val monsters : String
 
+  val indexes : String
+
+
   val level : String
 
   val range : String

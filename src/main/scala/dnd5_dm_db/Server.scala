@@ -15,7 +15,9 @@ object Settings {
 
   def port : Int = _port
 
-  private [this] var _resourcesDir = Properties.envOrElse("dnd5_dm_db_resources_dir", ".")
+  private [this] val defaultResourcesDir = "/home/lorilan/projects/dnd5_dm_db/src/universal" //"."
+
+  private [this] var _resourcesDir = Properties.envOrElse("dnd5_dm_db_resources_dir", defaultResourcesDir)
 
   def resourcesDir : String = _resourcesDir
 

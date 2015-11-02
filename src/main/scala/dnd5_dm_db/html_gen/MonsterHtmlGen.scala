@@ -1,6 +1,6 @@
 package dnd5_dm_db.html_gen
 
-import dnd5_dm_db.ToHtml
+import dnd5_dm_db.{Constant, ToHtml}
 import dnd5_dm_db.lang.Lang
 import dnd5_dm_db.model._
 
@@ -53,7 +53,7 @@ object MonsterHtmlGen extends ToHtml[Monster]{
 
     s"""<div id="monsters_$id" class="bloc">
        |   <div class="dragbar"><div></div></div>
-       |   ${Templates.tradDiv(Templates.monsters, id, m.name, lang)}
+       |   ${Templates.tradDiv(Constant.monsters, id, m.name, lang)}
        |   <div class="name">${m.name.value}</div>
        |   <div class="type sansSerif">
        |        <em>${lang.monsterTypeAndSize(m.size, m.typ, m.typeTags)}, ${lang.alignment(m.alignment)}</em>
@@ -74,7 +74,7 @@ object MonsterHtmlGen extends ToHtml[Monster]{
        |    $resistancesStr
        |    $sensStr
        |    $langStr
-       |    <div><b>${lang.challengeRanking}</b> ${m.challengeRanking} (${m.xp} ${lang.xp})</div>
+       |    <div><b>${lang.challengeRanking}</b> ${m.challengeRanking} (${m.challengeRanking.xp} ${lang.xp})</div>
        |    </div><!-- /red -->
        |    $sepMonster
        |    ${m.traits map traitToHtml mkString ""}

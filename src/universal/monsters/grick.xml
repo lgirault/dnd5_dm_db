@@ -28,7 +28,6 @@
         </resistances>
         <senses><darkvision unit="feet" value="60" /></senses>
         <cr>2</cr>
-        <xp>450</xp>
     </skillMisc>
     <traits>
         <trait>
