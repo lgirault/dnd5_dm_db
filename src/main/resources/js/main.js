@@ -29,6 +29,7 @@ function setIndex(htmlText){
     htmlDom.querySelectorAll("#indexBloc").forEach(function(n){
         index_wrapper.appendChild(n);
     });
+    linkifyItems(index_wrapper);
     Utils.show(index_wrapper);
     document.querySelectorAll(".menu").forEach(Utils.hide);
 }
@@ -400,7 +401,7 @@ function Context(){
     }
 
     this.search = function(str){
-        var items = document.querySelectorAll(".menuLink");
+        var items = document.querySelectorAll(".itemLink");
         if(str.length == 0)
             items.forEach(function(a){
                 Utils.show(a);   
@@ -429,12 +430,15 @@ function asynchronizeLink(link, funOnClick){
     };
 }
 
-function initMenuLinks(){
-    var menuLinks = document.querySelectorAll(".menuLink"); //nodeList
+function linkifyItems(root){
+    var menuLinks = root.querySelectorAll(".itemLink");
     menuLinks.forEach(function(menuLink){
         asynchronizeLink(menuLink, context.parseAndLoadQuery);
     });
+}
 
+function initMenuLinks(){
+    linkifyItems(document)
 }
 
 function initInterface(){

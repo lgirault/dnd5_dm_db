@@ -39,6 +39,11 @@ object SpellXmlParser extends FromXml[Spell]
     )
   }
 
+  var level : FromXml[Int] = new FromXml[Int] {
+    override def fromXml(n: Node): Int =
+      (n \ "level").text.toInt
+
+  }
   val magicSchool : FromXml[MagicSchool] = new FromXml[MagicSchool] {
     override def fromXml(n: Node): MagicSchool =
       MagicSchool.fromString(n \ "type")

@@ -32,7 +32,7 @@ trait SpellText extends lang.SpellText {
 
   val magicSchool : MagicSchool => String = {
     case Abjuration => "abjuration"
-    case Conjuration => "invocation"
+    case Conjuration => "conjuration"
     case Divination => "divination"
     case Enchantment => "enchantement"
     case Evocation => "évocation"

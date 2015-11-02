@@ -15,6 +15,50 @@ body			{	width:100%; height:100%;
 				 	width : 200px;
 				 }
 
+#left_frame a 	{ text-decoration: none;
+				}
+
+.menu a 		{	font-family: verdana, arial, sans-serif;
+				  	color:#6D0000; 
+				 	font-weight:normal; 
+				 	font-size:1.5rem;
+				}
+
+#indexBloc h1	{	color:#6D0000; 
+					margin:10px 0 5px 0; 
+					border-bottom:1px solid #B30303; 
+					font-size:2rem; 
+					text-transform:uppercase; 
+					font-weight:bold;
+				}
+
+#indexBloc a 	{
+					font-size:1.4rem; 
+				}
+
+.spellsIndex .orderCriteria 
+				{
+					text-transform:uppercase; 
+					font-size:1.6rem; 
+					font-weight:bold;
+				}
+
+
+.monstersIndex .orderClass:nth-child(even) {
+	background: #CCC
+}
+
+.monstersIndex .orderCriteria
+				{
+					float:right;
+				}
+
+.monstersIndex .itemList 
+				{ display : inline;
+
+
+				}
+
 #right_frame	{	padding: 0px;	}
 
 
@@ -41,10 +85,7 @@ body			{	width:100%; height:100%;
 					z-index:999
 				}
 
-.menuLink 		{
-					font-family: verdana, arial, sans-serif;
-				 	color:#6D0000; font-weight:normal; font-size:1.5rem;
-				}
+
 
 .bloc			{
 					width:200px; padding:1%; margin:0; 				 

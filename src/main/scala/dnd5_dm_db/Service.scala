@@ -175,7 +175,7 @@ trait Dnd5DMDBService extends HttpService {
                     case Monster =>
                       IndexToHtml.monsterIndexToHtml(s"$resources/$monsters")
                     case Spell =>
-                      IndexToHtml.spellIndexToHtml(s"$resources/$spells")
+                      IndexToHtml.spellIndexToHtmlOrderedByLevel(s"$resources/$spells")
                   }
                   htmlGen.toHtml(id, i)(lang)
                 } catch {

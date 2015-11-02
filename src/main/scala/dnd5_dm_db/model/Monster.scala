@@ -1,7 +1,9 @@
 package dnd5_dm_db
 package model
 
-object Monster extends IndexType
+object Monster extends IndexType {
+  val id = Constant.monsters
+}
 
 case class Monster
 ( name : Local,

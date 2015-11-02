@@ -15,7 +15,8 @@ case class Spell
   highLevelDescription : Option[Local],
   source : Seq[Source])
 
-object Spell extends IndexType{
+object Spell extends IndexType {
+  val id = Constant.spells
   type Concentration = Boolean
 }
 

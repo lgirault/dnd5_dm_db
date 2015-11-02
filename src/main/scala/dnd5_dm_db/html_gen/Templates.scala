@@ -37,12 +37,18 @@ object Templates {
     m => m.name
 
 
+  def menuItem[A]
+    (typ : String, item :(ItemId, A))
+    (implicit lang : Lang, extract : NameExtractor[A]) : String = item match {
+      case (n, elt) =>
+        s"""<a class="itemLink" href="?$typ=${lang.id}/$n">${extract(elt).value}</a>"""
+    }
+
+
   def genMenu[A](typ : String, menuId : String, kseq : Seq[(ItemId, A)])
                 (implicit lang : Lang, extract : NameExtractor[A]) : String =
     s"""<div id="$menuId" class="menu">""" +
-      kseq.sortBy(t => extract(t._2).value).map{case (n, elt) =>
-        s"""<div><a class="menuLink" href="?$typ=${lang.id}/$n">${extract(elt).value}</a></div>"""
-      }.mkString("\n") +
+      kseq.sortBy(t => extract(t._2).value).map(menuItem(typ, _)).mkString("<div>", "</div>\n<div>", "</div>") +
     "</div>"
 
   def menuLocaleLink(lg : Lang) : String =
