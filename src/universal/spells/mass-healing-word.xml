@@ -17,6 +17,6 @@
         <local id="eng">When you cast this spell using a spell slot of 4th level or higher, the healing increases by 1d4 for each slot level above 3rd.</local>
         <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 4 ou plus, la quantité de points de vie récupérés est augmentée de 1d4 pour chaque niveau d'emplacement supérieur à 3.</local>
     </higher-level-description>
-    <source page="258">PHB</source>
+    <source page="258">Player's Handbook</source>
     <source>Basic Rules</source>
 </spell>

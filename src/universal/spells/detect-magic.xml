@@ -1,0 +1,20 @@
+<spell>
+    <name>
+        <local id="fr">Détection de la magie</local>
+        <local id="eng">Detect magic</local>
+    </name>
+    <level>1</level>
+    <type ritual="true">divination</type>
+    <ctime unit="action" />
+    <range unit="self" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="minute" concentration="true" value="10"/>
+    <description>
+        <local id="fr">[p]Pour la durée du sort, vous percevez la présence de magie à 9 mètres ou moins de vous. Si vous percevez de la magie de cette manière, vous pouvez utiliser votre action pour discerner une faible aura enveloppant une créature ou un objet visible dans la zone qui présente de la magie. Vous déterminez aussi l'école de magie, le cas échéant. [/p]
+            [p]Le sort peut outrepasser la plupart des obstacles mais il est bloqué par 30 cm de pierre, 2,50 cm de métal ordinaire, une mince feuille de plomb ou 1 mètre de bois ou de terre. [/p]</local>
+        <local id="eng">[p]For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.[/p]
+            [p]The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.[/p]</local>
+    </description>
+    <source page="231">Player's Handbook</source>
+    <source>Basic Rules</source>
+</spell>

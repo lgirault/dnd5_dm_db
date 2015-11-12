@@ -1,0 +1,24 @@
+<spell>
+    <name>
+        <local id="fr">Absorption des éléments</local>
+        <local id="eng">Absorb elements</local>
+    </name>
+    <level>1</level>
+    <type>abjuration</type>
+    <ctime unit="reaction" >
+        <local id="fr">, que vous prenez lorsque vous subissez des dégâts d'acide, de froid, de feu, de foudre ou de tonnerre.</local>
+        <local id="eng">, which you take when you take acid, cold, fire, lightning, or thunder damage.</local>
+    </ctime>
+    <range unit="self" />
+    <components verbose="false" somatic="true" material="false" />
+    <duration unit="round" />
+    <description>
+        <local id="fr">Le sort capte une partie de l'énergie entrante, ce qui réduit son effet sur vous et la stocke pour votre prochaine attaque de corps à corps. Vous obtenez une résistance à ce type de dégâts jusqu'au début de votre prochain tour. De plus, la première fois que vous touchez avec une attaque de corps à corps lors de votre prochain tour, la cible subit 1d6 de dommages supplémentaires du type d'élément ciblé, et le sort se termine.</local>
+        <local id="eng">The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends. </local>
+    </description>
+    <higher-level-description>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, les dommages supplémentaires augmente de 1d6 pour chaque niveau d'emplacement supérieur à 1.</local>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st.</local>
+    </higher-level-description>
+    <source page="15">Elemental Evil Player´s Companion</source>
+</spell>

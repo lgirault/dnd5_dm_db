@@ -1,0 +1,18 @@
+<spell>
+    <name>
+        <local id="fr">Guide</local>
+        <local id="eng">Guidance</local>
+    </name>
+    <level>0</level>
+    <type>Divination</type>
+    <ctime unit="action" />
+    <range unit="touch" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="minute" concentration="true" />
+    <description>
+        <local id="fr">Vous touchez une créature consentante. Une fois avant la fin du sort, la cible peut lancer un d4 et ajouter le résultat du dé à un jet de caractéristique de son choix. Elle peut lancer le dé avant ou après avoir effectué son jet de caractéristique. Le sort prend alors fin. </local>
+        <local id="eng">You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one ability check of its choice. It can roll the die before or after making the ability check. The spell then ends. </local>
+    </description>
+    <source page="248">Player's Handbook</source>
+    <source>Basic Rules</source>
+</spell>

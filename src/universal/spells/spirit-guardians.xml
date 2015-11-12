@@ -23,6 +23,6 @@
         <local id="eng">When you cast this spell using a spell slot of 4th level or higher, the damage in creases by 1d8 for each slot level above 3rd.</local>
         <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 4 ou plus, les dégâts augmentent de 1d8 pour chaque niveau d'emplacement supérieur à 3.</local>
     </higher-level-description>
-    <source page="278">PHB</source>
+    <source page="278">Player's Handbook</source>
     <source>Basic Rules</source>
 </spell>

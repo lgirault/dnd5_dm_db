@@ -1,0 +1,18 @@
+<spell>
+    <name>
+        <local id="fr">Compréhension animale</local>
+        <local id="eng">Speak with animals</local>
+    </name>
+    <level>1</level>
+    <type ritual="true">divination</type>
+    <ctime unit="action" />
+    <range unit="self"/>
+    <components verbose="true" somatic="true" material="false"/>
+    <duration unit="minute" value="10"/>
+    <description>
+        <local id="fr">Vous gagnez la capacité de comprendre et de communiquer verbalement (ou oralement) avec des bêtes pour la durée du sort. Les connaissances et la compréhension de nombreuses bêtes sont limitées par leur intelligence, mais au minimum, elles peuvent vous communiquer des informations sur les alentours et les bêtes à proximité, incluant tout ce qu'elles peuvent percevoir ou ont perçu au cours des derniers jours. Vous devriez être capable de convaincre une bête de vous rendre un petit service, à la discrétion du MD.</local>
+        <local id="eng">You gain the ability to comprehend and verbally communicate with beasts for the duration. The knowledge and awareness of many beasts is limited by their intelligence, but at minimum, beasts can give you information about nearby locations and monsters, including whatever they can perceive or have perceived within the past day. You might be able to persuade a beast to perform a small favor for you, at the DM's discretion.</local>
+    </description>
+    <source page="277">Player's Handbook</source>
+    <source>Rise of Tiamat supplement</source>
+</spell>

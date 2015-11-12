@@ -45,4 +45,6 @@ trait SpellText extends lang.SpellText {
     case Transmutation => "transmutation"
   }
 
+  val ritual : String = "Ritual"
+
 }

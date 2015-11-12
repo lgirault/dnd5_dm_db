@@ -1,0 +1,25 @@
+<spell>
+    <name>
+        <local id="fr">Grand pas</local>
+        <local id="eng">Longstrider</local>
+    </name>
+    <level>1</level>
+    <type>transmutation</type>
+    <ctime unit="action" />
+    <range unit="touch" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">une pincée de terre</local>
+        <local id="eng">a pinch of dirt</local>
+    </components>
+    <duration unit="hour" />
+    <description>
+        <local id="fr">Vous touchez une créature. La vitesse de la cible augmente de 3 mètres jusqu'à la fin du sort.</local>
+        <local id="eng">You touch a creature. The target's speed increases by 10 feet until the spell ends.</local>
+    </description>
+    <higher-level-description>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.</local>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez cibler une créature supplémentaire pour chaque niveau d'emplacement de sort supérieur à 1.</local>
+    </higher-level-description>
+    <source page="256">Player's Handbook</source>
+    <source>Hoard of the Dragon Queen supplement</source>
+</spell>

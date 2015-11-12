@@ -1,0 +1,20 @@
+<spell>
+    <name>
+        <local id="fr">Vaporisation de poison</local>
+        <local id="eng">Poison spray</local>
+    </name>
+    <level>0</level>
+    <type>conjuration</type>
+    <ctime unit="action" />
+    <range unit="feet" value="10" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="instant" />
+    <description>
+        <local id="fr">[p]Vous tendez votre paume vers une créature visible dans la portée du sort et vous projetez une bouffée de gaz nocif de votre main. La créature doit réussir un jet de sauvegarde de Constitution sans quoi elle subit 1d12 de dégâts de poison.[/p]
+            [p]Les dégâts de ce sort augmentent de 1d12 lorsque vous atteignez le niveau 5 (2d12), le niveau 11 (3d12) et le niveau 17 (4d12).[/p]</local>
+        <local id="eng">[p]You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a Constitution saving throw or take 1d12 poison damage.[/p]
+            [p]This spell's damage increases by 1d12 when you reach 5th level (2d12), 11th level (3d12), and 17th level (4d12).[/p]</local>
+    </description>
+    <source page="266">Player's Handbook</source>
+    <source>Basic Rules</source>
+</spell>

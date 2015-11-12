@@ -17,6 +17,6 @@
         <local id="fr">Lorsque le sort est lancé en utilisant un emplacement de sort de niveau 2 ou plus, il crée une fléchette additionnelle pour chaque niveau d'emplacement au-dessus du niveau 1.</local>
         <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</local>
     </higher-level-description>
-    <source page="257">PHB</source>
+    <source page="257">Player's Handbook</source>
     <source>Basic Rules</source>
 </spell>

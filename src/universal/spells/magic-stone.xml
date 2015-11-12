@@ -1,0 +1,17 @@
+<spell>
+    <name>
+        <local id="fr">Pierre magique</local>
+        <local id="eng">Magic stone</local>
+    </name>
+    <level>0</level>
+    <type>Transmutation</type>
+    <ctime unit="bonusAction" />
+    <range unit="touch" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="minute" />
+    <description>
+        <local id="fr">Vous touchez un à trois cailloux et les imprégnez de magie. Vous ou quelqu'un d'autre peut faire une attaque de sort à distance avec un des ces cailloux en le jetant à la main ou en le lançant à l'aide d'une fronde. S'il est jeté, sa portée est de 18 mètres. Si quelqu'un d'autre attaque avec ces cailloux, il ajoute votre modificateur de caractéristique pour lancer un sort au jet d'attaque (et non pas la sienne). Si le coup touche, la cible prend 1d6 de dégât contondant + votre modificateur de caractéristique pour lancer vos sorts. Dans tous les cas, le caillou perd ses propriétés magiques. Si vous lancez ce sort à nouveau, le sort s'arrête prématurément pour tous les cailloux encore sous effet magique. </local>
+        <local id="eng">You touch one to three pebbles and imbue them with magic. You or someone else can make a ranged spell attack with one of the pebbles by throwing it or hurling it with a sling. If thrown, it has a range of 60 feet. If someone else attacks with the pebble, that attacker adds your spellcasting ability modifier, not the attacker's, to the attack roll. On a hit, the target takes bludgeoning damage equal to 1d6 + your spellcasting ability modifier. Hit or miss, the spell then ends on the stone. If you cast this spell again, the spell ends early on any pebbles still affected by it. </local>
+    </description>
+    <source page="20">Elemental Evil Player´s Companion</source>
+</spell>

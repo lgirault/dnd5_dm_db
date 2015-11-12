@@ -1,0 +1,26 @@
+<spell>
+    <name>
+        <local id="fr">Façonnage de la terre</local>
+        <local id="eng">Mold earth</local>
+    </name>
+    <level>0</level>
+    <type>Transmutation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="30" />
+    <components verbose="false" somatic="true" material="false" />
+    <duration unit="instant" />
+    <duration unit="hour" />
+    <description>
+        <local id="fr">Vous choisissez une section de terre ou de pierre qui ne dépasse pas un cube de 1,50 mètre d'arête et visible dans la portée du sort. Vous pouvez alors la manipuler d'une des façons suivantes :
+            [ul][li]Si vous ciblez une zone de terre meuble, vous pouvez instantanément la creuser, la déplacer sur le sol, et la déposer jusqu'à 1,50 mètre plus loin. Ce mouvement n'a pas assez de force pour causer des dégâts.[/li]
+            [li]Vous pouvez faire apparaitre des formes et/ou des couleurs sur la terre ou la pierre, représentant des mots, créant des images ou formant des motifs. La modification dure 1 heure.[/li]
+            [li]Si la terre ou la pierre est au sol, vous pouvez la transformer en terrain difficile. A l'inverse, vous pouvez rendre normal un sol considéré comme terrain difficile. Ce changement dure 1 heure.[/li][/ul]
+            Si vous lancez ce sort plusieurs fois, vous pouvez avoir jusqu'à deux de ces effets non-instantanés actifs à la fois, et vous pouvez en dissiper un en une action.</local>
+        <local id="eng">You choose a portion of dirt or stone that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:
+            [ul][li]If you target an area of loose earth, you can instantaneously excavate it, move it along the ground, and deposit it up to 5 feet away. This movement doesn't have enough force to cause damage.[/li]
+            [li]You cause shapes, colors, or both to appear on the dirt or stone, spelling out words, creating images, or shaping patterns. The changes last for 1 hour.[/li]
+            [li]If the dirt or stone you target is on the ground, you cause it to become difficult terrain. Alternatively, you can cause the ground to become normal terrain if it is already difficult terrain. This change lasts for 1 hour. [/li][/ul]
+            If you cast this spell multiple times, you can have no more than two of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</local>
+    </description>
+    <source page="21">Elemental Evil Player´s Companion</source>
+</spell>

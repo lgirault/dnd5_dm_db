@@ -1,0 +1,65 @@
+<index entry-type="spells" id="ranger-spells">
+    <name>
+        <local id="fr">Sorts de Rôdeur</local>
+        <local id="eng">Ranger Spells</local>
+    </name>
+
+    <!-- 1st level -->
+    <entry id="absorb-elements"/>
+    <entry id="alarm"/>
+    <entry id="animal-friendship"/>
+    <entry id="beast-bond"/>
+    <entry id="cure-wounds"/>
+    <entry id="detect-magic"/>
+    <entry id="detect-poison-and-disease"/>
+    <entry id="ensnaring-strike"/>
+    <entry id="fog-cloud"/>
+    <entry id="goodberry"/>
+    <entry id="hail-o-f-thorns"/>
+    <entry id="hunter-s-mark"/>
+    <entry id="jump"/>
+    <entry id="longstrider"/>
+    <entry id="speak-with-animals"/>
+
+    <!-- 2nd level -->
+    <entry id="animal-messenger"/>
+    <entry id="barkskin"/>
+    <entry id="beast-sense"/>
+    <entry id="cordon-o-f-arrows"/>
+    <entry id="darkvision"/>
+    <entry id="find-traps"/>
+    <entry id="lesser-restoration"/>
+    <entry id="locate-animals-or-plants"/>
+    <entry id="locate-object"/>
+    <entry id="pass-without-trace"/>
+    <entry id="protection-from-poison"/>
+    <entry id="silence"/>
+    <entry id="spike-growth"/>
+
+    <!-- 3rd level -->
+    <entry id="conjure-animals"/>
+    <entry id="conjure-barrage"/>
+    <entry id="daylight"/>
+    <entry id="flame-arrows"/>
+    <entry id="lightning-arrow"/>
+    <entry id="nondetection"/>
+    <entry id="plant-growth"/>
+    <entry id="protection-from-energy"/>
+    <entry id="speak-with-plants"/>
+    <entry id="water-breathing"/>
+    <entry id="water-walk"/>
+    <entry id="wind-wall"/>
+
+    <!-- 4th level -->
+    <entry id="conjure-woodland-beings"/>
+    <entry id="freedom-of-movement"/>
+    <entry id="grasping-vine"/>
+    <entry id="locate-creature"/>
+    <entry id="stoneskin"/>
+
+    <!-- 5th level -->
+    <entry id="commune-with-nature"/>
+    <entry id="conjure-volley"/>
+    <entry id="swift-quiver"/>
+    <entry id="tree-stride"/>
+</index>

@@ -11,7 +11,7 @@
         <local id="fr">une petite pièce de fer droite</local>
         <local id="eng">a small, straight piece of iron</local>
     </components>
-    <duration unit="minute" upTo="true" concentration="true" value="1" />
+    <duration unit="minute" concentration="true" value="1" />
     <description>
         <local id="eng">Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</local>
         <local id="fr">Choisissez un humanoïde visible à porté. La cible doit réussir un jet de sauvegarde de Sagesse ou être paralysé pour la durée du sort. À la fin de chacun de ses tours, la cible peut faire un autre jet de sauvegarde de Sagesse. Sur un succès, le sort se termine pour la cible.</local>
@@ -20,6 +20,6 @@
         <local id="eng">When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</local>
         <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 3 ou plus, vous pouvez cibler un humanoïde supplémentaire pour chaque niveau d'emplacement supérieur à 2. Les humanoïdes doivent être à moins de 9m l'un de l'autre lorsque vous les ciblez.</local>
     </higher-level-description>
-    <source page="251">PHB</source>
+    <source page="251">Player's Handbook</source>
     <source>Basic Rules</source>
 </spell>

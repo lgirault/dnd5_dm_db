@@ -1,0 +1,23 @@
+<spell>
+    <name>
+        <local id="fr">Rafale</local>
+        <local id="eng">Gust</local>
+    </name>
+    <level>0</level>
+    <type>Transmutation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="30" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="instant" />
+    <description>
+        <local id="fr">Vous saisissez l'air et l'obligez à créer un des effets suivants à un point que vous pouvez voir à portée :
+            [ul][li]Une créature de taille M ou plus petite que vous choisissez doit réussir un jet de sauvegarde de Force ou bien être repoussée de 1,50 mètre de vous.[/li]
+            [li]Vous créez une petite explosion d'air capable de bouger un objet qui n'est pas tenu ni porté et qui ne pèse pas plus que 2,5 kg. L'objet est repoussé de 3 mètres. Il n'est pas poussé avec assez de force pour faire des dégâts.[/li]
+            [li]Vous créez un effet sensoriel inoffensif qui utilise l'air, comme provoquer le bruissement de feuilles, faire claquer des volets ou faire onduler des vêtements dans une brise.[/li][/ul] </local>
+        <local id="eng">You seize the air and compel it to create one of the following effects at a point you can see within range:
+            [ul][li]One Medium or smaller creature that you choose must succeed on a Strength saving throw or be pushed up to 5 feet away from you.[/li]
+            [li]You create a small blast of air capable of moving one object that is neither held nor carried and that weighs no more than 5 pounds. The object is pushed up to 10 feet away from you. It isn't pushed with enough force to cause damage.[/li]
+            [li]You create a harmless sensory affect using air, such as causing leaves to rustle, wind to slam shutters shut, or your clothing to ripple in a breeze.[/li][/ul]</local>
+    </description>
+    <source page="19">Elemental Evil Player´s Companion</source>
+</spell>

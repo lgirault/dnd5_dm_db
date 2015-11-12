@@ -1,0 +1,21 @@
+<spell>
+    <name>
+        <local id="fr">Saut</local>
+        <local id="eng">Jump</local>
+    </name>
+    <level>1</level>
+    <type>transmutation</type>
+    <ctime unit="action" />
+    <range unit="touch" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">la patte postérieure d'une sauterelle</local>
+        <local id="eng">a grasshopper's hind leg</local>
+    </components>
+    <duration unit="minute" />
+    <description>
+        <local id="fr">Vous touchez une créature. La distance de saut de la créature est triplée pour la durée du sort.</local>
+        <local id="eng">You touch a creature. The creature's jump distance is tripled until the spell ends. </local>
+    </description>
+    <source page="254">Player's Handbook</source>
+    <source>Princes of the Apocalypse supplement</source>
+</spell>

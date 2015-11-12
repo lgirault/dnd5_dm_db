@@ -1,0 +1,21 @@
+<spell>
+    <name>
+        <local id="fr">Secousse terrestre</local>
+        <local id="eng">Earth tremor</local>
+    </name>
+    <level>1</level>
+    <type>evocation</type>
+    <ctime unit="action" />
+    <range unit="self" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="instant" />
+    <description>
+        <local id="fr">Vous causez un tremblement dans le sol dans un rayon de 3 mètres. Chaque créature autre que vous-même dans cette zone doit faire un jet de sauvegarde de Dextérité. En cas d'échec, la créature subit 1d6 points de dégâts contondants et se retrouve à terre. Si le sol dans cette zone est de la terre meuble ou de la pierre, il devient un terrain difficile jusqu'à qu'il soit déblayé.</local>
+        <local id="eng">You cause a tremor in the ground in a 10-foot radius. Each creature other than you in that area must make a Dexterity saving throw. On a failed save, a creature takes 1d6 bludgeoning damage and is knocked prone. If the ground in that area is loose earth or stone, it becomes difficult terrain until cleared.</local>
+    </description>
+    <higher-level-description>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, les dégâts augmentent de 1d6 pour chaque niveau d'emplacement supérieur à 1.</local>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.</local>
+    </higher-level-description>
+    <source page="17">Elemental Evil Player´s Companion</source>
+</spell>

@@ -20,6 +20,6 @@
         <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.</local>
         <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, les dégâts augmentent de 1d8 pour chaque niveau d'emplacement supérieur à 1.</local>
     </higher-level-description>
-    <source page="282">PHB</source>
+    <source page="282">Player's Handbook</source>
     <source>Basic Rules</source>
 </spell>

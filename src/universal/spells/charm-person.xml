@@ -17,6 +17,6 @@
         <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez cibler une créature supplémentaire pour chaque niveau d'emplacement supérieur à 1. Les créatures doivent se trouver à 9 mètres maximum les unes des autres lorsque vous les ciblez.</local>
         <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</local>
     </higher-level-description>
-    <source page="211">221</source>
+    <source page="221">Player's Handbook</source>
     <source>Basic Rules</source>
 </spell>

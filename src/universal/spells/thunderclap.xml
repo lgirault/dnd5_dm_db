@@ -1,0 +1,19 @@
+<spell>
+    <name>
+        <local id="fr">Coup de tonnerre</local>
+        <local id="eng">Thunderclap</local>
+    </name>
+    <level>0</level>
+    <type>Evocation</type>
+    <ctime unit="action" />
+    <range unit="self" />
+    <components verbose="false" somatic="true" material="false" />
+    <duration unit="instant" />
+    <description>
+        <local id="fr">[p]Vous créez un bruit de tonnerre qui peut être entendu jusqu'à 30 mètres. Hormis vous-même, toutes les créatures situées à 1,50 mètre de vous doivent faire un jet de sauvegarde de Constitution. En cas d'échec, la créature prend 1d6 points de dégâts de tonnerre.[/p]
+            [p]Les dégâts de ce sort augmentent de 1d6 lorsque vous atteignez le niveau 5 (2d6), le niveau 11 (3d6) et le niveau 17 (4d6).[/p]</local>
+        <local id="eng">[p]You create a burst of thunderous sound, which can be heard 100 feet away. Each creature other than you within 5 feet of you must make a Constitution saving throw. On a failed save, the creature takes 1d6 thunder damage.[/p]
+            [p]The spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).[/p]</local>
+    </description>
+    <source page="22">Elemental Evil Player´s Companion</source>
+</spell>

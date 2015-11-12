@@ -1,6 +1,6 @@
 <spell>
     <name>
-        <local id="fr">Flame</local>
+        <local id="fr">Flamme</local>
         <local id="eng">Produce flame</local>
     </name>
     <level>0</level>
@@ -17,6 +17,6 @@
             [p]You can also attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell attack. On a hit, the target takes 1d8 fire damage.[/p]
             [p]This spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).[/p]</local>
     </description>
-    <source page="269">PHB</source>
+    <source page="269">Player's Handbook</source>
     <source>Princes of the Apocalypse supplement</source>
 </spell>

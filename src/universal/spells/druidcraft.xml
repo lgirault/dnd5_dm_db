@@ -1,0 +1,26 @@
+<spell>
+    <name>
+        <local id="fr">Druiderie</local>
+        <local id="eng">Druidcraft</local>
+    </name>
+    <level>0</level>
+    <type>Transmutation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="30" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="instant" />
+    <description>
+        <local id="fr">En murmurant aux esprits de la nature, vous créez l'un des effets suivants, dans la portée du sort :
+            [ul][li]Vous créez un minuscule et inoffensif effet sensoriel qui permet de prédire les conditions météorologiques pour les 24 prochaines heures, à l'endroit où vous êtes. L'effet pourrait se manifester comme un orbe doré pour indiquer un ciel dégagé, un nuage pour annoncer la pluie, un flocon de neige pour une chute de neige et ainsi de suite. L'effet persiste pour 1 round.[/li]
+            [li]Vous provoquez immédiatement la floraison d'une fleur, l'ouverture d'une gousse ou le débourrement d'un bourgeon de feuille.[/li]
+            [li]Vous créez un inoffensif effet sensoriel instantané comme une chute de feuilles, une légère brise, le son d'un petit animal ou une subtile odeur de putois. L'effet doit se limiter à un cube de 1,50 mètre d'arête.[/li]
+            [li]Vous éteignez ou allumez instantanément une chandelle, une torche ou un petit feu de camp.[/li][/ul]</local>
+        <local id="eng">Whispering to the spirits of nature, you create one of the following effects within range:
+            [ul][li]You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.[/li]
+            [li]You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.[/li]
+            [li]You create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.[/li]
+            [li]You instantly light or snuff out a candle, a torch, or a small campfire.[/li][/ul]</local>
+    </description>
+    <source page="236">Player's Handbook</source>
+    <source>Hoard of the Dragon Queen supplement</source>
+</spell>

@@ -1,0 +1,20 @@
+<spell>
+    <name>
+        <local id="fr">Lien avec une bête</local>
+        <local id="eng">Beast bond</local>
+    </name>
+    <level>1</level>
+    <type>divination</type>
+    <ctime unit="action" />
+    <range unit="touch" />
+    <components verbose="false" somatic="true" material="true">
+        <local id="fr">un morceau de fourrure enveloppé dans un linge</local>
+        <local id="eng">a bit of fur wrapped in a cloth</local>
+    </components>
+    <duration unit="minute" concentration="true" value="10" />
+    <description>
+        <local id="fr">Vous établissez un lien télépathique avec une bête que vous touchez, qui est amicale ou que vous avez charmée. Le sort échoue si l'Intelligence de la bête est de 4 ou plus. Jusqu'à la fin du sort, le lien est actif tant que vous et la bête êtes à portée de vue. Via le lien, la bête peut comprendre vos messages télépathiques, et elle peut communiquer par télépathie ses émotions et des concepts simples en retour. Tant que le lien est actif, la bête à l'avantage à ses jets attaque contre toute créature à 1,50 mètre de vous et que vous pouvez voir.</local>
+        <local id="eng">You establish a telepathic link with one beast you touch that is friendly to you or charmed by you. The spell fails if the beast's Intelligence is 4 or higher. Until the spell ends, the link is active while you and the beast are within line of sight of each other. Through the link, the beast can understand your telepathic messages to it, and it can telepathically communicate simple emotions and concepts back to you. While the link is active, the beast gains advantage on attack rolls against any creature within 5 feet of you that you can see.</local>
+    </description>
+    <source page="15">Elemental Evil Player´s Companion</source>
+</spell>

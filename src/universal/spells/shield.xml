@@ -16,6 +16,6 @@
         <local id="fr">Une barrière invisible de force magique apparaît et vous protège. Jusqu'au début de votre prochain tour, vous obtenez un bonus de +5 à votre CA, y compris contre l'attaque qui a déclenché le sort, et vous ne prenez aucun dégât par le sort projectile magique.</local>
         <local id="eng">An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile. </local>
     </description>
-    <source page="275">PHB</source>
+    <source page="275">Player's Handbook</source>
     <source>Basic Rules</source>
 </spell>

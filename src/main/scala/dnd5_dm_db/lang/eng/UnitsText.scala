@@ -22,7 +22,7 @@ trait UnitsText {
 
 
   val time : DnDTime => String = {
-    case UpTo(t) => "up to " + time(t)
+    case Concentration(t) => "Concentration, up to " + time(t)
     case Minute(i) => i + " minute" + plural(i)
     case Hour(i) => i +" hour" + plural(i)
     case Round(i) => i +" tour" + plural(i)

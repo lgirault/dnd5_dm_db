@@ -1,0 +1,19 @@
+<spell>
+    <name>
+        <local id="fr">Gelure</local>
+        <local id="eng">Frostbite</local>
+    </name>
+    <level>0</level>
+    <type>Evocation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="60" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="instant" />
+    <description>
+        <local id="fr">[p]Vous faîtes se former une couche de gel engourdissante sur une créature que vous voyez à portée. La cible doit réussir un jet de sauvegarde de Constitution, sans quoi elle reçoit 1d6 points de dégâts de froid, et obtient un désavantage à son prochain jet d'attaque fait avant la fin de son prochain tour.[/p]
+            [p]Les dégâts de ce sort augmentent de 1d6 lorsque vous atteignez le niveau 5 (2d6), le niveau 11 (3d6) et le niveau 17 (4d6).[/p]</local>
+        <local id="eng">[p]You cause numbing frost to form on one creature that you can see within range. The target must make a Constitution saving throw. On a failed save, the target takes 1d6 cold damage, and it has disadvantage on the next weapon attack roll it makes before the end of its next turn.[/p]
+            [p]The spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).[/p]</local>
+    </description>
+    <source page="18">Elemental Evil Player´s Companion</source>
+</spell>

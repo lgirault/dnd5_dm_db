@@ -1,0 +1,23 @@
+<spell>
+    <name>
+        <local id="fr">Liane épineuse</local>
+        <local id="eng">Thorn whip</local>
+    </name>
+    <level>0</level>
+    <type>transmutation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="30" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">la tige d'une plante avec des épines</local>
+        <local id="eng">the stem of a plant with thorns</local>
+    </components>
+    <duration unit="instant" />
+    <description>
+        <local id="fr">[p]Vous créez une longue et épaisse liane ressemblante à de la vigne et recouverte d'épines qui, selon vos ordres, s'accrochent à une créature à portée. Effectuez une attaque de sort de corps à corps contre la cible. Si l'attaque touche, la créature subit 1d6 dégâts perforants, et si la créature est de taille G ou inférieure, vous la tirez de 3 mètres vers vous.[/p]
+            [p]Les dégâts de ce sort augmentent de 1d6 lorsque vous atteignez le niveau 5 (2d6), le niveau 11 (3d6) et le niveau 17 (4d6).[/p]</local>
+        <local id="eng">[p]You create a long, vine-like whip covered in thorns that lashes out at your command toward a creature in range. Make a melee spell attack against the target. If the attack hits, the creature takes 1d6 piercing damage, and if the creature is Large or smaller, you pull the creature up to 10 feet closer to you.[/p]
+            [p]This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).[/p]</local>
+    </description>
+    <source page="282">Player's Handbook</source>
+    <source>Princes of the Apocalypse supplement</source>
+</spell>

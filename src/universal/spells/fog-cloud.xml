@@ -1,0 +1,22 @@
+<spell>
+    <name>
+        <local id="fr">Nappe de brouillard</local>
+        <local id="eng">Fog cloud</local>
+    </name>
+    <level>1</level>
+    <type>conjuration</type>
+    <ctime unit="action" />
+    <range unit="feet" value="120" />
+    <components verbose="true" somatic="true" material="false" />
+    <duration unit="hour" concentration="true" />
+    <description>
+        <local id="fr">Vous créez une sphère de brouillard de 6 mètres de rayon centrée sur un point dans la portée du sort. La sphère s'étend au-delà des coins et la visibilité dans la zone est nulle. Elle persiste pour la durée du sort ou jusqu'à ce qu'un vent de force modérée ou plus (au moins 16 km/h) la dissipe.</local>
+        <local id="eng">You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</local>
+    </description>
+    <higher-level-description>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, le rayon de la sphère augmente de 6 mètres pour chaque niveau d'emplacement de sort supérieur à 1.</local>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.</local>
+    </higher-level-description>
+    <source page="243">Player's Handbook</source>
+    <source>Hoard of the Dragon Queen supplement</source>
+</spell>

@@ -9,7 +9,7 @@
     <range unit="feet" value="30" />
     <components verbose="false" somatic="true" material="false"/>
     <duration unit="instant" />
-    <duration unit="hour" value="1" />https://s3.amazonaws.com/files.d20.io/images/12817449/t6rGyj9n4NUJs4uLkeQQ1A/thumb.jpg?1444144923
+    <duration unit="hour" />
     <description>
         <local id="fr">Choisissez un cube d'eau visible de 1,50 mètre d'arête dans la portée du sort. Vous pouvez alors le manipuler d'une des façons suivantes :
             [ul][li]Vous déplacez instantanément ou modifiez le sens du courant selon vos directives jusqu'à 1,50 mètre dans n'importe quelle direction. Ce mouvement n'a pas assez de force pour causer des dégâts.[/li]

@@ -1,0 +1,21 @@
+<spell>
+    <name>
+        <local id="fr">Réparation</local>
+        <local id="eng">Mending</local>
+    </name>
+    <level>0</level>
+    <type>Transmutation</type>
+    <ctime unit="minute" />
+    <range unit="touch" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">deux aimants</local>
+        <local id="eng">two lodestones</local>
+    </components>
+    <duration unit="instant" />
+    <description>
+        <local id="fr">Ce sort répare une simple fissure, déchirure ou fêlure sur un objet que vous touchez, comme un maillon de chaîne cassé, une clé brisée en deux morceaux, un accroc sur un manteau ou une fuite sur une outre. Tant que la fissure ou l'accroc n'excède pas 30 cm dans toutes les dimensions, vous le réparez, ne laissant aucune trace de la détérioration passée. Ce sort peut réparer physiquement un objet magique ou une créature artificielle, mais ne peut pas rendre sa magie à un objet. </local>
+        <local id="eng">This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage. This spell can physically repair a magic item or construct, but the spell can't restore magic to such an object. </local>
+    </description>
+    <source page="259">Player's Handbook</source>
+    <source>Princes of the Apocalypse supplement</source>
+</spell>

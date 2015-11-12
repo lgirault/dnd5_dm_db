@@ -7,7 +7,7 @@ case class BonusAction(i : Int) extends DnDTime
 case class Minute(i: Int) extends DnDTime
 case class Hour(i : Int) extends DnDTime
 case class Round(i : Int) extends DnDTime
-case class UpTo(t : DnDTime) extends DnDTime
+case class Concentration(t : DnDTime) extends DnDTime
 case class Reaction(trigger : Local) extends DnDTime
 case object Instant extends DnDTime
 

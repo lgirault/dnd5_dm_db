@@ -1,0 +1,21 @@
+<spell>
+    <name>
+        <local id="fr">Résistance</local>
+        <local id="eng">Resistance</local>
+    </name>
+    <level>0</level>
+    <type>Abjuration</type>
+    <ctime unit="action" />
+    <range unit="touch" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">une cape miniature</local>
+        <local id="eng">a miniature cloak</local>
+    </components>
+    <duration unit="minute" concentration="true"/>
+    <description>
+        <local id="fr">Vous touchez une créature consentante. Une fois avant la fin du sort, la cible peut lancer un d4 et ajouter le résultat du dé à un jet de sauvegarde de son choix. Elle peut lancer le dé avant ou après avoir effectué son jet de sauvegarde. Le sort prend alors fin. </local>
+        <local id="eng">You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one saving throw of its choice. It can roll the die before or after making the saving throw. The spell then ends.</local>
+    </description>
+    <source page="272">Player's Handbook</source>
+    <source>Basic Rules</source>
+</spell>

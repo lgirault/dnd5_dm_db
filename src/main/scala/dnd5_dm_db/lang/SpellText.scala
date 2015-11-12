@@ -21,5 +21,6 @@ trait SpellText {
 
   val magicSchool : MagicSchool => String
 
+  val ritual : String
 
 }

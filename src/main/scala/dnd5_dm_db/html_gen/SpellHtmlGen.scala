@@ -21,15 +21,14 @@ object SpellHtmlGen extends ToHtml[Spell]{
 
   def toHtmlWithClass(sid : Option[String], s : Spell, clazz : String)(implicit lang : Lang)  : String = {
 
-    def optionConcentrationText(t : DnDTime, c : Concentration) : String = {
-      if (c) lang.concentration + ", " + lang.time(t)
-      else lang.time(t)
-    }
+    val duration0 = s.durations map lang.time
+    val duration =
+      if(duration0.length == 1) duration0.head
+      else duration0 mkString ("", s" ${lang.or} ", s" (${lang.seeBelow})")
 
-    val duration0 = s.durations map (t => optionConcentrationText(t._1, t._2))
-    //    val duration0 = s.durations map  optionConcentrationText.tupled
-    val duration = if(duration0.length == 1) duration0.head
-    else duration0 mkString ("", s" ${lang.or} ", s" (${lang.seeBelow})")
+    val ritual =
+      if(s.ritual) s" (${lang.ritual})"
+      else ""
 
     s"""<div${sid map (id => s""" id="spells_$id" """ ) getOrElse " "} class="$clazz">
        |   <div class="dragbar"><div></div></div>
@@ -37,7 +36,7 @@ object SpellHtmlGen extends ToHtml[Spell]{
        |     <div class="name">${s.name.value}</div>
        |     <div class="toHide">
        |     <div class="level">
-       |       <em>${lang.level} ${s.level} ${lang.magicSchool(s.school)}</em>
+       |       <em>${lang.level} ${s.level} ${lang.magicSchool(s.school)}$ritual</em>
        |     </div>
        |     <div><b>${lang.castingTime} : </b> ${lang.time(s.castingTime)}</div>
        |     <div><b>${lang.range}</b> : ${lang.length(s.range)}${lang.sAreaOfEffect(s.sAreaOfEffect)}</div>

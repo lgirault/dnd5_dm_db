@@ -1,0 +1,20 @@
+<spell>
+    <name>
+        <local id="fr">Lueur féerique</local>
+        <local id="eng">Faerie fire</local>
+    </name>
+    <level>1</level>
+    <type>evocation</type>
+    <ctime unit="action" />
+    <range unit="feet" value="60" />
+    <components verbose="true" somatic="false" material="false" />
+    <duration unit="minute" concentration="true" />
+    <description>
+        <local id="fr">[p]Tous les objets à l'intérieur d'un cube de 6 mètres d'arête dans la portée du sort se distinguent par un halo bleu, vert ou violet (à votre choix). Toutes les créatures présentes dans la zone lors de l'incantation du sort sont également enveloppées du halo si elles échouent à un jet de sauvegarde de Dextérité. Pour la durée du sort, les objets et les créatures affectées émettent une faible lumière dans un rayon de 3 mètres.[/p]
+            [p]Les jets d'attaques contre des créatures affectées ou des objets bénéficient de l'avantage si l'attaquant peut les voir. Les créatures affectées ou les objets ne peuvent devenir invisibles. [/p]</local>
+        <local id="eng">[p]Each object in a 20-foot cube within range is outlined in blue, green, or violet light (your choice). Any creature in the area when the spell is cast is also outlined in light if it fails a Dexterity saving throw. For the duration, objects and affected creatures shed dim light in a 10-foot radius.[/p]
+            [p]Any attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can't benefit from being invisible. [/p]</local>
+    </description>
+    <source page="239">Player's Handbook</source>
+    <source>Basic Rules</source>
+</spell>

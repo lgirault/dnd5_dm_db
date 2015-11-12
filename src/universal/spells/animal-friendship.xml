@@ -1,0 +1,25 @@
+<spell>
+    <name>
+        <local id="fr">Amitié animale</local>
+        <local id="eng">Animal friendship</local>
+    </name>
+    <level>1</level>
+    <type>enchantment</type>
+    <ctime unit="action" />
+    <range unit="feet"  value="30" />
+    <components verbose="true" somatic="true" material="true">
+        <local id="fr">un morceau de nourriture</local>
+        <local id="eng">a morsel of food</local>
+    </components>
+    <duration unit="hour" value="24" />
+    <description>
+        <local id="fr">Ce sort vous permet de persuader une bête que vous ne lui voulez aucun mal. Choisissez une bête que vous pouvez voir dans la portée du sort. Elle doit vous voir et vous entendre. Si l'Intelligence de la bête est de 4 ou plus, le sort échoue. Autrement, la bête doit réussir un jet de sauvegarde de Sagesse sans quoi elle tombe sous votre charme pour la durée du sort. Si vous, ou un de vos compagnons, blessez la cible, le sort prend fin.</local>
+        <local id="eng">This spell lets you convince a beast that you mean it no harm. Choose a beast that you can see within range. It must see and hear you. If the beast's Intelligence is 4 or higher, the spell fails. Otherwise, the beast must succeed on a Wisdom saving throw or be charmed by you for the spell's duration. If you or one of your companions harms the target, the spell ends. </local>
+    </description>
+    <higher-level-description>
+        <local id="fr">Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 2 ou plus, vous pouvez charmer une bête supplémentaire pour chaque niveau d'emplacement de sort supérieur à 1.</local>
+        <local id="eng">When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional beast for each slot level above 1st.</local>
+    </higher-level-description>
+    <source page="212">Player's Handbook</source>
+    <source>Hoard of the Dragon Queen supplement</source>
+</spell>

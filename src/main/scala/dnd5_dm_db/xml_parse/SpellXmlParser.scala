@@ -24,15 +24,17 @@ object SpellXmlParser extends FromXml[Spell]
         case _ => None
       }).flatten
 
+
   def fromXml(spell: Node): Spell = {
     Spell( localFromXml(spell \ "name")  ,
       (spell \ "level").text.toInt ,
       magicSchool.fromXml(spell),
+      ritual.fromXml(spell),
       timeFromXml(spell \ "ctime"),
       lengthFromXml(spell \ "range"),
       (spell \ "areaOfEffect").toNodeOption map areaOfEffectFromXml,
       componentsFromXml(spell \ "components"),
-      spell \ "duration" map (n => (timeFromXml(n), optionBooleanAttribute(n, "concentration"))),
+      spell \ "duration" map timeFromXml,
       localFromXml(spell \ "description" )  ,
       (spell \ "higher-level-description" ).toNodeOption map localFromXml,
       (spell \ "source").theSeq map sourceFromXml
@@ -47,5 +49,9 @@ object SpellXmlParser extends FromXml[Spell]
   val magicSchool : FromXml[MagicSchool] = new FromXml[MagicSchool] {
     override def fromXml(n: Node): MagicSchool =
       MagicSchool.fromString(n \ "type")
+  }
+  val ritual : FromXml[Boolean] = new FromXml[Boolean] {
+    override def fromXml(n: Node): Boolean =
+      optionBooleanAttribute(n \ "type", "ritual")
   }
 }

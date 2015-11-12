@@ -25,8 +25,8 @@ trait DnDMeasuresXmlParser {
         case attr => error(s"unknown time unit $attr")
       }
 
-    singleOptionAttribute(node, "upTo") match {
-      case Some("true") => UpTo(t)
+    singleOptionAttribute(node, "concentration") match {
+      case Some("true") => Concentration(t)
       case attr => t
     }
   }
